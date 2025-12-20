@@ -107,27 +107,40 @@ Screenshot of website mockup
 
 **User's side**
 login and register page
+<img width="278" height="910" alt="image" src="https://github.com/user-attachments/assets/81b64ae1-ed84-4e19-96f9-c3be961ec97f" />
 
 
 
 **landing page**
+<img width="278" height="910" alt="image" src="https://github.com/user-attachments/assets/6770c2c6-a168-4712-900a-377a75851d03" />
 
 
 **payment page**
+<img width="278" height="931" alt="image" src="https://github.com/user-attachments/assets/e48a42bf-e93b-45f6-8a11-2d3d8d49d6bd" />
 
 
 **booking management page**
+<img width="278" height="931" alt="image" src="https://github.com/user-attachments/assets/cae25f19-821f-4513-88e5-5d1701ad8cb6" />
 
+
+
+### Architecture / Technical Design
+
+• Explanation of widget/component structure
+• State management approach (e.g., setState, Provider, Riverpod, Bloc)
+
+### Data Model
 ER Diagram
 
 ![ER_Diagram_Swift](https://github.com/user-attachments/assets/9a9e1461-45c9-41bf-b000-12846883e031)
 
-Sequence Diagram
+### Sequence Diagram
 
 ![SD - Guest](https://github.com/user-attachments/assets/cf3e22e8-6ab5-4b92-aa58-7b12acfc4d03)
 ![SD - Staff](https://github.com/user-attachments/assets/c642ccf6-e42c-4cd9-8a60-162d25a4637e)
 ![SD - Admin](https://github.com/user-attachments/assets/d0c79f61-a8fd-41af-b48e-f3a278e34bf0)
 
+### References
 
 
 
