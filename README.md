@@ -138,17 +138,20 @@ Screenshot of website mockup
 • State management approach (e.g., setState, Provider, Riverpod, Bloc)
 
 **User's side**
-login and register page
+**login and register page**
 
 
 **landing page**
 
 
+
 **payment page**
+
 ![Screenshot 2025-05-22 225719](https://github.com/user-attachments/assets/f97110de-a0bb-47dd-8532-ed087f511b90)
 
 
 **booking management page**
+
 ![Screenshot 2025-05-22 224455](https://github.com/user-attachments/assets/be33b35d-0752-45ba-80b2-3e254237e3c4)
 
 
