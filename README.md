@@ -114,7 +114,7 @@ login and register page
 
 **landing page**
 
-<img width="483" height="937" alt="Screenshot 2025-12-20 203546" src="https://github.com/user-attachments/assets/cc2870f2-6bbb-4e5d-b880-0a4a72b1ae3e" />
+<img width="483" height="588" alt="Screenshot 2025-12-20 203546" src="https://github.com/user-attachments/assets/cc2870f2-6bbb-4e5d-b880-0a4a72b1ae3e" />
 
 **payment page**
 
