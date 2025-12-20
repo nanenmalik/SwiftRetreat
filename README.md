@@ -106,9 +106,11 @@ The Swift Retreat mobile application, built with Flutter, focuses exclusively on
 Screenshot of website mockup
 
 **User's side**
-login and register page
+**login page** 
+
 <img align="center" alt="Screenshot 2025-12-20 214907" src="https://github.com/user-attachments/assets/9e08a658-4eb2-4971-b0fc-154720483dc2" />
 
+**register page**
 
 <img align="center" alt="Screenshot 2025-12-20 214929" src="https://github.com/user-attachments/assets/45151629-8bca-4ad3-b929-57f45fce807e" />
 
