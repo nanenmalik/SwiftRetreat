@@ -110,8 +110,6 @@ login and register page
 
 <img width="200" height="500" alt="image" src="https://github.com/user-attachments/assets/49cb7be0-0023-4c65-a036-5e21f7246da5" />
 
-
-
 **landing page**
 
 <img width="200" height="500" alt="Screenshot 2025-12-20 203546" src="https://github.com/user-attachments/assets/cc2870f2-6bbb-4e5d-b880-0a4a72b1ae3e" />
@@ -129,6 +127,21 @@ login and register page
 
 • Explanation of widget/component structure
 • State management approach (e.g., setState, Provider, Riverpod, Bloc)
+
+**User's side**
+login and register page
+
+
+**landing page**
+
+
+**payment page**
+![Screenshot 2025-05-22 225719](https://github.com/user-attachments/assets/f97110de-a0bb-47dd-8532-ed087f511b90)
+
+
+**booking management page**
+
+
 
 ### Data Model
 ER Diagram
