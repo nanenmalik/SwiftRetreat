@@ -134,8 +134,6 @@ Screenshot of website mockup
 
 ### Architecture / Technical Design
 
-• Explanation of widget/component structure
-• State management approach (e.g., setState, Provider, Riverpod, Bloc)
 
 **User's side**
 **login and register page**
@@ -165,7 +163,7 @@ Screenshot of website mockup
 
 - BottomAppBar: A fixed container at the bottom holding the "Pay Now" ElevatedButton.
 
-Booking Management Page (Right Image)
+
 **booking management page**
 
 ![Screenshot 2025-05-22 224455](https://github.com/user-attachments/assets/be33b35d-0752-45ba-80b2-3e254237e3c4)
