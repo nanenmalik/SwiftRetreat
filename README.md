@@ -114,15 +114,15 @@ login and register page
 
 **landing page**
 
-<img width="483" height="588" alt="Screenshot 2025-12-20 203546" src="https://github.com/user-attachments/assets/cc2870f2-6bbb-4e5d-b880-0a4a72b1ae3e" />
+<img width="483" height="700" alt="Screenshot 2025-12-20 203546" src="https://github.com/user-attachments/assets/cc2870f2-6bbb-4e5d-b880-0a4a72b1ae3e" />
 
 **payment page**
 
-<img width="483" height="910" alt="Screenshot 2025-12-20 203624" src="https://github.com/user-attachments/assets/9bc25e42-1f98-428f-bfb0-075459cfc82a" />
+<img width="483" height="700" alt="Screenshot 2025-12-20 203624" src="https://github.com/user-attachments/assets/9bc25e42-1f98-428f-bfb0-075459cfc82a" />
 
 **booking management page**
 
-<img width="483" height="931" alt="Screenshot 2025-12-20 203706" src="https://github.com/user-attachments/assets/97b1d813-ff67-41b9-af6f-45b3fb98f227" />
+<img width="483" height="700" alt="Screenshot 2025-12-20 203706" src="https://github.com/user-attachments/assets/97b1d813-ff67-41b9-af6f-45b3fb98f227" />
 
 
 ### Architecture / Technical Design
