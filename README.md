@@ -108,7 +108,7 @@ Screenshot of website mockup
 **User's side**
 login and register page
 
-<img width="483" height="500" alt="image" src="https://github.com/user-attachments/assets/49cb7be0-0023-4c65-a036-5e21f7246da5" />
+<img width="200" height="500" alt="image" src="https://github.com/user-attachments/assets/49cb7be0-0023-4c65-a036-5e21f7246da5" />
 
 
 
