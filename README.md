@@ -149,12 +149,40 @@ Screenshot of website mockup
 
 ![Screenshot 2025-05-22 225719](https://github.com/user-attachments/assets/f97110de-a0bb-47dd-8532-ed087f511b90)
 
+- Scaffold: The base container with an AppBar ("Payment Details").
 
+- Stepper/Progress Indicator: A custom horizontal widget at the top showing the flow (Book -> Payment -> Confirm).
+
+- Card/Container (Order Summary):
+
+   - Row: Hotel thumbnail image + Column (Title, Rating, Location).
+
+   - Divider: To separate sections.
+
+   - Price Breakdown Table: Multiple Rows with MainAxisAlignment.spaceBetween for labels and values.
+
+- RadioListTile Group: For selecting "Credit Card," "PayPal," or "Google Pay."
+
+- BottomAppBar: A fixed container at the bottom holding the "Pay Now" ElevatedButton.
+
+Booking Management Page (Right Image)
 **booking management page**
 
 ![Screenshot 2025-05-22 224455](https://github.com/user-attachments/assets/be33b35d-0752-45ba-80b2-3e254237e3c4)
 
+- Scaffold: With a bottom navigation bar.
 
+- Segmented Control / TabBar: To toggle between "Upcoming," "Completed," and "Cancelled."
+
+- ListView.builder: To render the scrollable list of booking cards.
+
+- Booking Card (Custom Widget):
+
+   - Column:
+
+      - Top Section: Row with Image + Title/Date/Status Chip.
+
+      - Action Row: "Cancel Booking" and "View Ticket" buttons.
 
 ### Data Model
 ER Diagram
