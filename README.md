@@ -107,21 +107,22 @@ Screenshot of website mockup
 
 **User's side**
 login and register page
-<img width="278" height="910" alt="image" src="https://github.com/user-attachments/assets/81b64ae1-ed84-4e19-96f9-c3be961ec97f" />
+
+<img width="483" height="588" alt="image" src="https://github.com/user-attachments/assets/49cb7be0-0023-4c65-a036-5e21f7246da5" />
 
 
 
 **landing page**
-<img width="278" height="910" alt="image" src="https://github.com/user-attachments/assets/6770c2c6-a168-4712-900a-377a75851d03" />
 
+<img width="483" height="937" alt="Screenshot 2025-12-20 203546" src="https://github.com/user-attachments/assets/cc2870f2-6bbb-4e5d-b880-0a4a72b1ae3e" />
 
 **payment page**
-<img width="278" height="931" alt="image" src="https://github.com/user-attachments/assets/e48a42bf-e93b-45f6-8a11-2d3d8d49d6bd" />
 
+<img width="483" height="910" alt="Screenshot 2025-12-20 203624" src="https://github.com/user-attachments/assets/9bc25e42-1f98-428f-bfb0-075459cfc82a" />
 
 **booking management page**
-<img width="278" height="931" alt="image" src="https://github.com/user-attachments/assets/cae25f19-821f-4513-88e5-5d1701ad8cb6" />
 
+<img width="483" height="931" alt="Screenshot 2025-12-20 203706" src="https://github.com/user-attachments/assets/97b1d813-ff67-41b9-af6f-45b3fb98f227" />
 
 
 ### Architecture / Technical Design
