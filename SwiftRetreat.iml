@@ -2,7 +2,11 @@
 <module type="GENERAL_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/swiftretreat/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/swiftretreat/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/swiftretreat/build" />
+    </content>
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
