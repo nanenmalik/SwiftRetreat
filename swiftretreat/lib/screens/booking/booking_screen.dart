@@ -4,8 +4,9 @@ import '../../theme/app_theme.dart';
 
 class BookingScreen extends StatefulWidget {
   final Hotel hotel;
+  final RoomType? room;
 
-  const BookingScreen({super.key, required this.hotel});
+  const BookingScreen({super.key, required this.hotel, this.room});
 
   @override
   State<BookingScreen> createState() => _BookingScreenState();
@@ -49,6 +50,30 @@ class _BookingScreenState extends State<BookingScreen> {
     }
   }
 
+  Widget _buildDateTile(String label, DateTime? date) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        border: Border.all(color: AppTheme.darkCream),
+        borderRadius: BorderRadius.circular(12),
+        color: Colors.white,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+          const SizedBox(height: 4),
+          Text(
+            date == null
+                ? 'Select Date'
+                : '${date.day}/${date.month}/${date.year}',
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,10 +110,18 @@ class _BookingScreenState extends State<BookingScreen> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: Image.network(
-                        widget.hotel.imageUrl,
+                        widget.room?.imageUrls.isNotEmpty == true
+                            ? widget.room!.imageUrls.first
+                            : widget.hotel.imageUrl,
                         width: 80,
                         height: 80,
                         fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => Container(
+                          width: 80,
+                          height: 80,
+                          color: Colors.grey[200],
+                          child: const Icon(Icons.hotel, color: Colors.grey),
+                        ),
                       ),
                     ),
                     const SizedBox(width: 16),
@@ -101,6 +134,15 @@ class _BookingScreenState extends State<BookingScreen> {
                             style: Theme.of(context).textTheme.titleMedium
                                 ?.copyWith(fontWeight: FontWeight.bold),
                           ),
+                          if (widget.room != null)
+                            Text(
+                              widget.room!.name,
+                              style: Theme.of(context).textTheme.bodyMedium
+                                  ?.copyWith(
+                                    color: AppTheme.mocha,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
                           const SizedBox(height: 4),
                           Text(
                             widget.hotel.location,
@@ -111,7 +153,7 @@ class _BookingScreenState extends State<BookingScreen> {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            '\$${widget.hotel.pricePerNight.toInt()} / night',
+                            '\$${(widget.room?.price ?? widget.hotel.pricePerNight).toInt()} / night',
                             style: TextStyle(
                               color: AppTheme.mocha,
                               fontWeight: FontWeight.bold,
@@ -135,78 +177,47 @@ class _BookingScreenState extends State<BookingScreen> {
               const SizedBox(height: 16),
 
               // Date Selection
-              Row(
-                children: [
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () => _selectDate(context, true),
-                      child: Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: AppTheme.darkCream),
-                          borderRadius: BorderRadius.circular(12),
-                          color: Colors.white,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Check-in',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              _checkInDate == null
-                                  ? 'Select Date'
-                                  : '${_checkInDate!.day}/${_checkInDate!.month}/${_checkInDate!.year}',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final isNarrow = constraints.maxWidth < 350;
+                  final children = [
+                    if (isNarrow)
+                      GestureDetector(
+                        onTap: () => _selectDate(context, true),
+                        child: _buildDateTile('Check-in', _checkInDate),
+                      )
+                    else
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () => _selectDate(context, true),
+                          child: _buildDateTile('Check-in', _checkInDate),
                         ),
                       ),
+                    SizedBox(
+                      width: isNarrow ? 0 : 16,
+                      height: isNarrow ? 16 : 0,
                     ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () => _selectDate(context, false),
-                      child: Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: AppTheme.darkCream),
-                          borderRadius: BorderRadius.circular(12),
-                          color: Colors.white,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Check-out',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              _checkOutDate == null
-                                  ? 'Select Date'
-                                  : '${_checkOutDate!.day}/${_checkOutDate!.month}/${_checkOutDate!.year}',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
+                    if (isNarrow)
+                      GestureDetector(
+                        onTap: () => _selectDate(context, false),
+                        child: _buildDateTile('Check-out', _checkOutDate),
+                      )
+                    else
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () => _selectDate(context, false),
+                          child: _buildDateTile('Check-out', _checkOutDate),
                         ),
                       ),
-                    ),
-                  ),
-                ],
+                  ];
+
+                  return isNarrow
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: children,
+                        )
+                      : Row(children: children);
+                },
               ),
 
               const SizedBox(height: 24),
@@ -215,39 +226,60 @@ class _BookingScreenState extends State<BookingScreen> {
               Text('Guests', style: Theme.of(context).textTheme.titleMedium),
               const SizedBox(height: 8),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
                   border: Border.all(color: AppTheme.darkCream),
                   borderRadius: BorderRadius.circular(12),
                   color: Colors.white,
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text('Number of Guests'),
-                    Row(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final isNarrow = constraints.maxWidth < 300;
+                    return Flex(
+                      direction: isNarrow ? Axis.vertical : Axis.horizontal,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: isNarrow
+                          ? CrossAxisAlignment.start
+                          : CrossAxisAlignment.center,
                       children: [
-                        IconButton(
-                          onPressed: () {
-                            if (_guests > 1) {
-                              setState(() => _guests--);
-                            }
-                          },
-                          icon: const Icon(Icons.remove),
-                        ),
-                        Text(
-                          '$_guests',
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            setState(() => _guests++);
-                          },
-                          icon: const Icon(Icons.add),
+                        const Text('Number of Guests'),
+                        if (isNarrow) const SizedBox(height: 8),
+                        Row(
+                          mainAxisSize: isNarrow
+                              ? MainAxisSize.max
+                              : MainAxisSize.min,
+                          mainAxisAlignment: isNarrow
+                              ? MainAxisAlignment.end
+                              : MainAxisAlignment.start,
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                if (_guests > 1) {
+                                  setState(() => _guests--);
+                                }
+                              },
+                              icon: const Icon(Icons.remove),
+                            ),
+                            Text(
+                              '$_guests',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                setState(() => _guests++);
+                              },
+                              icon: const Icon(Icons.add),
+                            ),
+                          ],
                         ),
                       ],
-                    ),
-                  ],
+                    );
+                  },
                 ),
               ),
 
@@ -300,7 +332,9 @@ class _BookingScreenState extends State<BookingScreen> {
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.symmetric(vertical: 16),
           ),
-          child: const Text('Continue to Payment'),
+          child: MediaQuery.of(context).size.width < 400
+              ? const Icon(Icons.arrow_forward)
+              : const Text('Continue to Payment'),
         ),
       ),
     );

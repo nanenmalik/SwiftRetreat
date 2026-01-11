@@ -441,9 +441,10 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
                       Navigator.pushNamed(
                         context,
                         '/booking',
-                        arguments: widget.hotel,
-                        // Note: You might want to pass the selected room too in the future
-                        // arguments: {'hotel': widget.hotel, 'room': selectedRoom},
+                        arguments: {
+                          'hotel': widget.hotel,
+                          'room': selectedRoom,
+                        },
                       );
                     },
                     style: ElevatedButton.styleFrom(
@@ -452,7 +453,9 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
                         vertical: 16,
                       ),
                     ),
-                    child: const Text('Book Now'),
+                    child: MediaQuery.of(context).size.width < 360
+                        ? const Icon(Icons.arrow_forward)
+                        : const Text('Book Now'),
                   ),
                 ],
               ),

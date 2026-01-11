@@ -90,6 +90,14 @@ class MyBookingsScreen extends StatelessWidget {
                     width: 60,
                     height: 60,
                     fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        width: 60,
+                        height: 60,
+                        color: Colors.grey[300],
+                        child: const Icon(Icons.hotel, color: Colors.grey),
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(width: 16),
