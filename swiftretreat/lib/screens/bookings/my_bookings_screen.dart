@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_theme.dart';
-import '../../data/mock_data.dart';
+import '../../data/booking_service.dart';
+import '../../models/booking_model.dart';
+import 'package:intl/intl.dart';
 
-class MyBookingsScreen extends StatelessWidget {
+class MyBookingsScreen extends StatefulWidget {
   const MyBookingsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // Mock data for bookings
-    final upcomingBooking = MockData.hotels[0];
-    final completedBooking = MockData.hotels[1];
+  State<MyBookingsScreen> createState() => _MyBookingsScreenState();
+}
 
+class _MyBookingsScreenState extends State<MyBookingsScreen> {
+  final _bookingService = BookingService();
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Bookings'),
-        automaticallyImplyLeading: false, // Hide back button as it's a tab
+        automaticallyImplyLeading: false,
       ),
       body: DefaultTabController(
         length: 3,
@@ -34,31 +39,23 @@ class MyBookingsScreen extends StatelessWidget {
               child: TabBarView(
                 children: [
                   // Upcoming
-                  ListView(
-                    padding: const EdgeInsets.all(16),
-                    children: [
-                      _buildBookingCard(
-                        context,
-                        upcomingBooking,
-                        'Upcoming',
-                        Colors.blue,
-                      ),
-                    ],
+                  _buildBookingList(
+                    _bookingService.upcomingBookings,
+                    'Upcoming',
+                    Colors.blue,
                   ),
                   // Completed
-                  ListView(
-                    padding: const EdgeInsets.all(16),
-                    children: [
-                      _buildBookingCard(
-                        context,
-                        completedBooking,
-                        'Completed',
-                        Colors.green,
-                      ),
-                    ],
+                  _buildBookingList(
+                    _bookingService.completedBookings,
+                    'Completed',
+                    Colors.green,
                   ),
                   // Cancelled
-                  const Center(child: Text('No cancelled bookings')),
+                  _buildBookingList(
+                    _bookingService.cancelledBookings,
+                    'Cancelled',
+                    Colors.red,
+                  ),
                 ],
               ),
             ),
@@ -68,12 +65,31 @@ class MyBookingsScreen extends StatelessWidget {
     );
   }
 
+  Widget _buildBookingList(
+    List<Booking> bookings,
+    String statusLabel,
+    Color color,
+  ) {
+    if (bookings.isEmpty) {
+      return Center(child: Text('No $statusLabel bookings'));
+    }
+    return ListView.builder(
+      padding: const EdgeInsets.all(16),
+      itemCount: bookings.length,
+      itemBuilder: (context, index) {
+        return _buildBookingCard(context, bookings[index], statusLabel, color);
+      },
+    );
+  }
+
   Widget _buildBookingCard(
     BuildContext context,
-    hotel,
-    String status,
+    Booking booking,
+    String statusLabel,
     Color statusColor,
   ) {
+    final dateFormat = DateFormat('dd MMM');
+
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -86,7 +102,7 @@ class MyBookingsScreen extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: Image.network(
-                    hotel.imageUrl,
+                    booking.hotel.imageUrl,
                     width: 60,
                     height: 60,
                     fit: BoxFit.cover,
@@ -106,12 +122,20 @@ class MyBookingsScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        hotel.name,
+                        booking.hotel.name,
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
+                      if (booking.room != null)
+                        Text(
+                          booking.room!.name,
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: 12,
+                          ),
+                        ),
                       const SizedBox(height: 4),
                       Text(
-                        '12 Mar - 14 Mar', // Mock date
+                        '${dateFormat.format(booking.checkIn)} - ${dateFormat.format(booking.checkOut)}',
                         style: TextStyle(color: Colors.grey[600], fontSize: 12),
                       ),
                       const SizedBox(height: 8),
@@ -125,7 +149,7 @@ class MyBookingsScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text(
-                          status,
+                          statusLabel,
                           style: TextStyle(
                             color: statusColor,
                             fontSize: 10,
@@ -136,6 +160,13 @@ class MyBookingsScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+                Text(
+                  '\$${booking.totalPrice.toInt()}',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: AppTheme.mocha,
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 16),
@@ -143,21 +174,54 @@ class MyBookingsScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 OutlinedButton(
-                  onPressed: () {},
-                  child: const Text('View Ticket'),
+                  onPressed: () {
+                    // Could show details
+                  },
+                  child: const Text('View Booking'),
                 ),
-                if (status == 'Upcoming')
+                if (statusLabel == 'Upcoming')
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppTheme.terracotta,
+                      foregroundColor: Colors.white,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      _showCancelDialog(context, booking);
+                    },
                     child: const Text('Cancel Booking'),
                   ),
               ],
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  void _showCancelDialog(BuildContext context, Booking booking) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Cancel Booking?'),
+        content: const Text('Are you sure you want to cancel this booking?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('No'),
+          ),
+          TextButton(
+            onPressed: () {
+              setState(() {
+                _bookingService.cancelBooking(booking.id);
+              });
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Booking cancelled')),
+              );
+            }, // Close dialog
+            child: const Text('Yes, Cancel'),
+          ),
+        ],
       ),
     );
   }

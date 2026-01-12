@@ -90,8 +90,8 @@ class HomeContent extends StatelessWidget {
                 CircleAvatar(
                   backgroundColor: AppTheme.mocha,
                   backgroundImage: const NetworkImage(
-                    'https://i.pravatar.cc/150',
-                  ), // Placeholder avatar
+                    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=200&h=200',
+                  ), // High-quality avatar
                   child: const Icon(Icons.person, color: Colors.white),
                 ),
               ],

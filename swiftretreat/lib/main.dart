@@ -7,6 +7,10 @@ import 'screens/auth/login_screen.dart';
 import 'screens/auth/register_screen.dart';
 import 'screens/booking/booking_screen.dart';
 import 'screens/payment/payment_screen.dart';
+import 'screens/profile/edit_profile_screen.dart';
+import 'screens/profile/payment_methods_screen.dart';
+import 'screens/profile/settings_screen.dart';
+import 'screens/profile/help_support_screen.dart';
 
 void main() {
   runApp(const SwiftRetreatApp());
@@ -25,7 +29,11 @@ class SwiftRetreatApp extends StatelessWidget {
         '/': (context) => const HomeScreen(),
         '/login': (context) => const LoginScreen(),
         '/register': (context) => const RegisterScreen(),
-        '/payment': (context) => const PaymentScreen(), // Add Payment route
+        '/payment': (context) => const PaymentScreen(),
+        '/edit-profile': (context) => const EditProfileScreen(),
+        '/payment-methods': (context) => const PaymentMethodsScreen(),
+        '/settings': (context) => const SettingsScreen(),
+        '/help': (context) => const HelpSupportScreen(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == '/detail') {

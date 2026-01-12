@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../models/hotel_model.dart';
+import '../../models/booking_model.dart';
 import '../../theme/app_theme.dart';
 
 class BookingScreen extends StatefulWidget {
@@ -321,13 +322,48 @@ class _BookingScreenState extends State<BookingScreen> {
         ),
         child: ElevatedButton(
           onPressed: () {
-            // Navigate to Payment
-            // For now, let's just show a snackbar or go to a placeholder payment
-            // Navigator.pushNamed(context, '/payment');
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Proceeding to payment...')),
-            );
-            Navigator.pushNamed(context, '/payment', arguments: widget.hotel);
+            if (_checkInDate == null || _checkOutDate == null) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Please select check-in and check-out dates'),
+                ),
+              );
+              return;
+            }
+            if (_checkOutDate!.isBefore(_checkInDate!)) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Check-out date must be after check-in date'),
+                ),
+              );
+              return;
+            }
+
+            if (_formKey.currentState!.validate()) {
+              final double pricePerNight =
+                  widget.room?.price ?? widget.hotel.pricePerNight;
+              final int nights = _checkOutDate!
+                  .difference(_checkInDate!)
+                  .inDays;
+              // Ensure at least 1 night
+              final int actualNights = nights < 1 ? 1 : nights;
+              final double totalPrice = pricePerNight * actualNights;
+
+              final booking = Booking(
+                id: DateTime.now().millisecondsSinceEpoch.toString(),
+                hotel: widget.hotel,
+                room: widget.room,
+                checkIn: _checkInDate!,
+                checkOut: _checkOutDate!,
+                guests: _guests,
+                totalPrice: totalPrice,
+                guestName: _nameController.text,
+                guestPhone: _phoneController.text,
+                status: BookingStatus.upcoming,
+              );
+
+              Navigator.pushNamed(context, '/payment', arguments: booking);
+            }
           },
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.symmetric(vertical: 16),
