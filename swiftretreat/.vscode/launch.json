@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Flutter (with Gemini API)",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        "--dart-define=GEMINI_API_KEY=AIzaSyBTYee97FimVB6OS5zuO9bfAZr9Vf78Mpk"
+      ]
+    },
+    {
+      "name": "Flutter (no API key)",
+      "request": "launch",
+      "type": "dart"
+    }
+  ]
+}

@@ -52,33 +52,15 @@ class HelpSupportScreen extends StatelessWidget {
             ],
           ),
           const ExpansionTile(
-            title: Text('how to contact customer support?'),
+            title: Text('How to contact customer support?'),
             children: [
               Padding(
                 padding: EdgeInsets.all(16.0),
                 child: Text(
-                  'You can reach our support team 24/7 via the "Contact Us" button below or email support@swiftretreat.com.',
+                  'You can reach our support team 24/7 via email at support@swiftretreat.com.',
                 ),
               ),
             ],
-          ),
-          const SizedBox(height: 32),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton.icon(
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Opening Support Chat...')),
-                );
-              },
-              icon: const Icon(Icons.headset_mic),
-              label: const Text('Contact Us'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppTheme.mocha,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 16),
-              ),
-            ),
           ),
         ],
       ),

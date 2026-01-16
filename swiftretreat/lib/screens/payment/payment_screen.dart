@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../theme/app_theme.dart';
 import '../../models/booking_model.dart';
 import '../../data/booking_service.dart';
+import '../../services/google_calendar_service.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});
@@ -221,14 +222,18 @@ class _PaymentScreenState extends State<PaymentScreen> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       // Process Payment (Mock)
 
                       // Save Booking
                       BookingService().addBooking(booking);
 
+                      // Attempt Calendar sync (non-blocking failure)
+                      await _addBookingToCalendar(context, booking);
+
                       // Show Success
+                      if (!mounted) return;
                       showDialog(
                         context: context,
                         barrierDismissible: false,
@@ -274,6 +279,21 @@ class _PaymentScreenState extends State<PaymentScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _addBookingToCalendar(BuildContext context, Booking booking) async {
+    try {
+      await GoogleCalendarService().addBookingEvent(booking);
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Added to Google Calendar')),
+      );
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Calendar sync skipped: ${e.toString()}')),
+      );
+    }
   }
 
   Widget _buildPaymentTypeCard(String title, IconData icon, String value) {
