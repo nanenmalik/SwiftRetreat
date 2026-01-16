@@ -176,7 +176,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 ),
               ] else ...[
                 DropdownButtonFormField<String>(
-                  value: _selectedBank,
+                  initialValue: _selectedBank,
                   decoration: const InputDecoration(
                     labelText: 'Select Bank',
                     border: OutlineInputBorder(),

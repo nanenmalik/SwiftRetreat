@@ -11,7 +11,7 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   bool _pushNotifications = true;
   bool _emailUpdates = true;
-  bool _darkMode = false;
+  final bool _darkMode = false;
 
   @override
   Widget build(BuildContext context) {
@@ -22,19 +22,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
           const SizedBox(height: 16),
           _buildSectionHeader(context, 'Preferences'),
           SwitchListTile(
-            activeColor: AppTheme.mocha,
+            activeThumbColor: AppTheme.mocha,
             title: const Text('Push Notifications'),
             value: _pushNotifications,
             onChanged: (val) => setState(() => _pushNotifications = val),
           ),
           SwitchListTile(
-            activeColor: AppTheme.mocha,
+            activeThumbColor: AppTheme.mocha,
             title: const Text('Email Updates'),
             value: _emailUpdates,
             onChanged: (val) => setState(() => _emailUpdates = val),
           ),
           SwitchListTile(
-            activeColor: AppTheme.mocha,
+            activeThumbColor: AppTheme.mocha,
             title: const Text('Dark Mode'),
             subtitle: const Text('Coming soon'),
             value: _darkMode,

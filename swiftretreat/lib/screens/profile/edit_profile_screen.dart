@@ -61,8 +61,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   prefixIcon: Icon(Icons.person_outline),
                 ),
                 validator: (value) {
-                  if (value == null || value.isEmpty)
+                  if (value == null || value.isEmpty) {
                     return 'Please enter your name';
+                  }
                   return null;
                 },
               ),
@@ -75,8 +76,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 ),
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
-                  if (value == null || value.isEmpty)
+                  if (value == null || value.isEmpty) {
                     return 'Please enter your email';
+                  }
                   return null;
                 },
               ),
