@@ -9,7 +9,7 @@ class MockData {
       rating: 4.8,
       pricePerNight: 250.0,
       imageUrl:
-          'https://images.unsplash.com/photo-1571896349842-6e5c48dc52e3', // Placeholder from Unsplash
+          'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
       amenities: ['Private Pool', 'Halal Food', 'Prayer Room', 'Family Only'],
       isShariahCompliant: true,
       rooms: [
@@ -52,7 +52,7 @@ class MockData {
           description: 'Traditional Andalusian decor with modern amenities.',
           price: 180.0,
           imageUrls: [
-            'https://images.unsplash.com/photo-1590490360182-f33dbd9313d8?auto=format&fit=crop&w=800&q=80',
+            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=800&q=80',
           ],
           amenities: ['Queen Bed', 'Courtyard View'],
         ),

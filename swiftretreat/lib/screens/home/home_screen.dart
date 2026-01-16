@@ -16,11 +16,17 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
-  final List<Widget> _pages = [
-    const HomeContent(),
-    const MyBookingsScreen(),
-    const ProfileScreen(),
-  ];
+  late final List<Widget> _pages;
+
+  @override
+  void initState() {
+    super.initState();
+    _pages = [
+      HomeContent(onProfileTap: _onItemTapped),
+      const MyBookingsScreen(),
+      const ProfileScreen(),
+    ];
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -52,7 +58,9 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class HomeContent extends StatefulWidget {
-  const HomeContent({super.key});
+  final Function(int)? onProfileTap;
+  
+  const HomeContent({super.key, this.onProfileTap});
 
   @override
   State<HomeContent> createState() => _HomeContentState();
@@ -64,6 +72,10 @@ class _HomeContentState extends State<HomeContent> {
   final double _maxPrice = 500;
   double _minRating = 0;
   RangeValues _priceRange = const RangeValues(0, 500);
+  DateTime? _checkInDate;
+  DateTime? _checkOutDate;
+  int _numberOfPersons = 1;
+  bool _hasSearched = false;
 
   @override
   void initState() {
@@ -78,6 +90,8 @@ class _HomeContentState extends State<HomeContent> {
   }
 
   List get _filteredHotels {
+    if (!_hasSearched) return MockData.hotels;
+    
     return MockData.hotels.where((hotel) {
       final matchesSearch =
           hotel.name.toLowerCase().contains(_searchQuery.toLowerCase()) ||
@@ -223,12 +237,21 @@ class _HomeContentState extends State<HomeContent> {
                     ),
                   ],
                 ),
-                CircleAvatar(
-                  backgroundColor: AppTheme.mocha,
-                  backgroundImage: const NetworkImage(
-                    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=200&h=200',
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      // Navigate to profile tab
+                      widget.onProfileTap?.call(2);
+                    },
+                    child: CircleAvatar(
+                      radius: 24,
+                      backgroundColor: AppTheme.mocha,
+                      backgroundImage: const NetworkImage(
+                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_R4S4j_-Ii4yXXo5eCYiwhO66hb0Ez9a1dQ&s',
+                      ),
+                    ),
                   ),
-                  child: const Icon(Icons.person, color: Colors.white),
                 ),
               ],
             ),
@@ -261,16 +284,11 @@ class _HomeContentState extends State<HomeContent> {
                     Expanded(
                       child: TextField(
                         controller: _searchController,
-                        onChanged: (value) {
-                          setState(() {
-                            _searchQuery = value;
-                          });
-                        },
                         decoration: InputDecoration(
                           hintText: 'Search destination',
                           hintStyle: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: AppTheme.darkMocha,
+                            color: Colors.grey[400],
                           ),
                           border: InputBorder.none,
                           isDense: true,
@@ -281,35 +299,355 @@ class _HomeContentState extends State<HomeContent> {
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: _showFilterDialog,
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: AppTheme.cream,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: const Icon(
-                          Icons.tune,
-                          color: AppTheme.darkMocha,
-                          size: 20,
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
             ),
           ),
 
-          const SizedBox(height: 24),
+          const SizedBox(height: 16),
+
+          // Date and Person Selection
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Row(
+              children: [
+                // Check-in Date
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () async {
+                      final date = await showDatePicker(
+                        context: context,
+                        initialDate: _checkInDate ?? DateTime.now(),
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime.now().add(const Duration(days: 365)),
+                        builder: (context, child) {
+                          return Theme(
+                            data: Theme.of(context).copyWith(
+                              colorScheme: const ColorScheme.light(
+                                primary: AppTheme.mocha,
+                              ),
+                            ),
+                            child: child!,
+                          );
+                        },
+                      );
+                      if (date != null) {
+                        setState(() {
+                          _checkInDate = date;
+                          if (_checkOutDate != null && _checkOutDate!.isBefore(date)) {
+                            _checkOutDate = null;
+                          }
+                        });
+                      }
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.grey[300]!),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Check-in',
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: Colors.grey[600],
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            _checkInDate != null
+                                ? '${_checkInDate!.day}/${_checkInDate!.month}/${_checkInDate!.year}'
+                                : 'Select date',
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: AppTheme.darkMocha,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                // Check-out Date
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () async {
+                      final date = await showDatePicker(
+                        context: context,
+                        initialDate: _checkOutDate ?? (_checkInDate?.add(const Duration(days: 1)) ?? DateTime.now().add(const Duration(days: 1))),
+                        firstDate: _checkInDate?.add(const Duration(days: 1)) ?? DateTime.now().add(const Duration(days: 1)),
+                        lastDate: DateTime.now().add(const Duration(days: 365)),
+                        builder: (context, child) {
+                          return Theme(
+                            data: Theme.of(context).copyWith(
+                              colorScheme: const ColorScheme.light(
+                                primary: AppTheme.mocha,
+                              ),
+                            ),
+                            child: child!,
+                          );
+                        },
+                      );
+                      if (date != null) {
+                        setState(() {
+                          _checkOutDate = date;
+                        });
+                      }
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.grey[300]!),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Check-out',
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: Colors.grey[600],
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            _checkOutDate != null
+                                ? '${_checkOutDate!.day}/${_checkOutDate!.month}/${_checkOutDate!.year}'
+                                : 'Select date',
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: AppTheme.darkMocha,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                // Number of Persons
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                        ),
+                        builder: (context) {
+                          return StatefulBuilder(
+                            builder: (context, setModalState) {
+                              return Padding(
+                                padding: const EdgeInsets.all(24.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      'Number of Persons',
+                                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 24),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        IconButton(
+                                          onPressed: () {
+                                            if (_numberOfPersons > 1) {
+                                              setModalState(() {
+                                                _numberOfPersons--;
+                                              });
+                                              setState(() {
+                                                _numberOfPersons--;
+                                              });
+                                            }
+                                          },
+                                          icon: const Icon(Icons.remove_circle_outline),
+                                          color: AppTheme.mocha,
+                                          iconSize: 32,
+                                        ),
+                                        const SizedBox(width: 24),
+                                        Text(
+                                          _numberOfPersons.toString(),
+                                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            color: AppTheme.darkMocha,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 24),
+                                        IconButton(
+                                          onPressed: () {
+                                            if (_numberOfPersons < 10) {
+                                              setModalState(() {
+                                                _numberOfPersons++;
+                                              });
+                                              setState(() {
+                                                _numberOfPersons++;
+                                              });
+                                            }
+                                          },
+                                          icon: const Icon(Icons.add_circle_outline),
+                                          color: AppTheme.mocha,
+                                          iconSize: 32,
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 24),
+                                    ElevatedButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: AppTheme.mocha,
+                                        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
+                                      ),
+                                      child: const Text(
+                                        'Done',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      );
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.grey[300]!),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Persons',
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: Colors.grey[600],
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            _numberOfPersons.toString(),
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: AppTheme.darkMocha,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          const SizedBox(height: 16),
+
+          // Search Button
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  if (_searchController.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Please enter a destination'),
+                        backgroundColor: Colors.brown,
+                      ),
+                    );
+                    return;
+                  }
+                  setState(() {
+                    _searchQuery = _searchController.text;
+                    _hasSearched = true;
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppTheme.mocha,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: const Text(
+                  'Search Hotels',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 16),
 
           // Results count
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: Text(
-              '${_filteredHotels.length} hotels found',
-              style: TextStyle(color: Colors.grey[600], fontSize: 12),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '${_filteredHotels.length} hotels found',
+                  style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                ),
+                GestureDetector(
+                  onTap: _showFilterDialog,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: AppTheme.cream,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.tune,
+                          color: AppTheme.darkMocha,
+                          size: 16,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          'Filter',
+                          style: const TextStyle(
+                            color: AppTheme.darkMocha,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
 
@@ -322,11 +660,23 @@ class _HomeContentState extends State<HomeContent> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.search, size: 48, color: Colors.grey[400]),
+                        Icon(Icons.hotel_outlined, size: 64, color: Colors.grey[400]),
                         const SizedBox(height: 16),
                         Text(
                           'No hotels found',
-                          style: TextStyle(color: Colors.grey[600]),
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Try adjusting your search or filters',
+                          style: TextStyle(
+                            color: Colors.grey[400],
+                            fontSize: 12,
+                          ),
                         ),
                       ],
                     ),
