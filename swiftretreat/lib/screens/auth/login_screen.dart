@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_theme.dart';
-import '../../data/mock_data.dart';
+import '../../services/firebase_auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -13,6 +13,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final _authService = FirebaseAuthService();
+  bool _isLoading = false;
   int _failedAttempts = 0;
 
   @override
@@ -22,40 +24,57 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _handleLogin() {
+  Future<void> _handleLogin() async {
     if (_formKey.currentState!.validate()) {
-      final email = _emailController.text.trim();
-      final password = _passwordController.text;
+      setState(() {
+        _isLoading = true;
+      });
 
-      if (MockData.mockUsers.containsKey(email) &&
-          MockData.mockUsers[email] == password) {
-        // Success
+      try {
+        final email = _emailController.text.trim();
+        final password = _passwordController.text;
+
+        await _authService.signInWithEmailPassword(
+          email: email,
+          password: password,
+        );
+
+        // Success - reset failed attempts
         _failedAttempts = 0;
-        Navigator.pushReplacementNamed(context, '/');
-      } else {
+        
+        if (mounted) {
+          Navigator.pushReplacementNamed(context, '/home');
+        }
+      } catch (e) {
         // Failure
         setState(() {
           _failedAttempts++;
+          _isLoading = false;
         });
 
         if (_failedAttempts >= 5) {
           _showLockoutDialog();
         } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                'Invalid credentials. ${_failedAttempts}/5 attempts before lockout.',
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  '${e.toString()}. ${_failedAttempts}/5 attempts before lockout.',
+                ),
+                backgroundColor: Colors.red,
               ),
-              backgroundColor: Colors.red,
-            ),
-          );
+            );
+          }
         }
       }
     }
   }
 
-  void _showLockoutDialog() {
-    final emailForResetController = TextEditingController();
+  Future<void> _showLockoutDialog() async {
+    final emailForResetController = TextEditingController(
+      text: _emailController.text.trim(),
+    );
+    
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -66,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               const Text(
-                'Too many failed attempts. Please enter your email to verify your identity and create a new password.',
+                'Too many failed attempts. Please enter your email to reset your password.',
               ),
               const SizedBox(height: 16),
               TextField(
@@ -80,24 +99,40 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           actions: [
             TextButton(
-              onPressed: () {
+              onPressed: () async {
                 if (emailForResetController.text.isNotEmpty) {
-                  // Simulate sending email
-                  Navigator.pop(context); // Close dialog
-                  setState(() {
-                    _failedAttempts = 0; // Reset counter
-                  });
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                        'Verification email sent! Please check your inbox to reset your password.',
-                      ),
-                      backgroundColor: Colors.green,
-                    ),
-                  );
+                  try {
+                    await _authService.resetPassword(
+                      emailForResetController.text.trim(),
+                    );
+                    
+                    if (mounted) {
+                      Navigator.pop(context);
+                      setState(() {
+                        _failedAttempts = 0;
+                      });
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            'Password reset email sent! Please check your inbox.',
+                          ),
+                          backgroundColor: Colors.green,
+                        ),
+                      );
+                    }
+                  } catch (e) {
+                    if (mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Error: ${e.toString()}'),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    }
+                  }
                 }
               },
-              child: const Text('Send Verification'),
+              child: const Text('Send Reset Email'),
             ),
           ],
         );
@@ -188,8 +223,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 24),
                 // Login Button
                 ElevatedButton(
-                  onPressed: _handleLogin,
-                  child: const Text('Login'),
+                  onPressed: _isLoading ? null : _handleLogin,
+                  child: _isLoading
+                      ? const SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                          ),
+                        )
+                      : const Text('Login'),
                 ),
                 const SizedBox(height: 16),
                 // Register Link

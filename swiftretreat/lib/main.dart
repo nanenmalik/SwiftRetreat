@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'theme/app_theme.dart';
 import 'screens/home/home_screen.dart';
 import 'models/hotel_model.dart'; // Import Hotel model
 import 'screens/detail/room_detail_screen.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/auth/register_screen.dart';
+import 'screens/auth/auth_wrapper.dart';
 import 'screens/booking/booking_screen.dart';
 import 'screens/payment/payment_screen.dart';
 import 'screens/profile/edit_profile_screen.dart';
@@ -12,7 +15,11 @@ import 'screens/profile/payment_methods_screen.dart';
 import 'screens/profile/settings_screen.dart';
 import 'screens/profile/help_support_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const SwiftRetreatApp());
 }
 
@@ -24,9 +31,9 @@ class SwiftRetreatApp extends StatelessWidget {
     return MaterialApp(
       title: 'Swift Retreat',
       theme: AppTheme.bohemianTheme,
-      initialRoute: '/login',
+      home: const AuthWrapper(),
       routes: {
-        '/': (context) => const HomeScreen(),
+        '/home': (context) => const HomeScreen(),
         '/login': (context) => const LoginScreen(),
         '/register': (context) => const RegisterScreen(),
         '/payment': (context) => const PaymentScreen(),

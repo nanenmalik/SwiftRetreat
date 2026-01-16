@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_theme.dart';
-import '../../data/mock_data.dart';
+import '../../services/firebase_auth_service.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -14,6 +14,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final _authService = FirebaseAuthService();
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -23,19 +25,63 @@ class _RegisterScreenState extends State<RegisterScreen> {
     super.dispose();
   }
 
-  void _handleRegister() {
+  Future<void> _handleRegister() async {
     if (_formKey.currentState!.validate()) {
-      // Save user to mock data
-      MockData.mockUsers[_emailController.text.trim()] =
-          _passwordController.text;
+      setState(() {
+        _isLoading = true;
+      });
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Registration successful! Please login.'),
-          backgroundColor: Colors.green,
-        ),
-      );
-      Navigator.pop(context); // Go back to login
+      try {
+        // Perform registration
+        final userCredential = await _authService.signUpWithEmailPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text,
+          name: _nameController.text.trim(),
+        );
+
+        if (userCredential?.user != null && mounted) {
+          // Show success message
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'Welcome ${_nameController.text.trim()}! Your account has been created.',
+              ),
+              backgroundColor: Colors.green,
+              duration: const Duration(seconds: 2),
+            ),
+          );
+          
+          // Small delay to ensure user data is saved before navigating
+          await Future.delayed(const Duration(milliseconds: 500));
+          
+          // Navigate to home screen
+          if (mounted) {
+            Navigator.pushReplacementNamed(context, '/home');
+          }
+        }
+      } catch (e) {
+        setState(() {
+          _isLoading = false;
+        });
+
+        if (mounted) {
+          // Show error message
+          String errorMessage = e.toString();
+          if (errorMessage.contains('email-already-in-use')) {
+            errorMessage = 'This email is already registered. Please login instead.';
+          } else if (errorMessage.contains('weak-password')) {
+            errorMessage = 'Password is too weak. Please use a stronger password.';
+          }
+          
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(errorMessage),
+              backgroundColor: Colors.red,
+              duration: const Duration(seconds: 3),
+            ),
+          );
+        }
+      }
     }
   }
 
@@ -147,8 +193,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 const SizedBox(height: 24),
                 // Register Button
                 ElevatedButton(
-                  onPressed: _handleRegister,
-                  child: const Text('Sign Up'),
+                  onPressed: _isLoading ? null : _handleRegister,
+                  child: _isLoading
+                      ? const SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                          ),
+                        )
+                      : const Text('Sign Up'),
                 ),
                 const SizedBox(height: 16),
                 // Login Link

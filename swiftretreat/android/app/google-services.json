@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "251282535668",
+    "project_id": "swiftretreat-c7fad",
+    "storage_bucket": "swiftretreat-c7fad.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:251282535668:android:9b25fed1d70feab1bd1aa1",
+        "android_client_info": {
+          "package_name": "com.example.swiftretreat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAf70Flxu_9NGf8X3fvHLzV30ykz0zJiro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
