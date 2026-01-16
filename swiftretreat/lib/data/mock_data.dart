@@ -101,4 +101,8 @@ class MockData {
       ],
     ),
   ];
+
+  static Map<String, String> mockUsers = {
+    'test@swiftretreat.com': 'Password123!',
+  };
 }

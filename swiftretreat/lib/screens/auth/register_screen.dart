@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_theme.dart';
+import '../../data/mock_data.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -24,8 +25,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   void _handleRegister() {
     if (_formKey.currentState!.validate()) {
-      // TODO: Implement actual registration logic
-      Navigator.pushReplacementNamed(context, '/');
+      // Save user to mock data
+      MockData.mockUsers[_emailController.text.trim()] =
+          _passwordController.text;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Registration successful! Please login.'),
+          backgroundColor: Colors.green,
+        ),
+      );
+      Navigator.pop(context); // Go back to login
     }
   }
 
@@ -103,14 +113,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   decoration: const InputDecoration(
                     labelText: 'Password',
                     prefixIcon: Icon(Icons.lock_outline),
+                    suffixIcon: Tooltip(
+                      triggerMode: TooltipTriggerMode.tap,
+                      showDuration: Duration(seconds: 5),
+                      message:
+                          'Requirements:\n• Min 8 chars\n• 1 Uppercase\n• 1 Lowercase\n• 1 Number\n• 1 Symbol',
+                      child: Icon(Icons.info_outline, color: Colors.grey),
+                    ),
                   ),
                   obscureText: true,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your password';
                     }
-                    if (value.length < 6) {
-                      return 'Password must be at least 6 characters';
+                    if (value.length < 8) {
+                      return 'Password must be at least 8 characters';
+                    }
+                    if (!value.contains(RegExp(r'[A-Z]'))) {
+                      return 'Password must contain at least one uppercase letter';
+                    }
+                    if (!value.contains(RegExp(r'[a-z]'))) {
+                      return 'Password must contain at least one lowercase letter';
+                    }
+                    if (!value.contains(RegExp(r'[0-9]'))) {
+                      return 'Password must contain at least one number';
+                    }
+                    if (!value.contains(RegExp(r'[!@#\$&*~-]'))) {
+                      return 'Password must contain at least one symbol';
                     }
                     return null;
                   },

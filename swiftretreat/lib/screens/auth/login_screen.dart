@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_theme.dart';
+import '../../data/mock_data.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -12,6 +13,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  int _failedAttempts = 0;
 
   @override
   void dispose() {
@@ -22,9 +24,85 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _handleLogin() {
     if (_formKey.currentState!.validate()) {
-      // TODO: Implement actual login logic
-      Navigator.pushReplacementNamed(context, '/');
+      final email = _emailController.text.trim();
+      final password = _passwordController.text;
+
+      if (MockData.mockUsers.containsKey(email) &&
+          MockData.mockUsers[email] == password) {
+        // Success
+        _failedAttempts = 0;
+        Navigator.pushReplacementNamed(context, '/');
+      } else {
+        // Failure
+        setState(() {
+          _failedAttempts++;
+        });
+
+        if (_failedAttempts >= 5) {
+          _showLockoutDialog();
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'Invalid credentials. ${_failedAttempts}/5 attempts before lockout.',
+              ),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      }
     }
+  }
+
+  void _showLockoutDialog() {
+    final emailForResetController = TextEditingController();
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Account Locked'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'Too many failed attempts. Please enter your email to verify your identity and create a new password.',
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                controller: emailForResetController,
+                decoration: const InputDecoration(
+                  labelText: 'Confirm Email',
+                  prefixIcon: Icon(Icons.email),
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                if (emailForResetController.text.isNotEmpty) {
+                  // Simulate sending email
+                  Navigator.pop(context); // Close dialog
+                  setState(() {
+                    _failedAttempts = 0; // Reset counter
+                  });
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                        'Verification email sent! Please check your inbox to reset your password.',
+                      ),
+                      backgroundColor: Colors.green,
+                    ),
+                  );
+                }
+              },
+              child: const Text('Send Verification'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -88,6 +166,21 @@ class _LoginScreenState extends State<LoginScreen> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your password';
+                    }
+                    if (value.length < 8) {
+                      return 'Password must be at least 8 characters';
+                    }
+                    if (!value.contains(RegExp(r'[A-Z]'))) {
+                      return 'Password must contain at least one uppercase letter';
+                    }
+                    if (!value.contains(RegExp(r'[a-z]'))) {
+                      return 'Password must contain at least one lowercase letter';
+                    }
+                    if (!value.contains(RegExp(r'[0-9]'))) {
+                      return 'Password must contain at least one number';
+                    }
+                    if (!value.contains(RegExp(r'[!@#\$&*~-]'))) {
+                      return 'Password must contain at least one symbol';
                     }
                     return null;
                   },
