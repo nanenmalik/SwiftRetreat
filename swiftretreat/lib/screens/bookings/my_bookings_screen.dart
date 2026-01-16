@@ -175,7 +175,7 @@ class _MyBookingsScreenState extends State<MyBookingsScreen> {
               children: [
                 OutlinedButton(
                   onPressed: () {
-                    // Could show details
+                    _showBookingDetails(context, booking);
                   },
                   child: const Text('View Booking'),
                 ),
@@ -195,6 +195,203 @@ class _MyBookingsScreenState extends State<MyBookingsScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  void _showBookingDetails(BuildContext context, Booking booking) {
+    final dateFormat = DateFormat('EEE, dd MMM yyyy');
+    final nightCount = booking.checkOut.difference(booking.checkIn).inDays;
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => DraggableScrollableSheet(
+        initialChildSize: 0.7,
+        minChildSize: 0.5,
+        maxChildSize: 0.95,
+        expand: false,
+        builder: (context, scrollController) => SingleChildScrollView(
+          controller: scrollController,
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Handle Bar
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
+
+              // Title
+              Text(
+                'Booking Details',
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'ID: ${booking.id}',
+                style: TextStyle(color: Colors.grey[600]),
+              ),
+              const SizedBox(height: 24),
+
+              // Hotel Info
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.network(
+                  booking.hotel.imageUrl,
+                  height: 200,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      height: 200,
+                      width: double.infinity,
+                      color: Colors.grey[300],
+                      child: const Icon(
+                        Icons.hotel,
+                        size: 50,
+                        color: Colors.grey,
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                booking.hotel.name,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: AppTheme.mocha,
+                ),
+              ),
+              Text(
+                booking.hotel.location,
+                style: TextStyle(color: Colors.grey[600]),
+              ),
+              const Divider(height: 32),
+
+              // Stay Details
+              _buildDetailRow(
+                Icons.calendar_today,
+                'Check-in',
+                dateFormat.format(booking.checkIn),
+              ),
+              const SizedBox(height: 16),
+              _buildDetailRow(
+                Icons.calendar_today_outlined,
+                'Check-out',
+                dateFormat.format(booking.checkOut),
+              ),
+              const SizedBox(height: 16),
+              _buildDetailRow(
+                Icons.night_shelter_outlined,
+                'Duration',
+                '$nightCount Nights',
+              ),
+              const SizedBox(height: 16),
+              _buildDetailRow(
+                Icons.people_outline,
+                'Guests',
+                '${booking.guests} Guests',
+              ),
+              const SizedBox(height: 16),
+              if (booking.room != null)
+                _buildDetailRow(Icons.bed, 'Room Type', booking.room!.name),
+
+              const Divider(height: 32),
+
+              // Price Breakdown
+              const Text(
+                'Payment Summary',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: AppTheme.mocha,
+                ),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Rate per night',
+                    style: TextStyle(color: Colors.grey[700]),
+                  ),
+                  Text(
+                    booking.room != null
+                        ? '\$${booking.room!.price.toStringAsFixed(2)}'
+                        : '\$${booking.hotel.pricePerNight.toStringAsFixed(2)}',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Total Price',
+                    style: TextStyle(color: Colors.grey[700]),
+                  ),
+                  Text(
+                    '\$${booking.totalPrice.toStringAsFixed(2)}',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: AppTheme.mocha,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 32),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Close'),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDetailRow(IconData icon, String label, String value) {
+    return Row(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: AppTheme.cream,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Icon(icon, color: AppTheme.mocha, size: 20),
+        ),
+        const SizedBox(width: 16),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              label,
+              style: TextStyle(color: Colors.grey[600], fontSize: 12),
+            ),
+            Text(value, style: const TextStyle(fontWeight: FontWeight.bold)),
+          ],
+        ),
+      ],
     );
   }
 

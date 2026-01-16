@@ -127,6 +127,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       if (value == null || value.isEmpty) {
                         return 'Please enter card number';
                       }
+                      // Remove spaces and check length
+                      final cleanValue = value.replaceAll(RegExp(r'\s+'), '');
+                      if (cleanValue.length != 16 ||
+                          int.tryParse(cleanValue) == null) {
+                        return 'Card number must be 16 digits';
+                      }
                     }
                     return null;
                   },
@@ -166,6 +172,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           if (_selectedPaymentMethod == 'card') {
                             if (value == null || value.isEmpty) {
                               return 'Required';
+                            }
+                            if (value.length != 3 ||
+                                int.tryParse(value) == null) {
+                              return 'CVV must be 3 digits';
                             }
                           }
                           return null;
