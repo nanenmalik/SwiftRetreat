@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_theme.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  String _name = 'Adli Wahid';
+  String _email = 'adli@example.com';
+  String _profileImage =
+      'https://i.pinimg.com/736x/96/53/f7/9653f749c03eb888c0dde626b925437b.jpg';
 
   @override
   Widget build(BuildContext context) {
@@ -15,28 +25,42 @@ class ProfileScreen extends StatelessWidget {
         padding: const EdgeInsets.all(24),
         child: Column(
           children: [
-            const CircleAvatar(
+            CircleAvatar(
               radius: 50,
               backgroundColor: AppTheme.mocha,
-              backgroundImage: NetworkImage(
-                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=200&h=200',
-              ),
+              backgroundImage: NetworkImage(_profileImage),
             ),
             const SizedBox(height: 16),
             Text(
-              'Adli Wahid',
+              _name,
               style: Theme.of(
                 context,
               ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
             ),
-            Text('adli@example.com', style: TextStyle(color: Colors.grey[600])),
+            Text(_email, style: TextStyle(color: Colors.grey[600])),
             const SizedBox(height: 32),
             _buildProfileItem(
               context,
               Icons.person_outline,
               'Edit Profile',
-              () {
-                Navigator.pushNamed(context, '/edit-profile');
+              () async {
+                final result = await Navigator.pushNamed(
+                  context,
+                  '/edit-profile',
+                  arguments: {
+                    'name': _name,
+                    'email': _email,
+                    'image': _profileImage,
+                  },
+                );
+
+                if (result != null && result is Map<String, dynamic>) {
+                  setState(() {
+                    _name = result['name'] ?? _name;
+                    _email = result['email'] ?? _email;
+                    _profileImage = result['image'] ?? _profileImage;
+                  });
+                }
               },
             ),
             _buildProfileItem(

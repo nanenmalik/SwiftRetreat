@@ -10,9 +10,57 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController(text: 'Adli Wahid');
-  final _emailController = TextEditingController(text: 'adli@example.com');
-  final _phoneController = TextEditingController(text: '+60 12-345 6789');
+  late TextEditingController _nameController;
+  late TextEditingController _emailController;
+  late TextEditingController _phoneController;
+  late TextEditingController _imageController;
+
+  bool _initialized = false;
+  String _imageUrl =
+      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=200&h=200';
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController = TextEditingController();
+    _emailController = TextEditingController();
+    _phoneController = TextEditingController();
+    _imageController = TextEditingController();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_initialized) {
+      final args =
+          ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+      if (args != null) {
+        _nameController.text = args['name'] ?? 'Adli Wahid';
+        _emailController.text = args['email'] ?? 'adli@example.com';
+        _phoneController.text = args['phone'] ?? '+60 12-345 6789';
+        if (args['image'] != null) {
+          _imageUrl = args['image'];
+          _imageController.text = _imageUrl;
+        }
+      } else {
+        // Fallbacks if no args passed (e.g. direct nav/testing)
+        _nameController.text = 'Adli Wahid';
+        _emailController.text = 'adli@example.com';
+        _phoneController.text = '+60 12-345 6789';
+        _imageController.text = _imageUrl;
+      }
+      _initialized = true;
+    }
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+    _imageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +75,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               Center(
                 child: Stack(
                   children: [
-                    const CircleAvatar(
+                    CircleAvatar(
                       radius: 50,
                       backgroundColor: AppTheme.mocha,
-                      backgroundImage: NetworkImage(
-                        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=200&h=200',
-                      ),
+                      backgroundImage: NetworkImage(_imageUrl),
+                      onBackgroundImageError: (_, __) {
+                        // Fallback or handle error
+                      },
                     ),
                     Positioned(
                       bottom: 0,
@@ -91,13 +140,32 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 ),
                 keyboardType: TextInputType.phone,
               ),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: _imageController,
+                decoration: const InputDecoration(
+                  labelText: 'Profile Image URL',
+                  prefixIcon: Icon(Icons.image_outlined),
+                  hintText: 'https://...',
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    _imageUrl = value;
+                  });
+                },
+              ),
               const SizedBox(height: 48),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      Navigator.pop(context);
+                      Navigator.pop(context, {
+                        'name': _nameController.text,
+                        'email': _emailController.text,
+                        'phone': _phoneController.text,
+                        'image': _imageController.text,
+                      });
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('Profile updated successfully!'),
