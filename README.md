@@ -106,28 +106,94 @@ The Swift Retreat mobile application, built with Flutter, focuses exclusively on
 Screenshot of website mockup
 
 **User's side**
-login and register page
 
+**login page** 
+
+<img align="center" alt="Screenshot 2025-12-20 214907" src="https://github.com/user-attachments/assets/9e08a658-4eb2-4971-b0fc-154720483dc2" />
+
+
+**register page**
+
+<img align="center" alt="Screenshot 2025-12-20 214929" src="https://github.com/user-attachments/assets/45151629-8bca-4ad3-b929-57f45fce807e" />
+
+
+**landing page**
+
+<img align="center" alt="Screenshot 2025-12-20 203546" src="https://github.com/user-attachments/assets/cc2870f2-6bbb-4e5d-b880-0a4a72b1ae3e" />
+
+
+**payment page**
+
+<img  align="center" alt="Screenshot 2025-12-20 203624" src="https://github.com/user-attachments/assets/9bc25e42-1f98-428f-bfb0-075459cfc82a" />
+
+
+**booking management page**
+
+<img  align="center" alt="Screenshot 2025-12-20 203706" src="https://github.com/user-attachments/assets/97b1d813-ff67-41b9-af6f-45b3fb98f227" />
+
+
+### Architecture / Technical Design
+
+
+**User's side**
+**login and register page**
 
 
 **landing page**
 
 
+
 **payment page**
+
+![Screenshot 2025-05-22 225719](https://github.com/user-attachments/assets/f97110de-a0bb-47dd-8532-ed087f511b90)
+
+- Scaffold: The base container with an AppBar ("Payment Details").
+
+- Stepper/Progress Indicator: A custom horizontal widget at the top showing the flow (Book -> Payment -> Confirm).
+
+- Card/Container (Order Summary):
+
+   - Row: Hotel thumbnail image + Column (Title, Rating, Location).
+
+   - Divider: To separate sections.
+
+   - Price Breakdown Table: Multiple Rows with MainAxisAlignment.spaceBetween for labels and values.
+
+- RadioListTile Group: For selecting "Credit Card," "PayPal," or "Google Pay."
+
+- BottomAppBar: A fixed container at the bottom holding the "Pay Now" ElevatedButton.
 
 
 **booking management page**
 
+![Screenshot 2025-05-22 224455](https://github.com/user-attachments/assets/be33b35d-0752-45ba-80b2-3e254237e3c4)
+
+- Scaffold: With a bottom navigation bar.
+
+- Segmented Control / TabBar: To toggle between "Upcoming," "Completed," and "Cancelled."
+
+- ListView.builder: To render the scrollable list of booking cards.
+
+- Booking Card (Custom Widget):
+
+   - Column:
+
+      - Top Section: Row with Image + Title/Date/Status Chip.
+
+      - Action Row: "Cancel Booking" and "View Ticket" buttons.
+
+### Data Model
 ER Diagram
 
 ![ER_Diagram_Swift](https://github.com/user-attachments/assets/9a9e1461-45c9-41bf-b000-12846883e031)
 
-Sequence Diagram
+### Sequence Diagram
 
 ![SD - Guest](https://github.com/user-attachments/assets/cf3e22e8-6ab5-4b92-aa58-7b12acfc4d03)
 ![SD - Staff](https://github.com/user-attachments/assets/c642ccf6-e42c-4cd9-8a60-162d25a4637e)
 ![SD - Admin](https://github.com/user-attachments/assets/d0c79f61-a8fd-41af-b48e-f3a278e34bf0)
 
+### References
 
 
 
