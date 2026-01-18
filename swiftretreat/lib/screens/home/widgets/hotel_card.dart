@@ -12,8 +12,9 @@ class HotelCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.only(bottom: 24),
-      elevation: 0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      elevation: 2,
+      shadowColor: Colors.black.withValues(alpha: 0.05),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: onTap, // Pass the tap event to the parent
@@ -71,7 +72,7 @@ class HotelCard extends StatelessWidget {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: AppTheme.sageGreen,
+                        color: AppTheme.primaryTeal,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: const Text(
@@ -96,7 +97,7 @@ class HotelCard extends StatelessWidget {
                     hotel.name,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: AppTheme.darkMocha,
+                      color: AppTheme.textDark,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -125,9 +126,9 @@ class HotelCard extends StatelessWidget {
                           vertical: 4,
                         ),
                         decoration: BoxDecoration(
-                          color: AppTheme.offWhite,
+                          color: AppTheme.backgroundGrey,
                           borderRadius: BorderRadius.circular(4),
-                          border: Border.all(color: AppTheme.darkCream),
+                          border: Border.all(color: Colors.grey.shade300),
                         ),
                         child: Text(
                           amenity,
@@ -154,7 +155,7 @@ class HotelCard extends StatelessWidget {
                                 text: '\$${hotel.pricePerNight.toInt()}',
                                 style: Theme.of(context).textTheme.titleLarge
                                     ?.copyWith(
-                                      color: AppTheme.mocha,
+                                      color: AppTheme.primaryTeal,
                                       fontWeight: FontWeight.bold,
                                     ),
                               ),
@@ -167,7 +168,10 @@ class HotelCard extends StatelessWidget {
                         ),
                       ),
                       // "View" Button is implied by the card being clickable, but could add an icon here
-                      const Icon(Icons.arrow_forward, color: AppTheme.mocha),
+                      const Icon(
+                        Icons.arrow_forward,
+                        color: AppTheme.primaryTeal,
+                      ),
                     ],
                   ),
                 ],

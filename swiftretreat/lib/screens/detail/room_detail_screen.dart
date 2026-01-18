@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/hotel_model.dart';
 import '../../theme/app_theme.dart';
+import 'room_carousel.dart';
 
 class RoomDetailScreen extends StatefulWidget {
   final Hotel hotel;
@@ -115,7 +116,7 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
                                 widget.hotel.name,
                                 style: Theme.of(context).textTheme.displayMedium
                                     ?.copyWith(
-                                      color: AppTheme.darkMocha,
+                                      color: AppTheme.textDark,
                                       fontWeight: FontWeight.bold,
                                     ),
                               ),
@@ -143,7 +144,7 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
                             vertical: 4,
                           ),
                           decoration: BoxDecoration(
-                            color: AppTheme.cream,
+                            color: AppTheme.backgroundGrey,
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Row(
@@ -173,17 +174,17 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
                       Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: AppTheme.sageGreen.withValues(alpha: 0.1),
+                          color: AppTheme.primaryTeal.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                            color: AppTheme.sageGreen.withValues(alpha: 0.3),
+                            color: AppTheme.primaryTeal.withValues(alpha: 0.3),
                           ),
                         ),
                         child: Row(
                           children: [
                             const Icon(
                               Icons.check_circle,
-                              color: AppTheme.sageGreen,
+                              color: AppTheme.primaryTeal,
                             ),
                             const SizedBox(width: 12),
                             Expanded(
@@ -195,7 +196,7 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
                                     style: Theme.of(context).textTheme.bodyLarge
                                         ?.copyWith(
                                           fontWeight: FontWeight.bold,
-                                          color: AppTheme.darkGreen,
+                                          color: AppTheme.primaryTeal,
                                         ),
                                   ),
                                   Text(
@@ -203,7 +204,7 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyMedium
-                                        ?.copyWith(color: AppTheme.darkGreen),
+                                        ?.copyWith(color: AppTheme.primaryTeal),
                                   ),
                                 ],
                               ),
@@ -245,7 +246,7 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
                                   color: Colors.white,
                                   border: Border.all(
                                     color: isSelected
-                                        ? AppTheme.mocha
+                                        ? AppTheme.primaryTeal
                                         : Colors.grey[300]!,
                                     width: isSelected ? 2 : 1,
                                   ),
@@ -253,9 +254,8 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
                                   boxShadow: isSelected
                                       ? [
                                           BoxShadow(
-                                            color: AppTheme.mocha.withValues(
-                                              alpha: 0.2,
-                                            ),
+                                            color: AppTheme.primaryTeal
+                                                .withValues(alpha: 0.2),
                                             blurRadius: 8,
                                             offset: const Offset(0, 4),
                                           ),
@@ -270,22 +270,10 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
                                       borderRadius: const BorderRadius.vertical(
                                         top: Radius.circular(15),
                                       ),
-                                      child: Image.network(
-                                        room.imageUrls.isNotEmpty
-                                            ? room.imageUrls.first
-                                            : widget.hotel.imageUrl,
+                                      child: RoomImageCarousel(
+                                        imageUrls: room.imageUrls,
+                                        fallbackUrl: widget.hotel.imageUrl,
                                         height: 120,
-                                        width: double.infinity,
-                                        fit: BoxFit.cover,
-                                        errorBuilder:
-                                            (context, error, stackTrace) =>
-                                                Container(
-                                                  height: 120,
-                                                  color: Colors.grey[200],
-                                                  child: const Icon(
-                                                    Icons.image,
-                                                  ),
-                                                ),
                                       ),
                                     ),
                                     Padding(
@@ -317,7 +305,7 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
                                           Text(
                                             '\$${room.price.toInt()}',
                                             style: TextStyle(
-                                              color: AppTheme.mocha,
+                                              color: AppTheme.primaryTeal,
                                               fontWeight: FontWeight.bold,
                                               fontSize: 16,
                                             ),
@@ -357,8 +345,8 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
                               .map((amenity) {
                                 return Chip(
                                   label: Text(amenity),
-                                  backgroundColor: AppTheme.offWhite,
-                                  side: BorderSide(color: AppTheme.darkCream),
+                                  backgroundColor: AppTheme.backgroundGrey,
+                                  side: BorderSide(color: Colors.grey.shade300),
                                   labelStyle: TextStyle(
                                     color: Colors.grey[800],
                                   ),
@@ -422,7 +410,7 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
                               text: '\$${currentPrice.toInt()}',
                               style: Theme.of(context).textTheme.headlineSmall
                                   ?.copyWith(
-                                    color: AppTheme.mocha,
+                                    color: AppTheme.primaryTeal,
                                     fontWeight: FontWeight.bold,
                                   ),
                             ),

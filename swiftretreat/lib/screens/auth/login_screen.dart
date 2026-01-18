@@ -158,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Icon(
                   Icons.spa_rounded, // Example icon fitting the theme
                   size: 80,
-                  color: AppTheme.mocha,
+                  color: AppTheme.primaryTeal,
                 ),
                 const SizedBox(height: 24),
                 // Title
@@ -172,7 +172,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   'Sign in to your account',
                   style: Theme.of(
                     context,
-                  ).textTheme.bodyLarge?.copyWith(color: AppTheme.darkCream),
+                  ).textTheme.bodyLarge?.copyWith(color: AppTheme.textGrey),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 48),

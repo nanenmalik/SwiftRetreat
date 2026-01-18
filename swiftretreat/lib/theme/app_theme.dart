@@ -1,76 +1,100 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  // Bohemian Color Palette
-  static const Color cream = Color(0xFFF5E6CA);
-  static const Color darkCream = Color(0xFFE6D2B5);
-  static const Color mocha = Color(0xFF8D6E63);
-  static const Color darkMocha = Color(0xFF5D4037);
-  static const Color sageGreen = Color(0xFF8FA382);
-  static const Color darkGreen = Color(0xFF556B2F);
-  static const Color terracotta = Color(0xFFE07A5F);
-  static const Color offWhite = Color(0xFFFAF9F6);
+  // Figma Design Color Palette
+  static const Color primaryTeal = Color(0xFF1AB1AF);
+  static const Color backgroundGrey = Color(0xFFF5F5F5);
+  static const Color surfaceWhite = Colors.white;
+  static const Color textDark = Color(0xFF1A1A1A);
+  static const Color textGrey = Color(0xFF7D7D7D);
+  static const Color accentYellow = Color(0xFFFFD700); // For stars etc
+
+  // Deprecated colors mapped for compatibility if needed elsewhere
+  static const Color mocha = primaryTeal;
+  static const Color darkMocha = textDark;
 
   static final ThemeData bohemianTheme = ThemeData(
     useMaterial3: true,
-    scaffoldBackgroundColor: offWhite,
-    primaryColor: mocha,
+    fontFamily: null, // Use system sans-serif
+    scaffoldBackgroundColor: backgroundGrey,
+    primaryColor: primaryTeal,
     colorScheme: ColorScheme.fromSeed(
-      seedColor: mocha,
-      primary: mocha,
-      secondary: sageGreen,
-      surface: cream,
-      // background: offWhite, // Deprecated
-      error: terracotta,
+      seedColor: primaryTeal,
+      primary: primaryTeal,
+      secondary: textGrey,
+      surface: surfaceWhite,
+      error: Colors.redAccent,
       onPrimary: Colors.white,
       onSecondary: Colors.white,
-      onSurface: darkMocha,
-      // onBackground: darkMocha, // Deprecated
+      onSurface: textDark,
     ),
     appBarTheme: const AppBarTheme(
-      backgroundColor: cream,
-      foregroundColor: darkMocha,
+      backgroundColor: backgroundGrey,
+      foregroundColor: textDark,
       elevation: 0,
+      centerTitle: false,
+      titleTextStyle: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+        color: textDark,
+      ),
+    ),
+    cardTheme: CardThemeData(
+      color: surfaceWhite,
+      elevation: 2,
+      shadowColor: Colors.black.withValues(alpha: 0.05),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      margin: EdgeInsets.zero,
     ),
     textTheme: const TextTheme(
       displayLarge: TextStyle(
         fontSize: 32,
         fontWeight: FontWeight.bold,
-        color: darkMocha,
-        fontFamily: 'Serif', // Placeholder for a serif font
+        color: textDark,
       ),
       displayMedium: TextStyle(
         fontSize: 24,
-        fontWeight: FontWeight.w600,
-        color: darkMocha,
+        fontWeight: FontWeight.bold,
+        color: textDark,
       ),
-      bodyLarge: TextStyle(fontSize: 16, color: darkMocha),
-      bodyMedium: TextStyle(fontSize: 14, color: darkMocha),
+      titleLarge: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+        color: textDark,
+      ),
+      bodyLarge: TextStyle(fontSize: 16, color: textDark),
+      bodyMedium: TextStyle(fontSize: 14, color: textGrey),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: mocha,
+        backgroundColor: primaryTeal,
         foregroundColor: Colors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        elevation: 4,
+        shadowColor: primaryTeal.withValues(alpha: 0.4),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: Colors.white,
+      contentPadding: const EdgeInsets.all(20),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: darkCream),
+        borderRadius: BorderRadius.circular(20),
+        borderSide: BorderSide.none,
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: darkCream),
+        borderRadius: BorderRadius.circular(20),
+        borderSide: BorderSide.none,
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: mocha, width: 2),
+        borderRadius: BorderRadius.circular(20),
+        borderSide: const BorderSide(color: primaryTeal, width: 2),
       ),
-      labelStyle: const TextStyle(color: mocha),
+      prefixIconColor: textGrey,
+      labelStyle: const TextStyle(color: textGrey),
     ),
+    iconTheme: const IconThemeData(color: textDark),
   );
 }

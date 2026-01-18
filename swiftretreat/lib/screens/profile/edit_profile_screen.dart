@@ -67,7 +67,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   children: [
                     CircleAvatar(
                       radius: 50,
-                      backgroundColor: AppTheme.mocha,
+                      backgroundColor: AppTheme.primaryTeal,
                       backgroundImage: const NetworkImage(
                         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_R4S4j_-Ii4yXXo5eCYiwhO66hb0Ez9a1dQ&s',
                       ),
@@ -79,7 +79,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       child: Container(
                         padding: const EdgeInsets.all(4),
                         decoration: const BoxDecoration(
-                          color: AppTheme.terracotta,
+                          color: AppTheme.primaryTeal,
                           shape: BoxShape.circle,
                         ),
                         child: const Icon(

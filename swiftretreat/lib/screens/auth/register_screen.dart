@@ -50,10 +50,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
               duration: const Duration(seconds: 2),
             ),
           );
-          
+
           // Small delay to ensure user data is saved before navigating
           await Future.delayed(const Duration(milliseconds: 500));
-          
+
           // Navigate to home screen
           if (mounted) {
             Navigator.pushReplacementNamed(context, '/home');
@@ -68,11 +68,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
           // Show error message
           String errorMessage = e.toString();
           if (errorMessage.contains('email-already-in-use')) {
-            errorMessage = 'This email is already registered. Please login instead.';
+            errorMessage =
+                'This email is already registered. Please login instead.';
           } else if (errorMessage.contains('weak-password')) {
-            errorMessage = 'Password is too weak. Please use a stronger password.';
+            errorMessage =
+                'Password is too weak. Please use a stronger password.';
           }
-          
+
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(errorMessage),
@@ -105,7 +107,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 // Logo or Icon
-                Icon(Icons.person_add_rounded, size: 60, color: AppTheme.mocha),
+                Icon(
+                  Icons.person_add_rounded,
+                  size: 60,
+                  color: AppTheme.primaryTeal,
+                ),
                 const SizedBox(height: 24),
                 // Title
                 Text(
@@ -118,7 +124,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   'Join Swift Retreat today',
                   style: Theme.of(
                     context,
-                  ).textTheme.bodyLarge?.copyWith(color: AppTheme.darkCream),
+                  ).textTheme.bodyLarge?.copyWith(color: AppTheme.textGrey),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 48),
@@ -198,9 +204,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ? const SizedBox(
                           height: 20,
                           width: 20,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                          ),
+                          child: CircularProgressIndicator(strokeWidth: 2),
                         )
                       : const Text('Sign Up'),
                 ),

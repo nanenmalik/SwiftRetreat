@@ -55,7 +55,7 @@ class _BookingScreenState extends State<BookingScreen> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        border: Border.all(color: AppTheme.darkCream),
+        border: Border.all(color: Colors.grey.shade300),
         borderRadius: BorderRadius.circular(12),
         color: Colors.white,
       ),
@@ -140,7 +140,7 @@ class _BookingScreenState extends State<BookingScreen> {
                               widget.room!.name,
                               style: Theme.of(context).textTheme.bodyMedium
                                   ?.copyWith(
-                                    color: AppTheme.mocha,
+                                    color: AppTheme.primaryTeal,
                                     fontWeight: FontWeight.bold,
                                   ),
                             ),
@@ -156,7 +156,7 @@ class _BookingScreenState extends State<BookingScreen> {
                           Text(
                             '\$${(widget.room?.price ?? widget.hotel.pricePerNight).toInt()} / night',
                             style: TextStyle(
-                              color: AppTheme.mocha,
+                              color: AppTheme.primaryTeal,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -232,7 +232,7 @@ class _BookingScreenState extends State<BookingScreen> {
                   vertical: 8,
                 ),
                 decoration: BoxDecoration(
-                  border: Border.all(color: AppTheme.darkCream),
+                  border: Border.all(color: Colors.grey.shade300),
                   borderRadius: BorderRadius.circular(12),
                   color: Colors.white,
                 ),

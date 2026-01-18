@@ -26,9 +26,9 @@ class _MyBookingsScreenState extends State<MyBookingsScreen> {
         child: Column(
           children: [
             const TabBar(
-              labelColor: AppTheme.mocha,
+              labelColor: AppTheme.primaryTeal,
               unselectedLabelColor: Colors.grey,
-              indicatorColor: AppTheme.mocha,
+              indicatorColor: AppTheme.primaryTeal,
               tabs: [
                 Tab(text: 'Upcoming'),
                 Tab(text: 'Completed'),
@@ -164,7 +164,7 @@ class _MyBookingsScreenState extends State<MyBookingsScreen> {
                   '\$${booking.totalPrice.toInt()}',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: AppTheme.mocha,
+                    color: AppTheme.primaryTeal,
                   ),
                 ),
               ],
@@ -182,7 +182,7 @@ class _MyBookingsScreenState extends State<MyBookingsScreen> {
                 if (statusLabel == 'Upcoming')
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppTheme.terracotta,
+                      backgroundColor: Colors.redAccent,
                       foregroundColor: Colors.white,
                     ),
                     onPressed: () {
@@ -272,7 +272,7 @@ class _MyBookingsScreenState extends State<MyBookingsScreen> {
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: AppTheme.mocha,
+                  color: AppTheme.primaryTeal,
                 ),
               ),
               Text(
@@ -317,7 +317,7 @@ class _MyBookingsScreenState extends State<MyBookingsScreen> {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: AppTheme.mocha,
+                  color: AppTheme.primaryTeal,
                 ),
               ),
               const SizedBox(height: 16),
@@ -349,7 +349,7 @@ class _MyBookingsScreenState extends State<MyBookingsScreen> {
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: AppTheme.mocha,
+                      color: AppTheme.primaryTeal,
                     ),
                   ),
                 ],
@@ -375,10 +375,10 @@ class _MyBookingsScreenState extends State<MyBookingsScreen> {
         Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: AppTheme.cream,
+            color: AppTheme.backgroundGrey,
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Icon(icon, color: AppTheme.mocha, size: 20),
+          child: Icon(icon, color: AppTheme.primaryTeal, size: 20),
         ),
         const SizedBox(width: 16),
         Column(

@@ -50,7 +50,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             CircleAvatar(
               radius: 50,
-              backgroundColor: AppTheme.mocha,
+              backgroundColor: AppTheme.primaryTeal,
               backgroundImage: const NetworkImage(
                 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_R4S4j_-Ii4yXXo5eCYiwhO66hb0Ez9a1dQ&s',
               ),
@@ -126,8 +126,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   }
                 },
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: AppTheme.terracotta,
-                  side: const BorderSide(color: AppTheme.terracotta),
+                  foregroundColor: Colors.redAccent,
+                  side: const BorderSide(color: Colors.redAccent),
                   padding: const EdgeInsets.symmetric(vertical: 12),
                 ),
                 child: const Text('Logout'),
@@ -154,7 +154,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         side: const BorderSide(color: Color(0xFFEEEEEE)),
       ),
       child: ListTile(
-        leading: Icon(icon, color: AppTheme.mocha),
+        leading: Icon(icon, color: AppTheme.primaryTeal),
         title: Text(title),
         trailing: const Icon(
           Icons.arrow_forward_ios,

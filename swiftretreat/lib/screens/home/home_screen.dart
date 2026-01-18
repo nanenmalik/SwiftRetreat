@@ -138,8 +138,8 @@ class _HomeContentState extends State<HomeContent> {
                     min: 0,
                     max: 500,
                     divisions: 50,
-                    activeColor: AppTheme.mocha,
-                    inactiveColor: AppTheme.cream,
+                    activeColor: AppTheme.primaryTeal,
+                    inactiveColor: Colors.grey[300],
                     onChanged: (RangeValues values) {
                       setModalState(() {
                         _priceRange = values;
@@ -159,8 +159,8 @@ class _HomeContentState extends State<HomeContent> {
                     min: 0,
                     max: 5,
                     divisions: 10,
-                    activeColor: AppTheme.mocha,
-                    inactiveColor: AppTheme.cream,
+                    activeColor: AppTheme.primaryTeal,
+                    inactiveColor: Colors.grey[300],
                     onChanged: (value) {
                       setModalState(() {
                         _minRating = value;
@@ -192,7 +192,7 @@ class _HomeContentState extends State<HomeContent> {
                       Expanded(
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: AppTheme.mocha,
+                            backgroundColor: AppTheme.primaryTeal,
                           ),
                           onPressed: () => Navigator.pop(context),
                           child: const Text('Apply'),
@@ -672,7 +672,7 @@ class _HomeContentState extends State<HomeContent> {
                         vertical: 6,
                       ),
                       decoration: BoxDecoration(
-                        color: AppTheme.cream,
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Row(
@@ -736,22 +736,39 @@ class _HomeContentState extends State<HomeContent> {
                     ),
                   ),
                 )
-              : SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  sliver: SliverList(
-                    delegate: SliverChildBuilderDelegate((context, index) {
-                      final hotel = _filteredHotels[index];
-                      return HotelCard(
-                        hotel: hotel,
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            '/detail',
-                            arguments: hotel,
-                          );
-                        },
-                      );
-                    }, childCount: _filteredHotels.length),
+              : SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        final width = constraints.maxWidth;
+                        final crossAxisCount = width > 900 ? 3 : 2;
+                        final spacing = 16.0;
+                        final totalSpacing = spacing * (crossAxisCount - 1);
+                        final cardWidth =
+                            (width - totalSpacing) / crossAxisCount;
+
+                        return Wrap(
+                          spacing: spacing,
+                          runSpacing: spacing,
+                          children: _filteredHotels.map((hotel) {
+                            return SizedBox(
+                              width: cardWidth,
+                              child: HotelCard(
+                                hotel: hotel,
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    '/detail',
+                                    arguments: hotel,
+                                  );
+                                },
+                              ),
+                            );
+                          }).toList(),
+                        );
+                      },
+                    ),
                   ),
                 ),
         ],
