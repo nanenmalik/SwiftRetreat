@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_theme.dart';
 import '../../data/mock_data.dart';
+import '../../models/hotel_model.dart';
 import 'widgets/hotel_card.dart';
 
 import '../bookings/my_bookings_screen.dart';
@@ -75,10 +76,30 @@ class _HomeContentState extends State<HomeContent> {
   int _numberOfPersons = 1;
   // bool _hasSearched = false; // Removed unused
 
+  late List<Hotel> _popularHotels;
+  late List<Hotel> _recommendedHotels;
+
   @override
   void initState() {
     super.initState();
     _searchController = TextEditingController();
+
+    // Sort hotels by rating descending
+    final sortedHotels = List<Hotel>.from(MockData.hotels)
+      ..sort((a, b) => b.rating.compareTo(a.rating));
+
+    // Take top 10 for popular
+    if (sortedHotels.length > 10) {
+      _popularHotels = sortedHotels.sublist(0, 10);
+      // For recommended, we can either use the rest, or a mix.
+      // User request implies splitting logic. Let's use the rest for recommended so no duplicates.
+      // Or typically "Recommended" might just be "All" sorted differently.
+      // Let's assume distinct lists for now as it feels cleaner for the "Split" request.
+      _recommendedHotels = sortedHotels.sublist(10);
+    } else {
+      _popularHotels = sortedHotels;
+      _recommendedHotels = [];
+    }
   }
 
   @override
@@ -335,11 +356,54 @@ class _HomeContentState extends State<HomeContent> {
             ),
           ),
 
+          // Most Popular Hotels Section
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
+              padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
               child: Text(
-                'Popular Destinations',
+                'Most Popular Hotels',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: AppTheme.textDark,
+                ),
+              ),
+            ),
+          ),
+
+          SliverToBoxAdapter(
+            child: Container(
+              height: 320,
+              padding: const EdgeInsets.only(top: 16, bottom: 24),
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                itemCount: _popularHotels.length,
+                separatorBuilder: (context, index) => const SizedBox(width: 16),
+                itemBuilder: (context, index) {
+                  return SizedBox(
+                    width: 280,
+                    child: HotelCard(
+                      hotel: _popularHotels[index],
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          '/detail',
+                          arguments: _popularHotels[index],
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+
+          // Recommended Hotels Section (formerly Popular Destinations)
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
+              child: Text(
+                'Recommended Hotels',
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: AppTheme.textDark,
@@ -359,14 +423,14 @@ class _HomeContentState extends State<HomeContent> {
                 mainAxisExtent: 380,
               ),
               delegate: SliverChildBuilderDelegate((context, index) {
-                final hotel = MockData.hotels[index];
+                final hotel = _recommendedHotels[index];
                 return HotelCard(
                   hotel: hotel,
                   onTap: () {
                     Navigator.pushNamed(context, '/detail', arguments: hotel);
                   },
                 );
-              }, childCount: MockData.hotels.length),
+              }, childCount: _recommendedHotels.length),
             ),
           ),
 
