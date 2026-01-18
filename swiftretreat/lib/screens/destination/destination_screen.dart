@@ -5,8 +5,15 @@ import '../home/widgets/hotel_card.dart';
 
 class DestinationScreen extends StatefulWidget {
   final String destinationName;
+  final double minPrice;
+  final double maxPrice;
 
-  const DestinationScreen({super.key, required this.destinationName});
+  const DestinationScreen({
+    super.key,
+    required this.destinationName,
+    this.minPrice = 0,
+    this.maxPrice = 10000,
+  });
 
   @override
   State<DestinationScreen> createState() => _DestinationScreenState();
@@ -193,14 +200,27 @@ class _DestinationScreenState extends State<DestinationScreen>
   Widget _buildHotelsList(BuildContext context) {
     // Filter hotels by exact location since selection comes from this list
     final hotels = MockData.hotels
-        .where((h) => h.location == widget.destinationName)
+        .where(
+          (h) =>
+              h.location == widget.destinationName &&
+              h.pricePerNight >= widget.minPrice &&
+              h.pricePerNight <= widget.maxPrice,
+        )
         .toList();
 
     if (hotels.isEmpty) {
       return Center(
-        child: Text(
-          'No hotels found in ${widget.destinationName}',
-          style: const TextStyle(color: Colors.grey),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.search_off, size: 64, color: Colors.grey),
+            const SizedBox(height: 16),
+            Text(
+              'No hotels found in ${widget.destinationName}\nwithin this price range.',
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: Colors.grey),
+            ),
+          ],
         ),
       );
     }

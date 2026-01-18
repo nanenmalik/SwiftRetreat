@@ -74,6 +74,7 @@ class _HomeContentState extends State<HomeContent> {
   DateTime? _checkInDate;
   DateTime? _checkOutDate;
   int _numberOfPersons = 1;
+  RangeValues _priceRange = const RangeValues(100, 1000);
   // bool _hasSearched = false; // Removed unused
 
   late List<Hotel> _popularHotels;
@@ -317,6 +318,129 @@ class _HomeContentState extends State<HomeContent> {
                     ],
                   ),
 
+                  const SizedBox(height: 16),
+                  const Divider(height: 30),
+
+                  // Price Range Input
+                  _buildSearchField(
+                    context,
+                    icon: Icons.monetization_on_outlined,
+                    label: 'Price Range',
+                    value:
+                        '\$${_priceRange.start.toInt()} - \$${_priceRange.end.toInt()}',
+                    onTap: () async {
+                      await showModalBottomSheet(
+                        context: context,
+                        backgroundColor: Colors.white,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(24),
+                          ),
+                        ),
+                        builder: (context) {
+                          return StatefulBuilder(
+                            builder: (context, setModalState) {
+                              return Padding(
+                                padding: const EdgeInsets.all(24.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Select Price Range',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge
+                                          ?.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                    ),
+                                    const SizedBox(height: 24),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          '\$${_priceRange.start.toInt()}',
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                        Text(
+                                          '\$${_priceRange.end.toInt()}',
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    RangeSlider(
+                                      values: _priceRange,
+                                      min: 0,
+                                      max: 2000,
+                                      divisions: 20,
+                                      activeColor: AppTheme.primaryTeal,
+                                      inactiveColor: Colors.grey[300],
+                                      labels: RangeLabels(
+                                        '\$${_priceRange.start.toInt()}',
+                                        '\$${_priceRange.end.toInt()}',
+                                      ),
+                                      onChanged: (RangeValues values) {
+                                        setModalState(() {
+                                          _priceRange = values;
+                                        });
+                                        // Also update parent state to reflect in UI immediately if needed,
+                                        // but usually we wait for 'Apply'.
+                                        // For this simple UI, we can just update parent on close or here if we pass a callback.
+                                        // Let's rely on setState below after pop.
+                                      },
+                                    ),
+                                    const SizedBox(height: 24),
+                                    SizedBox(
+                                      width: double.infinity,
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.pop(context, _priceRange);
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: AppTheme.primaryTeal,
+                                          foregroundColor: Colors.white,
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 16,
+                                          ),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                              16,
+                                            ),
+                                          ),
+                                        ),
+                                        child: const Text(
+                                          'Apply',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      ).then((value) {
+                        if (value != null && value is RangeValues) {
+                          setState(() {
+                            _priceRange = value;
+                          });
+                        }
+                      });
+                    },
+                    isPlaceholder: false,
+                  ),
+
                   const SizedBox(height: 24),
 
                   // Search Button
@@ -328,9 +452,13 @@ class _HomeContentState extends State<HomeContent> {
                         Navigator.pushNamed(
                           context,
                           '/destination',
-                          arguments: _searchQuery.isEmpty
-                              ? 'Bali, Indonesia'
-                              : _searchQuery,
+                          arguments: {
+                            'destination': _searchQuery.isEmpty
+                                ? 'Bali, Indonesia'
+                                : _searchQuery,
+                            'minPrice': _priceRange.start,
+                            'maxPrice': _priceRange.end,
+                          },
                         );
                       },
                       style: ElevatedButton.styleFrom(
@@ -372,7 +500,7 @@ class _HomeContentState extends State<HomeContent> {
 
           SliverToBoxAdapter(
             child: Container(
-              height: 320,
+              height: 500,
               padding: const EdgeInsets.only(top: 16, bottom: 24),
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
@@ -420,7 +548,7 @@ class _HomeContentState extends State<HomeContent> {
                 crossAxisCount: 3,
                 mainAxisSpacing: 16,
                 crossAxisSpacing: 16,
-                mainAxisExtent: 380,
+                mainAxisExtent: 500,
               ),
               delegate: SliverChildBuilderDelegate((context, index) {
                 final hotel = _recommendedHotels[index];

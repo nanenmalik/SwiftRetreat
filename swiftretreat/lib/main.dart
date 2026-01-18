@@ -68,11 +68,25 @@ class SwiftRetreatApp extends StatelessWidget {
             builder: (context) => BookingScreen(hotel: hotel, room: room),
           );
         } else if (settings.name == '/destination') {
-          final destinationName =
-              settings.arguments as String? ?? 'Bali, Indonesia';
+          String destinationName = 'Bali, Indonesia';
+          double minPrice = 0;
+          double maxPrice = 10000;
+
+          if (settings.arguments is Map) {
+            final args = settings.arguments as Map<String, dynamic>;
+            destinationName = args['destination'] ?? 'Bali, Indonesia';
+            minPrice = args['minPrice'] ?? 0;
+            maxPrice = args['maxPrice'] ?? 10000;
+          } else if (settings.arguments is String) {
+            destinationName = settings.arguments as String;
+          }
+
           return MaterialPageRoute(
-            builder: (context) =>
-                DestinationScreen(destinationName: destinationName),
+            builder: (context) => DestinationScreen(
+              destinationName: destinationName,
+              minPrice: minPrice,
+              maxPrice: maxPrice,
+            ),
           );
         }
         return null; // Let other routes handle it
