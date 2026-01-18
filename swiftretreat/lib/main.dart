@@ -30,6 +30,8 @@ class SwiftRetreatApp extends StatelessWidget {
     return MaterialApp(
       title: 'Swift Retreat',
       theme: AppTheme.bohemianTheme,
+      darkTheme: null,
+      themeMode: ThemeMode.light,
       home: const AuthWrapper(),
       routes: {
         '/home': (context) => const HomeScreen(),

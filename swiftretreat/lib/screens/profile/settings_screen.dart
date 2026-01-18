@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_theme.dart';
+import 'privacy_policy_screen.dart';
+import 'terms_of_service_screen.dart';
+import 'language_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -11,7 +14,6 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   bool _pushNotifications = true;
   bool _emailUpdates = true;
-  final bool _darkMode = false;
 
   @override
   Widget build(BuildContext context) {
@@ -33,30 +35,38 @@ class _SettingsScreenState extends State<SettingsScreen> {
             value: _emailUpdates,
             onChanged: (val) => setState(() => _emailUpdates = val),
           ),
-          SwitchListTile(
-            activeThumbColor: AppTheme.mocha,
-            title: const Text('Dark Mode'),
-            subtitle: const Text('Coming soon'),
-            value: _darkMode,
-            onChanged: null, // Disabled
-          ),
           const Divider(),
           _buildSectionHeader(context, 'Account'),
           ListTile(
             title: const Text('Language'),
             subtitle: const Text('English (US)'),
             trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const LanguageScreen()),
+              );
+            },
           ),
           ListTile(
             title: const Text('Privacy Policy'),
             trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const PrivacyPolicyScreen()),
+              );
+            },
           ),
           ListTile(
             title: const Text('Terms of Service'),
             trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const TermsOfServiceScreen()),
+              );
+            },
           ),
           const Divider(),
           ListTile(
