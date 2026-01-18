@@ -4,7 +4,7 @@ import '../../../models/hotel_model.dart';
 
 class FilterBottomSheet extends StatefulWidget {
   final RangeValues initialPriceRange;
-  final Function(Map<String, dynamic>?) onApply;  // Changed from List<Hotel>
+  final Function(Map<String, dynamic>?) onApply; // Changed from List<Hotel>
   final List<Hotel> allHotels;
 
   const FilterBottomSheet({
@@ -20,7 +20,7 @@ class FilterBottomSheet extends StatefulWidget {
 
 class _FilterBottomSheetState extends State<FilterBottomSheet> {
   late RangeValues _priceRange;
-  int _selectedRating = 0;
+  int _selectedRating = 5;
 
   @override
   void initState() {
@@ -31,12 +31,13 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
   List<Hotel> _filterHotels() {
     return widget.allHotels.where((hotel) {
       // Filter by price range
-      bool priceMatch = hotel.pricePerNight >= _priceRange.start &&
+      bool priceMatch =
+          hotel.pricePerNight >= _priceRange.start &&
           hotel.pricePerNight <= _priceRange.end;
 
       // Filter by rating (0 means no filter)
-      bool ratingMatch = _selectedRating == 0 ||
-          hotel.rating >= _selectedRating;
+      bool ratingMatch =
+          _selectedRating == 0 || hotel.rating >= _selectedRating;
 
       return priceMatch && ratingMatch;
     }).toList();
@@ -107,7 +108,9 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                       setState(() => _priceRange = values);
                     },
                   ),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 16),
+
+                  const SizedBox(height: 16),
 
                   // Ratings
                   _buildSectionTitle('Ratings'),
@@ -133,12 +136,11 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () {
-                final filters = {
+                widget.onApply({
                   'minPrice': _priceRange.start,
                   'maxPrice': _priceRange.end,
                   'rating': _selectedRating,
-                };
-                widget.onApply(filters);
+                });
                 Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
