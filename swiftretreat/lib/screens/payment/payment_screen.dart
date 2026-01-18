@@ -51,7 +51,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: AppTheme.cream,
+                  color: AppTheme.backgroundGrey,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
@@ -65,7 +65,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: AppTheme.mocha,
+                            color: AppTheme.primaryTeal,
                           ),
                         ),
                       ],
@@ -230,10 +230,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       BookingService().addBooking(booking);
 
                       // Attempt Calendar sync (non-blocking failure)
-                      await _addBookingToCalendar(context, booking);
+                      await _addBookingToCalendar(booking);
 
                       // Show Success
-                      if (!mounted) return;
+                      if (!context.mounted) return;
                       showDialog(
                         context: context,
                         barrierDismissible: false,
@@ -264,7 +264,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    backgroundColor: AppTheme.mocha,
+                    backgroundColor: AppTheme.primaryTeal,
                     foregroundColor: Colors.white,
                   ),
                   child: Text(
@@ -281,13 +281,13 @@ class _PaymentScreenState extends State<PaymentScreen> {
     );
   }
 
-  Future<void> _addBookingToCalendar(BuildContext context, Booking booking) async {
+  Future<void> _addBookingToCalendar(Booking booking) async {
     try {
       await GoogleCalendarService().addBookingEvent(booking);
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Added to Google Calendar')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Added to Google Calendar')));
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
@@ -303,10 +303,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
         decoration: BoxDecoration(
-          color: isSelected ? AppTheme.mocha.withOpacity(0.1) : Colors.white,
+          color: isSelected
+              ? AppTheme.primaryTeal.withValues(alpha: 0.1)
+              : Colors.white,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: isSelected ? AppTheme.mocha : Colors.grey[300]!,
+            color: isSelected ? AppTheme.primaryTeal : Colors.grey[300]!,
             width: 2,
           ),
         ),
@@ -314,7 +316,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
           children: [
             Icon(
               icon,
-              color: isSelected ? AppTheme.mocha : Colors.grey,
+              color: isSelected ? AppTheme.primaryTeal : Colors.grey,
               size: 30,
             ),
             const SizedBox(height: 8),
@@ -323,7 +325,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                color: isSelected ? AppTheme.mocha : Colors.grey[600],
+                color: isSelected ? AppTheme.primaryTeal : Colors.grey[600],
                 fontSize: 12,
               ),
             ),

@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
         // Success - reset failed attempts
         _failedAttempts = 0;
-        
+
         if (mounted) {
           Navigator.pushReplacementNamed(context, '/home');
         }
@@ -59,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                  '${e.toString()}. ${_failedAttempts}/5 attempts before lockout.',
+                  '$e. $_failedAttempts/5 attempts before lockout.',
                 ),
                 backgroundColor: Colors.red,
               ),
@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final emailForResetController = TextEditingController(
       text: _emailController.text.trim(),
     );
-    
+
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -101,17 +101,19 @@ class _LoginScreenState extends State<LoginScreen> {
             TextButton(
               onPressed: () async {
                 if (emailForResetController.text.isNotEmpty) {
+                  final navigator = Navigator.of(context);
+                  final messenger = ScaffoldMessenger.of(context);
                   try {
                     await _authService.resetPassword(
                       emailForResetController.text.trim(),
                     );
-                    
+
                     if (mounted) {
-                      Navigator.pop(context);
+                      navigator.pop();
                       setState(() {
                         _failedAttempts = 0;
                       });
-                      ScaffoldMessenger.of(context).showSnackBar(
+                      messenger.showSnackBar(
                         const SnackBar(
                           content: Text(
                             'Password reset email sent! Please check your inbox.',
@@ -122,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     }
                   } catch (e) {
                     if (mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
+                      messenger.showSnackBar(
                         SnackBar(
                           content: Text('Error: ${e.toString()}'),
                           backgroundColor: Colors.red,
@@ -156,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Icon(
                   Icons.spa_rounded, // Example icon fitting the theme
                   size: 80,
-                  color: AppTheme.mocha,
+                  color: AppTheme.primaryTeal,
                 ),
                 const SizedBox(height: 24),
                 // Title
@@ -170,7 +172,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   'Sign in to your account',
                   style: Theme.of(
                     context,
-                  ).textTheme.bodyLarge?.copyWith(color: AppTheme.darkCream),
+                  ).textTheme.bodyLarge?.copyWith(color: AppTheme.textGrey),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 48),
@@ -228,9 +230,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ? const SizedBox(
                           height: 20,
                           width: 20,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                          ),
+                          child: CircularProgressIndicator(strokeWidth: 2),
                         )
                       : const Text('Login'),
                 ),

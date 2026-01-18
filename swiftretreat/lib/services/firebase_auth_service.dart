@@ -19,10 +19,8 @@ class FirebaseAuthService {
   }) async {
     try {
       // Create user in Firebase Auth
-      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      UserCredential userCredential = await _auth
+          .createUserWithEmailAndPassword(email: email, password: password);
 
       final user = userCredential.user;
       if (user == null) {
@@ -33,14 +31,17 @@ class FirebaseAuthService {
       await user.updateDisplayName(name);
 
       // Store user data in Firestore
-      await _firestore.collection('users').doc(user.uid).set({
-        'name': name,
-        'email': email,
-        'createdAt': FieldValue.serverTimestamp(),
-        'lastLogin': FieldValue.serverTimestamp(),
-        'profileImage': '',
-        'phone': '',
-      }, SetOptions(merge: true)); // merge: true prevents overwriting existing data
+      await _firestore.collection('users').doc(user.uid).set(
+        {
+          'name': name,
+          'email': email,
+          'createdAt': FieldValue.serverTimestamp(),
+          'lastLogin': FieldValue.serverTimestamp(),
+          'profileImage': '',
+          'phone': '',
+        },
+        SetOptions(merge: true),
+      ); // merge: true prevents overwriting existing data
 
       return userCredential;
     } on FirebaseAuthException catch (e) {
@@ -64,18 +65,20 @@ class FirebaseAuthService {
       final user = userCredential.user;
       if (user != null) {
         // Update last login time in Firestore
-        await _firestore.collection('users').doc(user.uid).update({
-          'lastLogin': FieldValue.serverTimestamp(),
-        }).catchError((_) {
-          // If user doc doesn't exist, create it
-          return _firestore.collection('users').doc(user.uid).set({
-            'email': email,
-            'name': user.displayName ?? 'User',
-            'createdAt': FieldValue.serverTimestamp(),
-            'lastLogin': FieldValue.serverTimestamp(),
-            'profileImage': '',
-          }, SetOptions(merge: true));
-        });
+        await _firestore
+            .collection('users')
+            .doc(user.uid)
+            .update({'lastLogin': FieldValue.serverTimestamp()})
+            .catchError((_) {
+              // If user doc doesn't exist, create it
+              return _firestore.collection('users').doc(user.uid).set({
+                'email': email,
+                'name': user.displayName ?? 'User',
+                'createdAt': FieldValue.serverTimestamp(),
+                'lastLogin': FieldValue.serverTimestamp(),
+                'profileImage': '',
+              }, SetOptions(merge: true));
+            });
       }
 
       return userCredential;
@@ -95,37 +98,33 @@ class FirebaseAuthService {
   Future<Map<String, dynamic>?> getUserData() async {
     try {
       if (currentUser == null) return null;
-      
+
       DocumentSnapshot doc = await _firestore
           .collection('users')
           .doc(currentUser!.uid)
           .get();
-      
+
       if (doc.exists) {
         return doc.data() as Map<String, dynamic>?;
       }
       return null;
     } catch (e) {
-      print('Error getting user data: $e');
       return null;
     }
   }
 
   // Update user profile
-  Future<void> updateUserProfile({
-    String? name,
-    String? email,
-  }) async {
+  Future<void> updateUserProfile({String? name, String? email}) async {
     try {
       if (currentUser == null) throw Exception('No user logged in');
 
       Map<String, dynamic> updates = {};
-      
+
       if (name != null) {
         await currentUser!.updateDisplayName(name);
         updates['name'] = name;
       }
-      
+
       if (email != null && email != currentUser!.email) {
         await currentUser!.verifyBeforeUpdateEmail(email);
         updates['email'] = email;

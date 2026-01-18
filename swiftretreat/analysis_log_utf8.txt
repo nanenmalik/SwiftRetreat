@@ -1,0 +1,26 @@
+﻿Analyzing swiftretreat...                                       
+
+   info - Unnecessary braces in a string interpolation - lib\screens\auth\login_screen.dart:62:37 - unnecessary_brace_in_string_interps
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\screens\auth\login_screen.dart:110:37 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\screens\auth\login_screen.dart:114:44 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\screens\auth\login_screen.dart:125:44 - use_build_context_synchronously
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\booking\booking_screen.dart:103:43 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\bookings\my_bookings_screen.dart:148:46 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\detail\room_detail_screen.dart:176:53 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\detail\room_detail_screen.dart:179:55 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\detail\room_detail_screen.dart:256:67 - deprecated_member_use
+warning - The value of the field '_maxPrice' isn't used - lib\screens\home\home_screen.dart:72:16 - unused_field
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\home\home_screen.dart:278:45 - deprecated_member_use
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\screens\payment\payment_screen.dart:238:25 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\screens\payment\payment_screen.dart:288:28 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\screens\payment\payment_screen.dart:293:28 - use_build_context_synchronously
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\payment\payment_screen.dart:306:46 - deprecated_member_use
+warning - The value of the field '_imageUrl' isn't used - lib\screens\profile\edit_profile_screen.dart:18:16 - unused_field
+warning - Unused import: '../../theme/app_theme.dart' - lib\screens\profile\help_support_screen.dart:2:8 - unused_import
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\profile\payment_methods_screen.dart:62:33 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\profile\payment_methods_screen.dart:76:41 - deprecated_member_use
+warning - The value of the field '_isLoading' isn't used - lib\screens\profile\profile_screen.dart:16:8 - unused_field
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\screens\profile\profile_screen.dart:119:54 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\screens\profile\profile_screen.dart:123:44 - use_build_context_synchronously
+   info - Don't invoke 'print' in production code - lib\services\firebase_auth_service.dart:109:7 - avoid_print
+

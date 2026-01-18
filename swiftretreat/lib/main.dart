@@ -14,12 +14,11 @@ import 'screens/profile/edit_profile_screen.dart';
 import 'screens/profile/payment_methods_screen.dart';
 import 'screens/profile/settings_screen.dart';
 import 'screens/profile/help_support_screen.dart';
+import 'screens/destination/destination_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const SwiftRetreatApp());
 }
 
@@ -65,6 +64,13 @@ class SwiftRetreatApp extends StatelessWidget {
 
           return MaterialPageRoute(
             builder: (context) => BookingScreen(hotel: hotel, room: room),
+          );
+        } else if (settings.name == '/destination') {
+          final destinationName =
+              settings.arguments as String? ?? 'Bali, Indonesia';
+          return MaterialPageRoute(
+            builder: (context) =>
+                DestinationScreen(destinationName: destinationName),
           );
         }
         return null; // Let other routes handle it

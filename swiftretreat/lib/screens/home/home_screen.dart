@@ -69,13 +69,11 @@ class HomeContent extends StatefulWidget {
 class _HomeContentState extends State<HomeContent> {
   late TextEditingController _searchController;
   String _searchQuery = '';
-  final double _maxPrice = 500;
-  double _minRating = 0;
-  RangeValues _priceRange = const RangeValues(0, 500);
+
   DateTime? _checkInDate;
   DateTime? _checkOutDate;
   int _numberOfPersons = 1;
-  bool _hasSearched = false;
+  // bool _hasSearched = false; // Removed unused
 
   @override
   void initState() {
@@ -89,131 +87,14 @@ class _HomeContentState extends State<HomeContent> {
     super.dispose();
   }
 
-  List get _filteredHotels {
-    if (!_hasSearched) return MockData.hotels;
-
-    return MockData.hotels.where((hotel) {
-      final matchesSearch =
-          hotel.name.toLowerCase().contains(_searchQuery.toLowerCase()) ||
-          hotel.location.toLowerCase().contains(_searchQuery.toLowerCase());
-
-      final matchesPrice =
-          hotel.pricePerNight >= _priceRange.start &&
-          hotel.pricePerNight <= _priceRange.end;
-
-      final matchesRating = hotel.rating >= _minRating;
-
-      return matchesSearch && matchesPrice && matchesRating;
-    }).toList();
-  }
-
-  void _showFilterDialog() {
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) {
-        return StatefulBuilder(
-          builder: (context, setModalState) {
-            return Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Filters',
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  Text(
-                    'Price Range: \$${_priceRange.start.toStringAsFixed(0)} - \$${_priceRange.end.toStringAsFixed(0)}',
-                    style: const TextStyle(fontWeight: FontWeight.w600),
-                  ),
-                  RangeSlider(
-                    values: _priceRange,
-                    min: 0,
-                    max: 500,
-                    divisions: 50,
-                    activeColor: AppTheme.mocha,
-                    inactiveColor: AppTheme.cream,
-                    onChanged: (RangeValues values) {
-                      setModalState(() {
-                        _priceRange = values;
-                      });
-                      setState(() {
-                        _priceRange = values;
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 24),
-                  Text(
-                    'Minimum Rating: ${_minRating.toStringAsFixed(1)} ⭐',
-                    style: const TextStyle(fontWeight: FontWeight.w600),
-                  ),
-                  Slider(
-                    value: _minRating,
-                    min: 0,
-                    max: 5,
-                    divisions: 10,
-                    activeColor: AppTheme.mocha,
-                    inactiveColor: AppTheme.cream,
-                    onChanged: (value) {
-                      setModalState(() {
-                        _minRating = value;
-                      });
-                      setState(() {
-                        _minRating = value;
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 24),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: OutlinedButton(
-                          onPressed: () {
-                            setModalState(() {
-                              _priceRange = const RangeValues(0, 500);
-                              _minRating = 0;
-                            });
-                            setState(() {
-                              _priceRange = const RangeValues(0, 500);
-                              _minRating = 0;
-                            });
-                          },
-                          child: const Text('Reset'),
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppTheme.mocha,
-                          ),
-                          onPressed: () => Navigator.pop(context),
-                          child: const Text('Apply'),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            );
-          },
-        );
-      },
-    );
-  }
+  // Removed _filteredHotels and _showFilterDialog
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: CustomScrollView(
         slivers: [
+          // Greeting Section
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(24.0),
@@ -224,475 +105,41 @@ class _HomeContentState extends State<HomeContent> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Salam, Traveler',
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        'Hello, Alpay',
+                        style: Theme.of(context).textTheme.headlineSmall
+                            ?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: AppTheme.textDark,
+                            ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        'Explore the world!',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Colors.grey[600],
                         ),
                       ),
-                      Text(
-                        'Where to next?',
-                        style: Theme.of(context).textTheme.displaySmall
-                            ?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: AppTheme.darkMocha,
-                            ),
-                      ),
                     ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        // Navigate to profile tab
-                        widget.onProfileTap?.call(2);
-                      },
-                      child: CircleAvatar(
-                        radius: 24,
-                        backgroundColor: AppTheme.mocha,
-                        backgroundImage: const NetworkImage(
-                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_R4S4j_-Ii4yXXo5eCYiwhO66hb0Ez9a1dQ&s',
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-
-          // Search Bar Area
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: GestureDetector(
-                onTap: () {
-                  FocusScope.of(context).requestFocus(FocusNode());
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.05),
-                        blurRadius: 10,
-                        offset: const Offset(0, 5),
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.search, color: AppTheme.mocha),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: TextField(
-                          controller: _searchController,
-                          decoration: InputDecoration(
-                            hintText: 'Search destination',
-                            hintStyle: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey[400],
-                            ),
-                            border: InputBorder.none,
-                            isDense: true,
-                          ),
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: AppTheme.darkMocha,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-
-          // Date and Person Selection (Sticky)
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: _StickyHeaderDelegate(
-              minHeight: 100, // Increased height to prevent overflow
-              maxHeight: 100,
-              child: Container(
-                color: Theme.of(context).scaffoldBackgroundColor,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24.0,
-                  vertical: 16,
-                ),
-                child: Row(
-                  children: [
-                    // Check-in Date
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () async {
-                          final date = await showDatePicker(
-                            context: context,
-                            initialDate: _checkInDate ?? DateTime.now(),
-                            firstDate: DateTime.now(),
-                            lastDate: DateTime.now().add(
-                              const Duration(days: 365),
-                            ),
-                            builder: (context, child) {
-                              return Theme(
-                                data: Theme.of(context).copyWith(
-                                  colorScheme: const ColorScheme.light(
-                                    primary: AppTheme.mocha,
-                                  ),
-                                ),
-                                child: child!,
-                              );
-                            },
-                          );
-                          if (date != null) {
-                            setState(() {
-                              _checkInDate = date;
-                              if (_checkOutDate != null &&
-                                  _checkOutDate!.isBefore(date)) {
-                                _checkOutDate = null;
-                              }
-                            });
-                          }
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: Colors.grey[300]!),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Check-in',
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.grey[600],
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                _checkInDate != null
-                                    ? '${_checkInDate!.day}/${_checkInDate!.month}/${_checkInDate!.year}'
-                                    : 'Select date',
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppTheme.darkMocha,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    // Check-out Date
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () async {
-                          final date = await showDatePicker(
-                            context: context,
-                            initialDate:
-                                _checkOutDate ??
-                                (_checkInDate?.add(const Duration(days: 1)) ??
-                                    DateTime.now().add(
-                                      const Duration(days: 1),
-                                    )),
-                            firstDate:
-                                _checkInDate?.add(const Duration(days: 1)) ??
-                                DateTime.now().add(const Duration(days: 1)),
-                            lastDate: DateTime.now().add(
-                              const Duration(days: 365),
-                            ),
-                            builder: (context, child) {
-                              return Theme(
-                                data: Theme.of(context).copyWith(
-                                  colorScheme: const ColorScheme.light(
-                                    primary: AppTheme.mocha,
-                                  ),
-                                ),
-                                child: child!,
-                              );
-                            },
-                          );
-                          if (date != null) {
-                            setState(() {
-                              _checkOutDate = date;
-                            });
-                          }
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: Colors.grey[300]!),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Check-out',
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.grey[600],
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                _checkOutDate != null
-                                    ? '${_checkOutDate!.day}/${_checkOutDate!.month}/${_checkOutDate!.year}'
-                                    : 'Select date',
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppTheme.darkMocha,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    // Number of Persons
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          showModalBottomSheet(
-                            context: context,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(20),
-                              ),
-                            ),
-                            builder: (context) {
-                              return StatefulBuilder(
-                                builder: (context, setModalState) {
-                                  return Padding(
-                                    padding: const EdgeInsets.all(24.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                          'Number of Persons',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleLarge
-                                              ?.copyWith(
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                        ),
-                                        const SizedBox(height: 24),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            IconButton(
-                                              onPressed: () {
-                                                if (_numberOfPersons > 1) {
-                                                  setModalState(() {
-                                                    _numberOfPersons--;
-                                                  });
-                                                  setState(() {
-                                                    _numberOfPersons--;
-                                                  });
-                                                }
-                                              },
-                                              icon: const Icon(
-                                                Icons.remove_circle_outline,
-                                              ),
-                                              color: AppTheme.mocha,
-                                              iconSize: 32,
-                                            ),
-                                            const SizedBox(width: 24),
-                                            Text(
-                                              _numberOfPersons.toString(),
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headlineMedium
-                                                  ?.copyWith(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: AppTheme.darkMocha,
-                                                  ),
-                                            ),
-                                            const SizedBox(width: 24),
-                                            IconButton(
-                                              onPressed: () {
-                                                if (_numberOfPersons < 10) {
-                                                  setModalState(() {
-                                                    _numberOfPersons++;
-                                                  });
-                                                  setState(() {
-                                                    _numberOfPersons++;
-                                                  });
-                                                }
-                                              },
-                                              icon: const Icon(
-                                                Icons.add_circle_outline,
-                                              ),
-                                              color: AppTheme.mocha,
-                                              iconSize: 32,
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 24),
-                                        ElevatedButton(
-                                          onPressed: () =>
-                                              Navigator.pop(context),
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: AppTheme.mocha,
-                                            padding: const EdgeInsets.symmetric(
-                                              vertical: 16,
-                                              horizontal: 32,
-                                            ),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                            ),
-                                          ),
-                                          child: const Text(
-                                            'Done',
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                },
-                              );
-                            },
-                          );
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: Colors.grey[300]!),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Persons',
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.grey[600],
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                _numberOfPersons.toString(),
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppTheme.darkMocha,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-
-          // Search Button
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_searchController.text.isEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Please enter a destination'),
-                          backgroundColor: Colors.brown,
-                        ),
-                      );
-                      return;
-                    }
-                    setState(() {
-                      _searchQuery = _searchController.text;
-                      _hasSearched = true;
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppTheme.mocha,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text(
-                    'Search Hotels',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-
-          SliverToBoxAdapter(child: const SizedBox(height: 16)),
-
-          // Results count
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    '${_filteredHotels.length} hotels found',
-                    style: TextStyle(color: Colors.grey[600], fontSize: 12),
                   ),
                   GestureDetector(
-                    onTap: _showFilterDialog,
+                    onTap: () => widget.onProfileTap?.call(2),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 6,
-                      ),
                       decoration: BoxDecoration(
-                        color: AppTheme.cream,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.tune,
-                            color: AppTheme.darkMocha,
-                            size: 16,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            'Filter',
-                            style: const TextStyle(
-                              color: AppTheme.darkMocha,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                            ),
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.white, width: 2),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.1),
+                            blurRadius: 10,
                           ),
                         ],
                       ),
+                      child: const CircleAvatar(
+                        radius: 24,
+                        backgroundImage: NetworkImage(
+                          'https://randomuser.me/api/portraits/men/32.jpg',
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -700,96 +147,294 @@ class _HomeContentState extends State<HomeContent> {
             ),
           ),
 
-          SliverToBoxAdapter(child: const SizedBox(height: 12)),
-
-          // Content Area
-          _filteredHotels.isEmpty
-              ? SliverFillRemaining(
-                  hasScrollBody: false,
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.hotel_outlined,
-                          size: 64,
-                          color: Colors.grey[400],
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          'No hotels found',
-                          style: TextStyle(
-                            color: Colors.grey[600],
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'Try adjusting your search or filters',
-                          style: TextStyle(
-                            color: Colors.grey[400],
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
+          // Search Card
+          SliverToBoxAdapter(
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 24),
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.05),
+                    blurRadius: 20,
+                    offset: const Offset(0, 10),
                   ),
-                )
-              : SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  sliver: SliverList(
-                    delegate: SliverChildBuilderDelegate((context, index) {
-                      final hotel = _filteredHotels[index];
-                      return HotelCard(
-                        hotel: hotel,
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            '/detail',
-                            arguments: hotel,
+                ],
+              ),
+              child: Column(
+                children: [
+                  // Location Input
+                  _buildSearchField(
+                    context,
+                    icon: Icons.search,
+                    label: 'Location',
+                    value: _searchQuery.isEmpty
+                        ? 'Where are you going?'
+                        : _searchQuery,
+                    onTap: () {
+                      // Focus logic or separate dialog
+                      // For simplicity, using a dialog to set location
+                      // Extract unique locations
+                      final locations =
+                          MockData.hotels
+                              .map((h) => h.location)
+                              .toSet()
+                              .toList()
+                            ..sort();
+
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text('Select Destination'),
+                            content: SizedBox(
+                              width: double.maxFinite,
+                              child: ListView.separated(
+                                shrinkWrap: true,
+                                itemCount: locations.length,
+                                separatorBuilder: (context, index) =>
+                                    const Divider(),
+                                itemBuilder: (context, index) {
+                                  final location = locations[index];
+                                  return ListTile(
+                                    title: Text(
+                                      location,
+                                      style: Theme.of(
+                                        context,
+                                      ).textTheme.bodyLarge,
+                                    ),
+                                    onTap: () {
+                                      setState(() => _searchQuery = location);
+                                      Navigator.pop(context);
+                                    },
+                                    trailing: _searchQuery == location
+                                        ? const Icon(
+                                            Icons.check,
+                                            color: AppTheme.primaryTeal,
+                                          )
+                                        : null,
+                                  );
+                                },
+                              ),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: const Text('Cancel'),
+                              ),
+                            ],
                           );
                         },
                       );
-                    }, childCount: _filteredHotels.length),
+                    },
+                    isPlaceholder: _searchQuery.isEmpty,
                   ),
+                  const Divider(height: 30),
+
+                  // Date Input
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _buildSearchField(
+                          context,
+                          icon: Icons.calendar_today_outlined,
+                          label: 'Date',
+                          value: _checkInDate == null
+                              ? 'Select Date'
+                              : '${_checkInDate!.day} ${_monthName(_checkInDate!.month)} - ${_checkOutDate?.day ?? "?"}',
+                          onTap: () async {
+                            final picked = await showDateRangePicker(
+                              context: context,
+                              firstDate: DateTime.now(),
+                              lastDate: DateTime.now().add(
+                                const Duration(days: 365),
+                              ),
+                              builder: (context, child) {
+                                return Theme(
+                                  data: Theme.of(context).copyWith(
+                                    colorScheme: const ColorScheme.light(
+                                      primary: AppTheme.primaryTeal,
+                                    ),
+                                  ),
+                                  child: child!,
+                                );
+                              },
+                            );
+                            if (picked != null) {
+                              setState(() {
+                                _checkInDate = picked.start;
+                                _checkOutDate = picked.end;
+                              });
+                            }
+                          },
+                          isPlaceholder: _checkInDate == null,
+                        ),
+                      ),
+                      Container(width: 1, height: 40, color: Colors.grey[200]),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 16),
+                          child: _buildSearchField(
+                            context,
+                            icon: Icons.person_outline,
+                            label: 'Guests',
+                            value: '$_numberOfPersons Guests',
+                            onTap: () {
+                              // Simple increment for demo
+                              setState(() {
+                                _numberOfPersons = _numberOfPersons >= 5
+                                    ? 1
+                                    : _numberOfPersons + 1;
+                              });
+                            },
+                            isPlaceholder: false,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  // Search Button
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Navigate to Destination Screen with the query
+                        Navigator.pushNamed(
+                          context,
+                          '/destination',
+                          arguments: _searchQuery.isEmpty
+                              ? 'Bali, Indonesia'
+                              : _searchQuery,
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppTheme.primaryTeal,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        elevation: 0,
+                      ),
+                      child: const Text(
+                        'Search',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
+              child: Text(
+                'Popular Destinations',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: AppTheme.textDark,
                 ),
+              ),
+            ),
+          ),
+
+          // Vertical Grid of Hotels (3 Columns)
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            sliver: SliverGrid(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                mainAxisSpacing: 16,
+                crossAxisSpacing: 16,
+                mainAxisExtent: 380,
+              ),
+              delegate: SliverChildBuilderDelegate((context, index) {
+                final hotel = MockData.hotels[index];
+                return HotelCard(
+                  hotel: hotel,
+                  onTap: () {
+                    Navigator.pushNamed(context, '/detail', arguments: hotel);
+                  },
+                );
+              }, childCount: MockData.hotels.length),
+            ),
+          ),
+
+          const SliverPadding(padding: EdgeInsets.only(bottom: 24)),
         ],
       ),
     );
   }
-}
 
-class _StickyHeaderDelegate extends SliverPersistentHeaderDelegate {
-  final double minHeight;
-  final double maxHeight;
-  final Widget child;
-
-  _StickyHeaderDelegate({
-    required this.minHeight,
-    required this.maxHeight,
-    required this.child,
-  });
-
-  @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    return SizedBox.expand(child: child);
+  Widget _buildSearchField(
+    BuildContext context, {
+    required IconData icon,
+    required String label,
+    required String value,
+    required VoidCallback onTap,
+    required bool isPlaceholder,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: AppTheme.backgroundGrey,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(icon, color: AppTheme.primaryTeal, size: 20),
+          ),
+          const SizedBox(width: 12),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                label,
+                style: TextStyle(color: Colors.grey[500], fontSize: 12),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                value,
+                style: TextStyle(
+                  color: isPlaceholder ? Colors.grey[400] : AppTheme.textDark,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 
-  @override
-  double get maxExtent => maxHeight;
-
-  @override
-  double get minExtent => minHeight;
-
-  @override
-  bool shouldRebuild(_StickyHeaderDelegate oldDelegate) {
-    return maxHeight != oldDelegate.maxHeight ||
-        minHeight != oldDelegate.minHeight ||
-        child != oldDelegate.child;
+  String _monthName(int month) {
+    const months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
+    return months[month - 1];
   }
 }

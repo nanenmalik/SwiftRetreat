@@ -13,7 +13,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final _authService = FirebaseAuthService();
   String _name = 'Loading...';
   String _email = 'Loading...';
-  bool _isLoading = true;
 
   @override
   void initState() {
@@ -29,13 +28,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       setState(() {
         _name = userData?['name'] ?? user?.displayName ?? 'User';
         _email = userData?['email'] ?? user?.email ?? '';
-        _isLoading = false;
       });
     } catch (e) {
       setState(() {
         _name = 'Error loading name';
         _email = 'Error loading email';
-        _isLoading = false;
       });
     }
   }
@@ -53,7 +50,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             CircleAvatar(
               radius: 50,
-              backgroundColor: AppTheme.mocha,
+              backgroundColor: AppTheme.primaryTeal,
               backgroundImage: const NetworkImage(
                 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_R4S4j_-Ii4yXXo5eCYiwhO66hb0Ez9a1dQ&s',
               ),
@@ -75,10 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 final result = await Navigator.pushNamed(
                   context,
                   '/edit-profile',
-                  arguments: {
-                    'name': _name,
-                    'email': _email,
-                  },
+                  arguments: {'name': _name, 'email': _email},
                 );
 
                 if (result != null && result is Map<String, dynamic>) {
@@ -113,14 +107,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
               width: double.infinity,
               child: OutlinedButton(
                 onPressed: () async {
+                  final navigator = Navigator.of(context);
+                  final messenger = ScaffoldMessenger.of(context);
                   try {
                     await _authService.signOut();
                     if (mounted) {
-                      Navigator.pushReplacementNamed(context, '/login');
+                      navigator.pushReplacementNamed('/login');
                     }
                   } catch (e) {
                     if (mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
+                      messenger.showSnackBar(
                         SnackBar(
                           content: Text('Error logging out: ${e.toString()}'),
                           backgroundColor: Colors.red,
@@ -130,8 +126,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   }
                 },
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: AppTheme.terracotta,
-                  side: const BorderSide(color: AppTheme.terracotta),
+                  foregroundColor: Colors.redAccent,
+                  side: const BorderSide(color: Colors.redAccent),
                   padding: const EdgeInsets.symmetric(vertical: 12),
                 ),
                 child: const Text('Logout'),
@@ -158,7 +154,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         side: const BorderSide(color: Color(0xFFEEEEEE)),
       ),
       child: ListTile(
-        leading: Icon(icon, color: AppTheme.mocha),
+        leading: Icon(icon, color: AppTheme.primaryTeal),
         title: Text(title),
         trailing: const Icon(
           Icons.arrow_forward_ios,
