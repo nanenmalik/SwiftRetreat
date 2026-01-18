@@ -173,10 +173,10 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
                       Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: AppTheme.sageGreen.withOpacity(0.1),
+                          color: AppTheme.sageGreen.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                            color: AppTheme.sageGreen.withOpacity(0.3),
+                            color: AppTheme.sageGreen.withValues(alpha: 0.3),
                           ),
                         ),
                         child: Row(
@@ -253,8 +253,8 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
                                   boxShadow: isSelected
                                       ? [
                                           BoxShadow(
-                                            color: AppTheme.mocha.withOpacity(
-                                              0.2,
+                                            color: AppTheme.mocha.withValues(
+                                              alpha: 0.2,
                                             ),
                                             blurRadius: 8,
                                             offset: const Offset(0, 4),

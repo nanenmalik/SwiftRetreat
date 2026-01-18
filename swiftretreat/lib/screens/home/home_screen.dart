@@ -69,7 +69,7 @@ class HomeContent extends StatefulWidget {
 class _HomeContentState extends State<HomeContent> {
   late TextEditingController _searchController;
   String _searchQuery = '';
-  final double _maxPrice = 500;
+
   double _minRating = 0;
   RangeValues _priceRange = const RangeValues(0, 500);
   DateTime? _checkInDate;
@@ -275,7 +275,7 @@ class _HomeContentState extends State<HomeContent> {
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.05),
+                        color: Colors.black.withValues(alpha: 0.05),
                         blurRadius: 10,
                         offset: const Offset(0, 5),
                       ),
