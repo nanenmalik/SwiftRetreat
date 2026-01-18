@@ -71,12 +71,20 @@ class SwiftRetreatApp extends StatelessWidget {
           String destinationName = 'Bali, Indonesia';
           double minPrice = 0;
           double maxPrice = 10000;
+          int rating = 0;
+          List<String> facilities = [];
 
           if (settings.arguments is Map) {
             final args = settings.arguments as Map<String, dynamic>;
             destinationName = args['destination'] ?? 'Bali, Indonesia';
-            minPrice = args['minPrice'] ?? 0;
-            maxPrice = args['maxPrice'] ?? 10000;
+            minPrice = (args['minPrice'] ?? 0).toDouble();
+            maxPrice = (args['maxPrice'] ?? 10000).toDouble();
+            rating = args['rating'] ?? 0;
+            facilities =
+                (args['facilities'] as List<dynamic>?)
+                    ?.map((e) => e.toString())
+                    .toList() ??
+                [];
           } else if (settings.arguments is String) {
             destinationName = settings.arguments as String;
           }
@@ -86,6 +94,8 @@ class SwiftRetreatApp extends StatelessWidget {
               destinationName: destinationName,
               minPrice: minPrice,
               maxPrice: maxPrice,
+              rating: rating,
+              facilities: facilities,
             ),
           );
         }

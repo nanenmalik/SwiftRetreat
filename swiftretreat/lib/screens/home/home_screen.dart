@@ -6,6 +6,7 @@ import 'widgets/hotel_card.dart';
 
 import '../bookings/my_bookings_screen.dart';
 import '../profile/profile_screen.dart';
+import 'widgets/filter_bottom_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -255,6 +256,51 @@ class _HomeContentState extends State<HomeContent> {
                   ),
                   const Divider(height: 30),
 
+                  // Filter Input
+                  _buildSearchField(
+                    context,
+                    icon: Icons.tune,
+                    label: 'Filter',
+                    value: 'Guests, Price, etc.',
+                    onTap: () async {
+                      await showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        builder: (context) {
+                          return FilterBottomSheet(
+                            initialPriceRange: _priceRange,
+                            onApply: (filters) {
+                              setState(() {
+                                if (filters['minPrice'] != null) {
+                                  _priceRange = RangeValues(
+                                    filters['minPrice'],
+                                    filters['maxPrice'],
+                                  );
+                                }
+                                Navigator.pushNamed(
+                                  context,
+                                  '/destination',
+                                  arguments: {
+                                    'destination':
+                                        filters['location'] ?? 'San Diego',
+                                    'minPrice': filters['minPrice'],
+                                    'maxPrice': filters['maxPrice'],
+                                    'rating': filters['rating'],
+                                    'facilities': filters['facilities'],
+                                  },
+                                );
+                              });
+                            },
+                          );
+                        },
+                      );
+                    },
+                    isPlaceholder: false,
+                  ),
+                  const SizedBox(height: 16),
+                  const Divider(height: 30),
+
                   // Date Input
                   Row(
                     children: [
@@ -316,129 +362,6 @@ class _HomeContentState extends State<HomeContent> {
                         ),
                       ),
                     ],
-                  ),
-
-                  const SizedBox(height: 16),
-                  const Divider(height: 30),
-
-                  // Price Range Input
-                  _buildSearchField(
-                    context,
-                    icon: Icons.monetization_on_outlined,
-                    label: 'Price Range',
-                    value:
-                        '\$${_priceRange.start.toInt()} - \$${_priceRange.end.toInt()}',
-                    onTap: () async {
-                      await showModalBottomSheet(
-                        context: context,
-                        backgroundColor: Colors.white,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(24),
-                          ),
-                        ),
-                        builder: (context) {
-                          return StatefulBuilder(
-                            builder: (context, setModalState) {
-                              return Padding(
-                                padding: const EdgeInsets.all(24.0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Select Price Range',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge
-                                          ?.copyWith(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                    ),
-                                    const SizedBox(height: 24),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          '\$${_priceRange.start.toInt()}',
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                        Text(
-                                          '\$${_priceRange.end.toInt()}',
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    RangeSlider(
-                                      values: _priceRange,
-                                      min: 0,
-                                      max: 2000,
-                                      divisions: 20,
-                                      activeColor: AppTheme.primaryTeal,
-                                      inactiveColor: Colors.grey[300],
-                                      labels: RangeLabels(
-                                        '\$${_priceRange.start.toInt()}',
-                                        '\$${_priceRange.end.toInt()}',
-                                      ),
-                                      onChanged: (RangeValues values) {
-                                        setModalState(() {
-                                          _priceRange = values;
-                                        });
-                                        // Also update parent state to reflect in UI immediately if needed,
-                                        // but usually we wait for 'Apply'.
-                                        // For this simple UI, we can just update parent on close or here if we pass a callback.
-                                        // Let's rely on setState below after pop.
-                                      },
-                                    ),
-                                    const SizedBox(height: 24),
-                                    SizedBox(
-                                      width: double.infinity,
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.pop(context, _priceRange);
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: AppTheme.primaryTeal,
-                                          foregroundColor: Colors.white,
-                                          padding: const EdgeInsets.symmetric(
-                                            vertical: 16,
-                                          ),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                              16,
-                                            ),
-                                          ),
-                                        ),
-                                        child: const Text(
-                                          'Apply',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          );
-                        },
-                      ).then((value) {
-                        if (value != null && value is RangeValues) {
-                          setState(() {
-                            _priceRange = value;
-                          });
-                        }
-                      });
-                    },
-                    isPlaceholder: false,
                   ),
 
                   const SizedBox(height: 24),

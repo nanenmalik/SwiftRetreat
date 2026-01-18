@@ -157,8 +157,8 @@ class HotelCard extends StatelessWidget {
                         padding: const EdgeInsets.only(
                           top: 8.0,
                         ), // Added padding to align with "per night" text
-                        child: RichText(
-                          text: TextSpan(
+                        child: Text.rich(
+                          TextSpan(
                             children: [
                               TextSpan(
                                 text: '\$${hotel.pricePerNight.toInt()}',
@@ -170,7 +170,10 @@ class HotelCard extends StatelessWidget {
                               ),
                               TextSpan(
                                 text: ' / night',
-                                style: TextStyle(color: Colors.grey[600]),
+                                style: TextStyle(
+                                  color: Colors.grey[600],
+                                  fontSize: 14,
+                                ),
                               ),
                             ],
                           ),

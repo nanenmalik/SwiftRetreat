@@ -2,6 +2,85 @@ import '../models/hotel_model.dart';
 import '../models/destination_feature_models.dart';
 
 class MockData {
+  static final List<Review> _mockReviews = [
+    Review(
+      id: 'r1',
+      username: 'Sarah Jenkins',
+      rating: 5.0,
+      comment:
+          'Absolutely stunning! The views were breathtaking and the service was impeccable.',
+      date: DateTime(2023, 10, 15),
+    ),
+    Review(
+      id: 'r2',
+      username: 'Ahmed Al-Farsi',
+      rating: 4.5,
+      comment:
+          'Great halal options and very clean facilities. Will definitely return.',
+      date: DateTime(2023, 11, 02),
+    ),
+    Review(
+      id: 'r3',
+      username: 'Emily Chen',
+      rating: 5.0,
+      comment:
+          'A hidden gem. The room was spacious and the bed was super comfortable.',
+      date: DateTime(2023, 09, 28),
+    ),
+    Review(
+      id: 'r4',
+      username: 'Michael Brown',
+      rating: 4.0,
+      comment:
+          'Nice location, close to everything. Breakfast could be better though.',
+      date: DateTime(2023, 12, 05),
+    ),
+    Review(
+      id: 'r5',
+      username: 'Fatima Zahra',
+      rating: 5.0,
+      comment: 'Perfect for a family vacation. The kids loved the pool!',
+      date: DateTime(2023, 08, 12),
+    ),
+    Review(
+      id: 'r6',
+      username: 'John Doe',
+      rating: 3.5,
+      comment: 'Decent stay, but a bit overpriced for what you get.',
+      date: DateTime(2023, 11, 20),
+    ),
+    Review(
+      id: 'r7',
+      username: 'Jessica Lim',
+      rating: 5.0,
+      comment:
+          'The staff went above and beyond to make our anniversary special. Thank you!',
+      date: DateTime(2023, 10, 05),
+    ),
+    Review(
+      id: 'r8',
+      username: 'Omar Hassan',
+      rating: 4.8,
+      comment:
+          'Highly recommended for Muslim travelers. Prayer mats were provided promptly.',
+      date: DateTime(2023, 12, 01),
+    ),
+    Review(
+      id: 'r9',
+      username: 'David Smith',
+      rating: 4.2,
+      comment: 'Good value for money. Clean and quiet.',
+      date: DateTime(2023, 09, 15),
+    ),
+    Review(
+      id: 'r10',
+      username: 'Maria Garcia',
+      rating: 4.7,
+      comment: 'Beautiful decor and atmosphere. A truly relaxing experience.',
+      date: DateTime(2023, 11, 10),
+    ),
+  ];
+
   static List<Food> foods = [
     Food(
       id: 'f1',
@@ -79,6 +158,7 @@ class MockData {
           'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
       amenities: ['Private Pool', 'Halal Food', 'Prayer Room', 'Family Only'],
       isShariahCompliant: true,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '101',
@@ -116,6 +196,7 @@ class MockData {
       imageUrl: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4',
       amenities: ['Halal Food', 'Mosque Nearby', 'Alcohol-Free'],
       isShariahCompliant: true,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '201',
@@ -151,6 +232,7 @@ class MockData {
       imageUrl: 'https://images.unsplash.com/photo-1540541338287-41700207dee6',
       amenities: ['Private Villa', 'Halal Kitchen', 'Qibla Direction'],
       isShariahCompliant: true,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '301',
@@ -187,6 +269,7 @@ class MockData {
           'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=800&q=80', // Placeholder
       amenities: ['Bosphorus View', 'Turkish Bath', 'Halal Dining'],
       isShariahCompliant: true,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '401',
@@ -212,6 +295,7 @@ class MockData {
           'https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=800&q=80',
       amenities: ['Onsen', 'Tea Ceremony', 'Zen Garden'],
       isShariahCompliant: true,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '501',
@@ -236,6 +320,7 @@ class MockData {
           'https://images.unsplash.com/photo-1514282401047-d77a7149ba6f?auto=format&fit=crop&w=800&q=80',
       amenities: ['Overwater Villa', 'Private Pool', 'Snorkeling'],
       isShariahCompliant: true,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '601',
@@ -261,6 +346,7 @@ class MockData {
           'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80', // Placeholder
       amenities: ['High Tea', 'City Center', 'Concierge'],
       isShariahCompliant: true,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '701',
@@ -285,6 +371,7 @@ class MockData {
           'https://images.unsplash.com/photo-1519659528534-7fd733a832a0?auto=format&fit=crop&w=800&q=80',
       amenities: ['Ski-in/Ski-out', 'Fireplace', 'Mountain View'],
       isShariahCompliant: true,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '801',
@@ -310,6 +397,7 @@ class MockData {
           'https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=800&q=80',
       amenities: ['Central Courtyard', 'Traditional Breakfast', 'Hammam'],
       isShariahCompliant: true,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '901',
@@ -334,6 +422,7 @@ class MockData {
           'https://images.unsplash.com/photo-1496417263034-38ec4f0d6b21?auto=format&fit=crop&w=800&q=80',
       amenities: ['Rooftop Lounge', 'Gym', 'Subway Access'],
       isShariahCompliant: true,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '1001',
@@ -359,6 +448,7 @@ class MockData {
           'https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?auto=format&fit=crop&w=800&q=80',
       amenities: ['Private Beach', 'Diving Center', 'Eco-Friendly'],
       isShariahCompliant: true,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '1101',
@@ -384,6 +474,7 @@ class MockData {
           'https://images.unsplash.com/photo-1586611292717-f828b167408c?auto=format&fit=crop&w=800&q=80',
       amenities: ['Infinity Pool', 'Thai Massage', 'Halal Kitchen'],
       isShariahCompliant: true,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '1201',
@@ -409,6 +500,7 @@ class MockData {
           'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80',
       amenities: ['Eiffel Tower View', 'Patisserie', 'Concierge'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '1301',
@@ -434,6 +526,7 @@ class MockData {
           'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=800&q=80',
       amenities: ['Colosseum View', 'Italian Breakfast', 'Rooftop Bar'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '1401',
@@ -458,6 +551,7 @@ class MockData {
           'https://images.unsplash.com/photo-1558642084-d995b6c1c153?auto=format&fit=crop&w=800&q=80',
       amenities: ['Gaudi Architecture', 'Tapas Bar', 'City Center'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '1501',
@@ -482,6 +576,7 @@ class MockData {
           'https://images.unsplash.com/photo-1572252009289-9d53c6d94889?auto=format&fit=crop&w=800&q=80',
       amenities: ['Pyramids View', 'Nile Cruise', 'Halal Food'],
       isShariahCompliant: true,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '1601',
@@ -506,6 +601,7 @@ class MockData {
           'https://images.unsplash.com/photo-1580060839134-75a5edca2e99?auto=format&fit=crop&w=800&q=80',
       amenities: ['Mountain View', 'Safari Tours', 'Pool'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '1701',
@@ -530,6 +626,7 @@ class MockData {
           'https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=800&q=80',
       amenities: ['Beachfront', 'Samba Lessons', 'Rooftop Pool'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '1801',
@@ -554,6 +651,7 @@ class MockData {
           'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80',
       amenities: ['City View', 'Karaoke', 'Subway Access'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '1901',
@@ -578,6 +676,7 @@ class MockData {
           'https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=800&q=80',
       amenities: ['Taj View', 'Ayurvedic Spa', 'Fine Dining'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '2001',
@@ -602,6 +701,7 @@ class MockData {
           'https://images.unsplash.com/photo-1533240683050-891961448655?auto=format&fit=crop&w=800&q=80',
       amenities: ['Historic Center', 'Beer Garden', 'Bike Rental'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '2101',
@@ -626,6 +726,7 @@ class MockData {
           'https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?auto=format&fit=crop&w=800&q=80',
       amenities: ['Caldera View', 'Infinity Pool', 'Cave Room'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '2201',
@@ -650,6 +751,7 @@ class MockData {
           'https://images.unsplash.com/photo-1538688423619-a81d3f23454b?auto=format&fit=crop&w=800&q=80',
       amenities: ['K-Pop Theme', 'High Tech', 'Shopping'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '2301',
@@ -674,6 +776,7 @@ class MockData {
           'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80',
       amenities: ['Northern Lights', 'Geothermal Spa', 'Bar'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '2401',
@@ -698,6 +801,7 @@ class MockData {
           'https://images.unsplash.com/photo-1585543805890-6051f7d16729?auto=format&fit=crop&w=800&q=80',
       amenities: ['Canal View', 'Bike Rental', 'Cheese Tasting'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '2501',
@@ -722,6 +826,7 @@ class MockData {
           'https://images.unsplash.com/photo-1571474004502-c1def214ac6d?auto=format&fit=crop&w=800&q=80',
       amenities: ['Ocean View', 'Seaplane Tours', 'Sushi Bar'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '2601',
@@ -746,6 +851,7 @@ class MockData {
           'https://images.unsplash.com/photo-1549449857-e85d41f3e8f8?auto=format&fit=crop&w=800&q=80',
       amenities: ['Bubble Tent', 'Bedouin Dinner', 'Stargazing'],
       isShariahCompliant: true,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '2701',
@@ -770,6 +876,7 @@ class MockData {
           'https://images.unsplash.com/photo-1587595431973-160d0d94add1?auto=format&fit=crop&w=800&q=80',
       amenities: ['Mountain View', 'Cocoa Tea', 'Hiking Guides'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '2801',
@@ -794,6 +901,7 @@ class MockData {
           'https://images.unsplash.com/photo-1577977695029-798835848bb2?auto=format&fit=crop&w=800&q=80',
       amenities: ['City Center', 'Infinity Pool', 'Halal Food'],
       isShariahCompliant: true,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '2901',
@@ -818,6 +926,7 @@ class MockData {
           'https://images.unsplash.com/photo-1514282401047-d77a7149ba6f?auto=format&fit=crop&w=800&q=80',
       amenities: ['Private Beach', 'Luxury Mall', 'Marina'],
       isShariahCompliant: true,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '3001',
@@ -842,6 +951,7 @@ class MockData {
           'https://images.unsplash.com/photo-1561501900-3701fa6a0864?auto=format&fit=crop&w=800&q=80',
       amenities: ['Bascharsija View', 'Halal Food', 'History Tour'],
       isShariahCompliant: true,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '3101',
@@ -866,6 +976,7 @@ class MockData {
           'https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?auto=format&fit=crop&w=800&q=80',
       amenities: ['White Sand Beach', 'Spice Tour', 'Diving'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '3201',
@@ -890,6 +1001,7 @@ class MockData {
           'https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=800&q=80',
       amenities: ['Canal View', 'Gondola Service', 'Fine Dining'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '3301',
@@ -913,6 +1025,7 @@ class MockData {
           'https://images.unsplash.com/photo-1528114039593-43664da1a760?auto=format&fit=crop&w=800&q=80',
       amenities: ['Vineyard', 'Cooking Class', 'Pool'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '3401',
@@ -936,6 +1049,7 @@ class MockData {
           'https://images.unsplash.com/photo-1513581166391-887a96ddeafd?auto=format&fit=crop&w=800&q=80',
       amenities: ['Near Duomo', 'Shopping Service', 'Spa'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '3501',
@@ -959,6 +1073,7 @@ class MockData {
           'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80',
       amenities: ['Sea View', 'Beach Access', 'Casino'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '3601',
@@ -982,6 +1097,7 @@ class MockData {
           'https://images.unsplash.com/photo-1478358161113-b0e11994a36b?auto=format&fit=crop&w=800&q=80',
       amenities: ['Gourmet Restaurant', 'City Center', 'Wine Cellar'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '3701',
@@ -1005,6 +1121,7 @@ class MockData {
           'https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&w=800&q=80',
       amenities: ['Near Palace', 'Rooftop Bar', 'Gym'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '3801',
@@ -1028,6 +1145,7 @@ class MockData {
           'https://images.unsplash.com/photo-1559599238-308793637427?auto=format&fit=crop&w=800&q=80',
       amenities: ['Flamenco Show', 'Patio', 'Pool'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '3901',
@@ -1051,6 +1169,7 @@ class MockData {
           'https://images.unsplash.com/photo-1565538006871-3375b4db919b?auto=format&fit=crop&w=800&q=80',
       amenities: ['River View', 'Tram Stop', 'Breakfast'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '4001',
@@ -1074,6 +1193,7 @@ class MockData {
           'https://images.unsplash.com/photo-1587875931252-0cde42718e47?auto=format&fit=crop&w=800&q=80',
       amenities: ['River Douro View', 'Wine Tasting', 'Terrace'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '4101',
@@ -1097,6 +1217,7 @@ class MockData {
           'https://images.unsplash.com/photo-1515488764276-beab7607c1e6?auto=format&fit=crop&w=800&q=80',
       amenities: ['Lake View', 'Spa', 'Fine Dining'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '4201',
@@ -1120,6 +1241,7 @@ class MockData {
           'https://images.unsplash.com/photo-1510425463958-dcc24b986163?auto=format&fit=crop&w=800&q=80',
       amenities: ['Jet d\'Eau View', 'Conference Center', 'Gym'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '4301',
@@ -1143,6 +1265,7 @@ class MockData {
           'https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=800&q=80',
       amenities: ['Near Opera', 'Classical Decor', 'Cafe'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '4401',
@@ -1166,6 +1289,7 @@ class MockData {
           'https://images.unsplash.com/photo-1541849546-216549ae216d?auto=format&fit=crop&w=800&q=80',
       amenities: ['Castle View', 'Old Town Square', 'Bar'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '4501',
@@ -1189,6 +1313,7 @@ class MockData {
           'https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=800&q=80',
       amenities: ['Thermal Bath', 'Danube View', 'Spa'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '4601',
@@ -1212,6 +1337,7 @@ class MockData {
           'https://images.unsplash.com/photo-1510422164475-43a059c2354c?auto=format&fit=crop&w=800&q=80',
       amenities: ['City Center', 'Chocolate Shop', 'Bar'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '4701',
@@ -1235,6 +1361,7 @@ class MockData {
           'https://images.unsplash.com/photo-1534067783741-514d4dddb79e?auto=format&fit=crop&w=800&q=80',
       amenities: ['Castle View', 'Whisky Bar', 'History'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '4801',
@@ -1258,6 +1385,7 @@ class MockData {
           'https://images.unsplash.com/photo-1550993950-7f938d21b01c?auto=format&fit=crop&w=800&q=80',
       amenities: ['Pub', 'Liffey View', 'Live Music'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '4901',
@@ -1281,6 +1409,7 @@ class MockData {
           'https://images.unsplash.com/photo-1497215842964-222b430dc0a1?auto=format&fit=crop&w=800&q=80',
       amenities: ['Waterfront', 'Sauna', 'Modern Design'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '5001',
@@ -1304,6 +1433,7 @@ class MockData {
           'https://images.unsplash.com/photo-1520699295475-b6d396db86c4?auto=format&fit=crop&w=800&q=80',
       amenities: ['Fjord View', 'Opera House', 'Skiing Nearby'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '5101',
@@ -1327,6 +1457,7 @@ class MockData {
           'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&w=800&q=80',
       amenities: ['Nyhavn View', 'Design Hotel', 'Bikes'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '5201',
@@ -1350,6 +1481,7 @@ class MockData {
           'https://images.unsplash.com/photo-1520288289068-07e3768c7e60?auto=format&fit=crop&w=800&q=80',
       amenities: ['Sauna', 'Cathedral View', 'Market Square'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '5301',
@@ -1373,6 +1505,7 @@ class MockData {
           'https://images.unsplash.com/photo-1550850839-8a543eda1363?auto=format&fit=crop&w=800&q=80',
       amenities: ['Medieval Charm', 'Spa', 'Fireplace'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '5401',
@@ -1396,6 +1529,7 @@ class MockData {
           'https://images.unsplash.com/photo-1560060965-09f4b93b8e57?auto=format&fit=crop&w=800&q=80',
       amenities: ['Architecture Tour', 'Old Town', 'Bar'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '5501',
@@ -1419,6 +1553,7 @@ class MockData {
           'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=800&q=80',
       amenities: ['Old Town', 'Amber Shop', 'Church View'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '5601',
@@ -1442,6 +1577,7 @@ class MockData {
           'https://images.unsplash.com/photo-1506543949980-60b6af9c97b8?auto=format&fit=crop&w=800&q=80',
       amenities: ['Royal Route', 'History', 'Fine Dining'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '5701',
@@ -1465,6 +1601,7 @@ class MockData {
           'https://images.unsplash.com/photo-1534351590666-13e3e96b5017?auto=format&fit=crop&w=800&q=80',
       amenities: ['Main Square', 'Wawel Castle', 'Nightlife'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '5801',
@@ -1488,6 +1625,7 @@ class MockData {
           'https://images.unsplash.com/photo-1587595431973-160d0d94add1?auto=format&fit=crop&w=800&q=80',
       amenities: ['Old Town', 'Architecture', 'Parks'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '5901',
@@ -1511,6 +1649,7 @@ class MockData {
           'https://images.unsplash.com/photo-1558913926-d716f9a3f461?auto=format&fit=crop&w=800&q=80', // Fixed broken URL
       amenities: ['Mountain View', 'Cathedral', 'Spa'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '6001',
@@ -1534,6 +1673,7 @@ class MockData {
           'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=800&q=80',
       amenities: ['Chao Phraya View', 'Rooftop Bar', 'Spa'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '6101',
@@ -1557,6 +1697,7 @@ class MockData {
           'https://images.unsplash.com/photo-1512413346549-d17e764724a4?auto=format&fit=crop&w=800&q=80',
       amenities: ['Old City', 'Temples', 'Night Market'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '6201',
@@ -1580,6 +1721,7 @@ class MockData {
           'https://images.unsplash.com/photo-1534067783741-514d4dddb79e?auto=format&fit=crop&w=800&q=80', // Reusing ID for simplicity
       amenities: ['Old Quarter', 'Lake View', 'Street Food'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '6301',
@@ -1603,6 +1745,7 @@ class MockData {
           'https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?auto=format&fit=crop&w=800&q=80',
       amenities: ['Pool', 'Rooftop', 'War Museum Nearby'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '6401',
@@ -1626,6 +1769,7 @@ class MockData {
           'https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=800&q=80',
       amenities: ['Infinity Pool', 'Gardens by the Bay', 'Casino'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '6501',
@@ -1649,6 +1793,7 @@ class MockData {
           'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=800&q=80',
       amenities: ['Sunset View', 'Pool', 'Mall Nearby'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '6601',
@@ -1672,6 +1817,7 @@ class MockData {
           'https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?auto=format&fit=crop&w=800&q=80', // Reusing ID
       amenities: ['White Sand', 'Party', 'Water Sports'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '6701',
@@ -1695,6 +1841,7 @@ class MockData {
           'https://images.unsplash.com/photo-1496417263034-38ec4f0d6b21?auto=format&fit=crop&w=800&q=80', // Reusing ID
       amenities: ['101 View', 'Night Market', 'Metro'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '6801',
@@ -1718,6 +1865,7 @@ class MockData {
           'https://images.unsplash.com/photo-1536768138796-3c91d5b31d52?auto=format&fit=crop&w=800&q=80',
       amenities: ['Victoria Harbour', 'Dim Sum', 'Ferry'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '6901',
@@ -1741,6 +1889,7 @@ class MockData {
           'https://images.unsplash.com/photo-1474181487882-5abf3f0ba6c2?auto=format&fit=crop&w=800&q=80',
       amenities: ['The Bund', 'Skyline', 'History'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '7001',
@@ -1764,6 +1913,7 @@ class MockData {
           'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=800&q=80',
       amenities: ['Forbidden City', 'Hutong', 'Duck'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '7101',
@@ -1787,6 +1937,7 @@ class MockData {
           'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80',
       amenities: ['Sea View', 'Gateway of India', 'Bollywood'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '7201',
@@ -1810,6 +1961,7 @@ class MockData {
           'https://images.unsplash.com/photo-1560067174-c5a3a8f37060?auto=format&fit=crop&w=800&q=80',
       amenities: ['Colonial Charm', 'Gardens', 'Spa'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '7301',
@@ -1833,6 +1985,7 @@ class MockData {
           'https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?auto=format&fit=crop&w=800&q=80', // Reusing ID
       amenities: ['Galle Face', 'Pool', 'Seafood'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '7401',
@@ -1856,6 +2009,7 @@ class MockData {
           'https://images.unsplash.com/photo-1544144433-d50aff500b91?auto=format&fit=crop&w=800&q=80',
       amenities: ['Himalaya View', 'Temple', 'Trekking Info'],
       isShariahCompliant: false,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '7501',
@@ -1879,6 +2033,7 @@ class MockData {
           'https://images.unsplash.com/photo-1587595431973-160d0d94add1?auto=format&fit=crop&w=800&q=80', // Reusing ID
       amenities: ['History', 'Food Street', 'Culture'],
       isShariahCompliant: true,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '7601',
@@ -1902,6 +2057,7 @@ class MockData {
           'https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=800&q=80', // Reusing ID
       amenities: ['Sea View', 'Clifton Beach', 'Mall'],
       isShariahCompliant: true,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '7701',
@@ -1925,6 +2081,7 @@ class MockData {
           'https://images.unsplash.com/photo-1586723812148-3b56a1c5031b?auto=format&fit=crop&w=800&q=80',
       amenities: ['Skybridge', 'Luxury Shopping', 'Fine Dining'],
       isShariahCompliant: true,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '7801',
@@ -1948,6 +2105,7 @@ class MockData {
           'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=800&q=80', // Reusing ID
       amenities: ['Corniche', 'Red Sea View', 'Aquarium'],
       isShariahCompliant: true,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '7901',
@@ -1971,6 +2129,7 @@ class MockData {
           'https://images.unsplash.com/photo-1578895210405-907a5e4b9e24?auto=format&fit=crop&w=800&q=80',
       amenities: ['Towers View', 'Shopping', 'Gulf View'],
       isShariahCompliant: true,
+      reviews: _mockReviews,
       rooms: [
         RoomType(
           id: '8001',

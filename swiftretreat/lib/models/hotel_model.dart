@@ -16,6 +16,22 @@ class RoomType {
   });
 }
 
+class Review {
+  final String id;
+  final String username;
+  final double rating;
+  final String comment;
+  final DateTime date;
+
+  Review({
+    required this.id,
+    required this.username,
+    required this.rating,
+    required this.comment,
+    required this.date,
+  });
+}
+
 class Hotel {
   final String id;
   final String name;
@@ -26,6 +42,7 @@ class Hotel {
   final List<String> amenities;
   final bool isShariahCompliant;
   final List<RoomType> rooms;
+  final List<Review> reviews;
 
   Hotel({
     required this.id,
@@ -37,5 +54,6 @@ class Hotel {
     required this.amenities,
     required this.isShariahCompliant,
     this.rooms = const [],
+    this.reviews = const [],
   });
 }

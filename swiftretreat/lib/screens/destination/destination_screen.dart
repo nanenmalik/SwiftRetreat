@@ -8,11 +8,16 @@ class DestinationScreen extends StatefulWidget {
   final double minPrice;
   final double maxPrice;
 
+  final int rating;
+  final List<String> facilities;
+
   const DestinationScreen({
     super.key,
     required this.destinationName,
     this.minPrice = 0,
     this.maxPrice = 10000,
+    this.rating = 0,
+    this.facilities = const [],
   });
 
   @override
@@ -204,7 +209,10 @@ class _DestinationScreenState extends State<DestinationScreen>
           (h) =>
               h.location == widget.destinationName &&
               h.pricePerNight >= widget.minPrice &&
-              h.pricePerNight <= widget.maxPrice,
+              h.pricePerNight <= widget.maxPrice &&
+              (widget.rating == 0 || h.rating >= widget.rating) &&
+              (widget.facilities.isEmpty ||
+                  widget.facilities.every((f) => h.amenities.contains(f))),
         )
         .toList();
 
