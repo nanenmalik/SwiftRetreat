@@ -191,9 +191,20 @@ class _DestinationScreenState extends State<DestinationScreen>
   }
 
   Widget _buildHotelsList(BuildContext context) {
-    // Filter hotels roughly by destination if possible, or just show all for demo
-    // Assuming "Bali" search
-    final hotels = MockData.hotels;
+    // Filter hotels by exact location since selection comes from this list
+    final hotels = MockData.hotels
+        .where((h) => h.location == widget.destinationName)
+        .toList();
+
+    if (hotels.isEmpty) {
+      return Center(
+        child: Text(
+          'No hotels found in ${widget.destinationName}',
+          style: const TextStyle(color: Colors.grey),
+        ),
+      );
+    }
+
     return ListView.separated(
       padding: const EdgeInsets.all(20),
       itemCount: hotels.length,
@@ -210,7 +221,22 @@ class _DestinationScreenState extends State<DestinationScreen>
   }
 
   Widget _buildFoodsList(BuildContext context) {
-    final foods = MockData.foods;
+    // Flexible filtering for foods (check if location contains the main region name)
+    // e.g. "Bali, Indonesia" -> keyword "Bali" matches "Ubud, Bali"
+    final searchKeyword = widget.destinationName.split(',').first.trim();
+    final foods = MockData.foods
+        .where((f) => f.location.contains(searchKeyword))
+        .toList();
+
+    if (foods.isEmpty) {
+      return Center(
+        child: Text(
+          'No foods found in ${widget.destinationName}',
+          style: const TextStyle(color: Colors.grey),
+        ),
+      );
+    }
+
     return ListView.separated(
       padding: const EdgeInsets.all(20),
       itemCount: foods.length,
@@ -229,7 +255,21 @@ class _DestinationScreenState extends State<DestinationScreen>
   }
 
   Widget _buildActivitiesList(BuildContext context) {
-    final activities = MockData.activities;
+    // Flexible filtering for activities
+    final searchKeyword = widget.destinationName.split(',').first.trim();
+    final activities = MockData.activities
+        .where((a) => a.location.contains(searchKeyword))
+        .toList();
+
+    if (activities.isEmpty) {
+      return Center(
+        child: Text(
+          'No activities found in ${widget.destinationName}',
+          style: const TextStyle(color: Colors.grey),
+        ),
+      );
+    }
+
     return ListView.separated(
       padding: const EdgeInsets.all(20),
       itemCount: activities.length,

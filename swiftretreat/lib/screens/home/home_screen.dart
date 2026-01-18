@@ -176,33 +176,53 @@ class _HomeContentState extends State<HomeContent> {
                     onTap: () {
                       // Focus logic or separate dialog
                       // For simplicity, using a dialog to set location
+                      // Extract unique locations
+                      final locations =
+                          MockData.hotels
+                              .map((h) => h.location)
+                              .toSet()
+                              .toList()
+                            ..sort();
+
                       showDialog(
                         context: context,
                         builder: (context) {
-                          final controller = TextEditingController(
-                            text: _searchQuery,
-                          );
                           return AlertDialog(
-                            title: const Text('Set Location'),
-                            content: TextField(
-                              controller: controller,
-                              decoration: const InputDecoration(
-                                hintText: 'e.g. Bali, Indonesia',
+                            title: const Text('Select Destination'),
+                            content: SizedBox(
+                              width: double.maxFinite,
+                              child: ListView.separated(
+                                shrinkWrap: true,
+                                itemCount: locations.length,
+                                separatorBuilder: (context, index) =>
+                                    const Divider(),
+                                itemBuilder: (context, index) {
+                                  final location = locations[index];
+                                  return ListTile(
+                                    title: Text(
+                                      location,
+                                      style: Theme.of(
+                                        context,
+                                      ).textTheme.bodyLarge,
+                                    ),
+                                    onTap: () {
+                                      setState(() => _searchQuery = location);
+                                      Navigator.pop(context);
+                                    },
+                                    trailing: _searchQuery == location
+                                        ? const Icon(
+                                            Icons.check,
+                                            color: AppTheme.primaryTeal,
+                                          )
+                                        : null,
+                                  );
+                                },
                               ),
                             ),
                             actions: [
                               TextButton(
                                 onPressed: () => Navigator.pop(context),
                                 child: const Text('Cancel'),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  setState(
-                                    () => _searchQuery = controller.text,
-                                  );
-                                  Navigator.pop(context);
-                                },
-                                child: const Text('Set'),
                               ),
                             ],
                           );
