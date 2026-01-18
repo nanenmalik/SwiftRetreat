@@ -257,46 +257,56 @@ class _HomeContentState extends State<HomeContent> {
                   const Divider(height: 30),
 
                   // Filter Input
-                  _buildSearchField(
-                    context,
-                    icon: Icons.tune,
-                    label: 'Filter',
-                    value: 'Guests, Price, etc.',
-                    onTap: () async {
-                      await showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                        builder: (context) {
-                          return FilterBottomSheet(
-                            initialPriceRange: _priceRange,
-                            onApply: (filters) {
-                              setState(() {
-                                if (filters['minPrice'] != null) {
-                                  _priceRange = RangeValues(
-                                    filters['minPrice'],
-                                    filters['maxPrice'],
-                                  );
-                                }
-                                Navigator.pushNamed(
-                                  context,
-                                  '/destination',
-                                  arguments: {
-                                    'destination':
-                                        filters['location'] ?? 'San Diego',
-                                    'minPrice': filters['minPrice'],
-                                    'maxPrice': filters['maxPrice'],
-                                    'rating': filters['rating'],
-                                    'facilities': filters['facilities'],
-                                  },
-                                );
-                              });
-                            },
-                          );
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.tune,
+                                size: 20,
+                                color: AppTheme.primaryTeal,
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                'Price Range',
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  color: Colors.grey[600],
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            '\$${_priceRange.start.toInt()}-\$${_priceRange.end.toInt()}',
+                            style: TextStyle(
+                              color: AppTheme.primaryTeal,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      RangeSlider(
+                        values: _priceRange,
+                        min: 0,
+                        max: 2000,
+                        divisions: 20,
+                        activeColor: AppTheme.primaryTeal,
+                        inactiveColor: Colors.blue[100],
+                        labels: RangeLabels(
+                          '\$${_priceRange.start.toInt()}',
+                          '\$${_priceRange.end.toInt()}',
+                        ),
+                        onChanged: (values) {
+                          setState(() => _priceRange = values);
                         },
-                      );
-                    },
-                    isPlaceholder: false,
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 16),
                   const Divider(height: 30),

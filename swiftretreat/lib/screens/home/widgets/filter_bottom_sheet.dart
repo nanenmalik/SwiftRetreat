@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import '../../../theme/app_theme.dart';
+import '../../../models/hotel_model.dart';
 
 class FilterBottomSheet extends StatefulWidget {
   final RangeValues initialPriceRange;
-  final Function(Map<String, dynamic>) onApply;
+  final Function(Map<String, dynamic>?) onApply;  // Changed from List<Hotel>
+  final List<Hotel> allHotels;
 
   const FilterBottomSheet({
     super.key,
     required this.initialPriceRange,
     required this.onApply,
+    required this.allHotels,
   });
 
   @override
@@ -17,26 +20,7 @@ class FilterBottomSheet extends StatefulWidget {
 
 class _FilterBottomSheetState extends State<FilterBottomSheet> {
   late RangeValues _priceRange;
-  int _guestCount =
-      2; // Default from image: 3 Guest (2 Adult, 1 Children) - simplified for now
-  bool _instantBook = false;
-  String _selectedLocation = 'San Diego'; // Default selection
-  final List<String> _locations = [
-    'San Diego',
-    'New York',
-    'Amsterdam',
-    'Bali',
-  ];
-
-  // Facilities
-  final Map<String, bool> _facilities = {
-    'Free Wifi': false,
-    'Swimming Pool': false,
-    'Tv': false,
-    'Laundry': false,
-  };
-
-  int _selectedRating = 5;
+  int _selectedRating = 0;
 
   @override
   void initState() {
@@ -44,10 +28,24 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
     _priceRange = widget.initialPriceRange;
   }
 
+  List<Hotel> _filterHotels() {
+    return widget.allHotels.where((hotel) {
+      // Filter by price range
+      bool priceMatch = hotel.pricePerNight >= _priceRange.start &&
+          hotel.pricePerNight <= _priceRange.end;
+
+      // Filter by rating (0 means no filter)
+      bool ratingMatch = _selectedRating == 0 ||
+          hotel.rating >= _selectedRating;
+
+      return priceMatch && ratingMatch;
+    }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.85,
+      height: MediaQuery.of(context).size.height * 0.5,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
@@ -84,34 +82,6 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Placeholder / Guest Selection
-                  _buildSectionTitle('Placeholder'),
-                  const SizedBox(height: 8),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 12,
-                    ),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey[200]!),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '$_guestCount Guest (${_guestCount > 1 ? "${_guestCount - 1} Adult, 1 Children" : "1 Adult"})',
-                          style: TextStyle(color: Colors.grey[800]),
-                        ),
-                        const Icon(
-                          Icons.keyboard_arrow_down,
-                          color: Colors.grey,
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-
                   // Price Range
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -120,7 +90,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                       Text(
                         '\$${_priceRange.start.toInt()}-\$${_priceRange.end.toInt()}',
                         style: TextStyle(
-                          color: AppTheme.primaryTeal.withOpacity(0.7),
+                          color: AppTheme.primaryTeal.withValues(alpha: 0.7),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -137,164 +107,20 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                       setState(() => _priceRange = values);
                     },
                   ),
-                  const SizedBox(height: 16),
-
-                  // Instant Book
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildSectionTitle('Instant Book'),
-                          const SizedBox(height: 4),
-                          Text(
-                            'Book without waiting for the host to respond',
-                            style: TextStyle(
-                              color: Colors.grey[400],
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Switch(
-                        value: _instantBook,
-                        onChanged: (val) => setState(() => _instantBook = val),
-                        activeColor: AppTheme.primaryTeal,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 24),
-
-                  // Location
-                  _buildSectionTitle('Location'),
-                  const SizedBox(height: 12),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: _locations.map((loc) {
-                        final isSelected = _selectedLocation == loc;
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 12),
-                          child: GestureDetector(
-                            onTap: () =>
-                                setState(() => _selectedLocation = loc),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 24,
-                                vertical: 12,
-                              ),
-                              decoration: BoxDecoration(
-                                color: isSelected
-                                    ? const Color(0xFF2B57C2)
-                                    : Colors
-                                          .white, // Blue explicitly requested in design
-                                border: Border.all(
-                                  color: isSelected
-                                      ? const Color(0xFF2B57C2)
-                                      : Colors.grey[200]!,
-                                ),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Text(
-                                loc,
-                                style: TextStyle(
-                                  color: isSelected
-                                      ? Colors.white
-                                      : const Color(0xFF2B57C2),
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-
-                  // Facilities
-                  _buildSectionTitle('Facilities'),
-                  const SizedBox(height: 12),
-                  ..._facilities.entries.map((entry) {
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 12),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            entry.key,
-                            style: TextStyle(
-                              color: Colors.grey[600],
-                              fontSize: 16,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 24,
-                            width: 24,
-                            child: Checkbox(
-                              value: entry.value,
-                              activeColor: const Color(0xFF2B57C2),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                              onChanged: (val) {
-                                setState(() {
-                                  _facilities[entry.key] = val ?? false;
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 32),
 
                   // Ratings
                   _buildSectionTitle('Ratings'),
                   const SizedBox(height: 12),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [5, 4, 3, 2, 1].map((rating) {
-                      final isSelected = _selectedRating == rating;
-                      return GestureDetector(
-                        onTap: () => setState(() => _selectedRating = rating),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 8,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(
-                              color: isSelected
-                                  ? const Color(0xFF2B57C2)
-                                  : Colors.grey[200]!,
-                              width: isSelected ? 2 : 1,
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.star,
-                                color: Colors.amber,
-                                size: 20,
-                              ),
-                              const SizedBox(width: 4),
-                              Text(
-                                rating.toString(),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: AppTheme.textDark,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    }).toList(),
+                    children: [
+                      _buildRatingButton(0, 'All'),
+                      _buildRatingButton(5, '5'),
+                      _buildRatingButton(4, '4'),
+                      _buildRatingButton(3, '3'),
+                      _buildRatingButton(2, '2'),
+                    ],
                   ),
                   const SizedBox(height: 24),
                 ],
@@ -307,22 +133,16 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () {
-                widget.onApply({
+                final filters = {
                   'minPrice': _priceRange.start,
                   'maxPrice': _priceRange.end,
-                  'location': _selectedLocation,
                   'rating': _selectedRating,
-                  'facilities': _facilities.entries
-                      .where((e) => e.value)
-                      .map((e) => e.key)
-                      .toList(),
-                  // 'guests': _guestCount,
-                  // 'instantBook': _instantBook,
-                });
+                };
+                widget.onApply(filters);
                 Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF2B57C2), // Match design blue
+                backgroundColor: const Color(0xFF2B57C2),
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(
@@ -348,6 +168,45 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
         fontSize: 16,
         fontWeight: FontWeight.bold,
         color: AppTheme.textDark,
+      ),
+    );
+  }
+
+  Widget _buildRatingButton(int rating, String label) {
+    final isSelected = _selectedRating == rating;
+    return GestureDetector(
+      onTap: () => setState(() => _selectedRating = rating),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: isSelected ? const Color(0xFF2B57C2) : Colors.grey[200]!,
+            width: isSelected ? 2 : 1,
+          ),
+        ),
+        child: rating == 0
+            ? Text(
+                label,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: AppTheme.textDark,
+                ),
+              )
+            : Row(
+                children: [
+                  const Icon(Icons.star, color: Colors.amber, size: 18),
+                  const SizedBox(width: 4),
+                  Text(
+                    label,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: AppTheme.textDark,
+                    ),
+                  ),
+                ],
+              ),
       ),
     );
   }
