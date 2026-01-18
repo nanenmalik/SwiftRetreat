@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   // Figma Design Color Palette
-  static const Color primaryTeal = Color(0xFF1AB1AF);
+  static const Color primaryTeal = Color(0xFF00B4D8);
   static const Color backgroundGrey = Color(0xFFF5F5F5);
   static const Color surfaceWhite = Colors.white;
   static const Color textDark = Color(0xFF1A1A1A);

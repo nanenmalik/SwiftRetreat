@@ -1,6 +1,73 @@
 import '../models/hotel_model.dart';
+import '../models/destination_feature_models.dart';
 
 class MockData {
+  static List<Food> foods = [
+    Food(
+      id: 'f1',
+      name: 'Nasi Goreng Special',
+      description: 'Authentic Indonesian fried rice served with satay.',
+      imageUrl:
+          'https://images.unsplash.com/photo-1603133872878-684f10842619?auto=format&fit=crop&w=800&q=80',
+      rating: 4.8,
+      location: 'Ubud, Bali',
+      priceRange: '\$10 - \$15',
+    ),
+    Food(
+      id: 'f2',
+      name: 'Babi Guling (Halal Ver.)',
+      description: 'Roasted chicken spiced with traditional herbs.',
+      imageUrl:
+          'https://images.unsplash.com/photo-1555126634-323283e090fa?auto=format&fit=crop&w=800&q=80',
+      rating: 4.7,
+      location: 'Seminyak, Bali',
+      priceRange: '\$12 - \$18',
+    ),
+    Food(
+      id: 'f3',
+      name: 'Seafood Platter',
+      description: 'Fresh catch from the Jimbaran coast.',
+      imageUrl:
+          'https://images.unsplash.com/photo-1599084993091-1e8b15d672b4?auto=format&fit=crop&w=800&q=80',
+      rating: 4.9,
+      location: 'Jimbaran, Bali',
+      priceRange: '\$25 - \$40',
+    ),
+  ];
+
+  static List<Activity> activities = [
+    Activity(
+      id: 'a1',
+      name: 'Bali Jungle Swing',
+      description: 'Experience the thrill of swinging over the jungle canopy.',
+      imageUrl:
+          'https://images.unsplash.com/photo-1596401057633-565632eb9a2f?auto=format&fit=crop&w=800&q=80',
+      rating: 4.9,
+      location: 'Ubud, Bali',
+      price: 35.0,
+    ),
+    Activity(
+      id: 'a2',
+      name: 'Tanah Lot Sunset Tour',
+      description: 'Visit the iconic temple on the sea at sunset.',
+      imageUrl:
+          'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80',
+      rating: 4.8,
+      location: 'Tabanan, Bali',
+      price: 20.0,
+    ),
+    Activity(
+      id: 'a3',
+      name: 'Scuba Diving Nusa Penida',
+      description: 'Dive with manta rays in crystal clear waters.',
+      imageUrl:
+          'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80',
+      rating: 5.0,
+      location: 'Nusa Penida, Bali',
+      price: 85.0,
+    ),
+  ];
+
   static List<Hotel> hotels = [
     Hotel(
       id: '1',
@@ -810,6 +877,1179 @@ class MockData {
             'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?auto=format&fit=crop&w=800&q=80', // Beach View
           ],
           amenities: ['King Bed', 'Mosquito Net', 'Terrace'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '33',
+      name: 'The Venetian canal',
+      location: 'Venice, Italy',
+      rating: 4.8,
+      pricePerNight: 320.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Canal View', 'Gondola Service', 'Fine Dining'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '3301',
+          name: 'Canal Suite',
+          description: 'Suite with canal view',
+          price: 320.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['King Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '34',
+      name: 'Tuscan Sun Villa',
+      location: 'Florence, Italy',
+      rating: 4.7,
+      pricePerNight: 280.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1528114039593-43664da1a760?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Vineyard', 'Cooking Class', 'Pool'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '3401',
+          name: 'Vintage Room',
+          description: 'Classic Tuscan room',
+          price: 280.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Queen Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '35',
+      name: 'Milan Fashion Hotel',
+      location: 'Milan, Italy',
+      rating: 4.5,
+      pricePerNight: 250.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1513581166391-887a96ddeafd?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Near Duomo', 'Shopping Service', 'Spa'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '3501',
+          name: 'Fashion Suite',
+          description: 'Stylish modern suite',
+          price: 250.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1590490360636-c7b8f9361399?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['King Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '36',
+      name: 'Riviera Blue',
+      location: 'Nice, France',
+      rating: 4.6,
+      pricePerNight: 220.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Sea View', 'Beach Access', 'Casino'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '3601',
+          name: 'Azure Room',
+          description: 'Room with Mediterranean view',
+          price: 220.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Balcony'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '37',
+      name: 'Lyon Gastronomy Inn',
+      location: 'Lyon, France',
+      rating: 4.4,
+      pricePerNight: 180.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1478358161113-b0e11994a36b?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Gourmet Restaurant', 'City Center', 'Wine Cellar'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '3701',
+          name: 'Chef Suite',
+          description: 'Cozy room for foodies',
+          price: 180.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Queen Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '38',
+      name: 'Royal Madrid',
+      location: 'Madrid, Spain',
+      rating: 4.7,
+      pricePerNight: 200.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Near Palace', 'Rooftop Bar', 'Gym'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '3801',
+          name: 'Royal Room',
+          description: 'Elegant city room',
+          price: 200.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['King Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '39',
+      name: 'Seville Orange Grove',
+      location: 'Seville, Spain',
+      rating: 4.8,
+      pricePerNight: 190.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1559599238-308793637427?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Flamenco Show', 'Patio', 'Pool'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '3901',
+          name: 'Patio Room',
+          description: 'Room opening to courtyard',
+          price: 190.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Double Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '40',
+      name: 'Lisbon Hills',
+      location: 'Lisbon, Portugal',
+      rating: 4.6,
+      pricePerNight: 160.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1565538006871-3375b4db919b?auto=format&fit=crop&w=800&q=80',
+      amenities: ['River View', 'Tram Stop', 'Breakfast'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '4001',
+          name: 'Hill View Room',
+          description: 'Bright room with view',
+          price: 160.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1560448204-603b3fc33ddc?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Queen Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '41',
+      name: 'Porto Wine Lodge',
+      location: 'Porto, Portugal',
+      rating: 4.7,
+      pricePerNight: 170.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1587875931252-0cde42718e47?auto=format&fit=crop&w=800&q=80',
+      amenities: ['River Douro View', 'Wine Tasting', 'Terrace'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '4101',
+          name: 'River Suite',
+          description: 'Suite with balcony',
+          price: 170.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1590490360636-c7b8f9361399?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['King Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '42',
+      name: 'Zurich Lakefront',
+      location: 'Zurich, Switzerland',
+      rating: 4.9,
+      pricePerNight: 350.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1515488764276-beab7607c1e6?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Lake View', 'Spa', 'Fine Dining'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '4201',
+          name: 'Lake Suite',
+          description: 'Luxury suite on the lake',
+          price: 350.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['King Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '43',
+      name: 'Geneva Diplomat',
+      location: 'Geneva, Switzerland',
+      rating: 4.8,
+      pricePerNight: 380.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1510425463958-dcc24b986163?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Jet d\'Eau View', 'Conference Center', 'Gym'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '4301',
+          name: 'Executive Room',
+          description: 'Room for business travelers',
+          price: 380.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Work Desk'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '44',
+      name: 'Vienna Opera House',
+      location: 'Vienna, Austria',
+      rating: 4.7,
+      pricePerNight: 230.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Near Opera', 'Classical Decor', 'Cafe'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '4401',
+          name: 'Classic Room',
+          description: 'Elegant Viennese room',
+          price: 230.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Queen Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '45',
+      name: 'Prague Castle View',
+      location: 'Prague, Czech Republic',
+      rating: 4.6,
+      pricePerNight: 150.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1541849546-216549ae216d?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Castle View', 'Old Town Square', 'Bar'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '4501',
+          name: 'Castle Room',
+          description: 'Room with a view of history',
+          price: 150.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Double Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '46',
+      name: 'Budapest Thermal',
+      location: 'Budapest, Hungary',
+      rating: 4.5,
+      pricePerNight: 120.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Thermal Bath', 'Danube View', 'Spa'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '4601',
+          name: 'Spa Room',
+          description: 'Relaxing room with spa access',
+          price: 120.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Queen Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '47',
+      name: 'Brussels Grand Place',
+      location: 'Brussels, Belgium',
+      rating: 4.4,
+      pricePerNight: 160.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1510422164475-43a059c2354c?auto=format&fit=crop&w=800&q=80',
+      amenities: ['City Center', 'Chocolate Shop', 'Bar'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '4701',
+          name: 'Square View',
+          description: 'Overlooking Grand Place',
+          price: 160.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1550973886-a6e55c7a4ec3?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Queen Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '48',
+      name: 'Edinburgh Castle Hotel',
+      location: 'Edinburgh, UK',
+      rating: 4.7,
+      pricePerNight: 210.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1534067783741-514d4dddb79e?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Castle View', 'Whisky Bar', 'History'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '4801',
+          name: 'Royal Mile Room',
+          description: 'Historic room',
+          price: 210.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['King Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '49',
+      name: 'Dublin Green',
+      location: 'Dublin, Ireland',
+      rating: 4.5,
+      pricePerNight: 180.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1550993950-7f938d21b01c?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Pub', 'Liffey View', 'Live Music'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '4901',
+          name: 'River Room',
+          description: 'Cozy room by the river',
+          price: 180.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Double Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '50',
+      name: 'Stockholm Archipelago',
+      location: 'Stockholm, Sweden',
+      rating: 4.8,
+      pricePerNight: 240.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1497215842964-222b430dc0a1?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Waterfront', 'Sauna', 'Modern Design'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '5001',
+          name: 'Nordic Suite',
+          description: 'Minimalist suite',
+          price: 240.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1590490360636-c7b8f9361399?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['King Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '51',
+      name: 'Oslo Fjord',
+      location: 'Oslo, Norway',
+      rating: 4.7,
+      pricePerNight: 260.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1520699295475-b6d396db86c4?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Fjord View', 'Opera House', 'Skiing Nearby'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '5101',
+          name: 'Fjord Room',
+          description: 'Room with stunning views',
+          price: 260.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1544986581-efac024faf62?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Queen Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '52',
+      name: 'Copenhagen Harbour',
+      location: 'Copenhagen, Denmark',
+      rating: 4.6,
+      pricePerNight: 220.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Nyhavn View', 'Design Hotel', 'Bikes'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '5201',
+          name: 'Design Room',
+          description: 'Danish design room',
+          price: 220.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Double Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '53',
+      name: 'Helsinki White',
+      location: 'Helsinki, Finland',
+      rating: 4.5,
+      pricePerNight: 200.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1520288289068-07e3768c7e60?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Sauna', 'Cathedral View', 'Market Square'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '5301',
+          name: 'White Room',
+          description: 'Bright and airy room',
+          price: 200.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Queen Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '54',
+      name: 'Tallinn Old Town',
+      location: 'Tallinn, Estonia',
+      rating: 4.6,
+      pricePerNight: 130.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1550850839-8a543eda1363?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Medieval Charm', 'Spa', 'Fireplace'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '5401',
+          name: 'Knight Room',
+          description: 'Medieval style room',
+          price: 130.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1549449857-e85d41f3e8f8?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Double Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '55',
+      name: 'Riga Art Nouveau',
+      location: 'Riga, Latvia',
+      rating: 4.5,
+      pricePerNight: 110.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1560060965-09f4b93b8e57?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Architecture Tour', 'Old Town', 'Bar'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '5501',
+          name: 'Art Room',
+          description: 'Art Nouveau decor',
+          price: 110.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Queen Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '56',
+      name: 'Vilnius Amber',
+      location: 'Vilnius, Lithuania',
+      rating: 4.4,
+      pricePerNight: 100.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Old Town', 'Amber Shop', 'Church View'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '5601',
+          name: 'Amber Suite',
+          description: 'Warm and cozy suite',
+          price: 100.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1590490360636-c7b8f9361399?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Double Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '57',
+      name: 'Warsaw Palace',
+      location: 'Warsaw, Poland',
+      rating: 4.6,
+      pricePerNight: 140.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1506543949980-60b6af9c97b8?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Royal Route', 'History', 'Fine Dining'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '5701',
+          name: 'Palace Room',
+          description: 'Reconstructed luxury',
+          price: 140.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1550973886-a6e55c7a4ec3?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['King Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '58',
+      name: 'Krakow Square',
+      location: 'Krakow, Poland',
+      rating: 4.7,
+      pricePerNight: 130.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1534351590666-13e3e96b5017?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Main Square', 'Wawel Castle', 'Nightlife'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '5801',
+          name: 'Square View',
+          description: 'View of the Cloth Hall',
+          price: 130.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Queen Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '59',
+      name: 'Bucharest Little Paris',
+      location: 'Bucharest, Romania',
+      rating: 4.4,
+      pricePerNight: 110.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1587595431973-160d0d94add1?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Old Town', 'Architecture', 'Parks'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '5901',
+          name: 'Urban Suite',
+          description: 'City center suite',
+          price: 110.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Double Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '60',
+      name: 'Sofia Vitosha',
+      location: 'Sofia, Bulgaria',
+      rating: 4.3,
+      pricePerNight: 90.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1558913926-d716f9a3f461?auto=format&fit=crop&w=800&q=80', // Fixed broken URL
+      amenities: ['Mountain View', 'Cathedral', 'Spa'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '6001',
+          name: 'Mountain Room',
+          description: 'View of Vitosha mountain',
+          price: 90.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Queen Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '61',
+      name: 'Bangkok Riverfront',
+      location: 'Bangkok, Thailand',
+      rating: 4.6,
+      pricePerNight: 120.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Chao Phraya View', 'Rooftop Bar', 'Spa'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '6101',
+          name: 'River Suite',
+          description: 'Luxury by the river',
+          price: 120.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1590490360636-c7b8f9361399?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['King Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '62',
+      name: 'Chiang Mai Retreat',
+      location: 'Chiang Mai, Thailand',
+      rating: 4.7,
+      pricePerNight: 80.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1512413346549-d17e764724a4?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Old City', 'Temples', 'Night Market'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '6201',
+          name: 'Lanna Room',
+          description: 'Northern Thai style',
+          price: 80.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Teak Furniture'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '63',
+      name: 'Hanoi Heritage',
+      location: 'Hanoi, Vietnam',
+      rating: 4.5,
+      pricePerNight: 70.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1534067783741-514d4dddb79e?auto=format&fit=crop&w=800&q=80', // Reusing ID for simplicity
+      amenities: ['Old Quarter', 'Lake View', 'Street Food'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '6301',
+          name: 'Quarter Room',
+          description: 'Heart of the action',
+          price: 70.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Balcony'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '64',
+      name: 'Ho Chi Minh Sky',
+      location: 'Ho Chi Minh City, Vietnam',
+      rating: 4.6,
+      pricePerNight: 90.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Pool', 'Rooftop', 'War Museum Nearby'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '6401',
+          name: 'Sky Room',
+          description: 'Modern city views',
+          price: 90.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Queen Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '65',
+      name: 'Singapore Marina',
+      location: 'Singapore',
+      rating: 4.9,
+      pricePerNight: 400.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Infinity Pool', 'Gardens by the Bay', 'Casino'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '6501',
+          name: 'Bay Room',
+          description: 'Iconic bay views',
+          price: 400.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1560448204-603b3fc33ddc?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['King Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '66',
+      name: 'Manila Bay View',
+      location: 'Manila, Philippines',
+      rating: 4.4,
+      pricePerNight: 80.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Sunset View', 'Pool', 'Mall Nearby'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '6601',
+          name: 'Sunset Room',
+          description: 'Famous sunset views',
+          price: 80.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Queen Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '67',
+      name: 'Boracay White Beach',
+      location: 'Boracay, Philippines',
+      rating: 4.8,
+      pricePerNight: 150.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?auto=format&fit=crop&w=800&q=80', // Reusing ID
+      amenities: ['White Sand', 'Party', 'Water Sports'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '6701',
+          name: 'Beachfront',
+          description: 'Steps to the beach',
+          price: 150.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Double Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '68',
+      name: 'Taipei 101 View',
+      location: 'Taipei, Taiwan',
+      rating: 4.7,
+      pricePerNight: 180.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1496417263034-38ec4f0d6b21?auto=format&fit=crop&w=800&q=80', // Reusing ID
+      amenities: ['101 View', 'Night Market', 'Metro'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '6801',
+          name: 'Tower Room',
+          description: 'View of Taipei 101',
+          price: 180.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['King Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '69',
+      name: 'Hong Kong Harbour',
+      location: 'Hong Kong',
+      rating: 4.8,
+      pricePerNight: 300.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1536768138796-3c91d5b31d52?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Victoria Harbour', 'Dim Sum', 'Ferry'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '6901',
+          name: 'Harbour Suite',
+          description: 'Stunning skyline views',
+          price: 300.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1560448204-603b3fc33ddc?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['King Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '70',
+      name: 'Shanghai Bund',
+      location: 'Shanghai, China',
+      rating: 4.8,
+      pricePerNight: 250.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1474181487882-5abf3f0ba6c2?auto=format&fit=crop&w=800&q=80',
+      amenities: ['The Bund', 'Skyline', 'History'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '7001',
+          name: 'Bund Room',
+          description: 'Historical architecture view',
+          price: 250.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1590490360636-c7b8f9361399?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Queen Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '71',
+      name: 'Beijing Palace',
+      location: 'Beijing, China',
+      rating: 4.7,
+      pricePerNight: 200.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Forbidden City', 'Hutong', 'Duck'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '7101',
+          name: 'Imperial Room',
+          description: 'Traditional style',
+          price: 200.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1549449857-e85d41f3e8f8?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['King Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '72',
+      name: 'Mumbai Marine Drive',
+      location: 'Mumbai, India',
+      rating: 4.6,
+      pricePerNight: 160.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Sea View', 'Gateway of India', 'Bollywood'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '7201',
+          name: 'Marine Room',
+          description: 'Queen\'s Necklace view',
+          price: 160.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Queen Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '73',
+      name: 'New Delhi Imperial',
+      location: 'New Delhi, India',
+      rating: 4.7,
+      pricePerNight: 150.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1560067174-c5a3a8f37060?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Colonial Charm', 'Gardens', 'Spa'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '7301',
+          name: 'Heritage Room',
+          description: 'Classic luxury',
+          price: 150.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1550973886-a6e55c7a4ec3?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['King Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '74',
+      name: 'Colombo Ocean',
+      location: 'Colombo, Sri Lanka',
+      rating: 4.4,
+      pricePerNight: 100.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?auto=format&fit=crop&w=800&q=80', // Reusing ID
+      amenities: ['Galle Face', 'Pool', 'Seafood'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '7401',
+          name: 'Ocean Room',
+          description: 'Indian Ocean view',
+          price: 100.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Balcony'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '75',
+      name: 'Kathmandu Peak',
+      location: 'Kathmandu, Nepal',
+      rating: 4.3,
+      pricePerNight: 80.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1544144433-d50aff500b91?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Himalaya View', 'Temple', 'Trekking Info'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '7501',
+          name: 'Peak Room',
+          description: 'View of the peaks',
+          price: 80.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Heater'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '76',
+      name: 'Lahore Fort Heritage',
+      location: 'Lahore, Pakistan',
+      rating: 4.5,
+      pricePerNight: 70.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1587595431973-160d0d94add1?auto=format&fit=crop&w=800&q=80', // Reusing ID
+      amenities: ['History', 'Food Street', 'Culture'],
+      isShariahCompliant: true,
+      rooms: [
+        RoomType(
+          id: '7601',
+          name: 'Heritage Room',
+          description: 'Traditional design',
+          price: 70.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Double Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '77',
+      name: 'Karachi Coast',
+      location: 'Karachi, Pakistan',
+      rating: 4.2,
+      pricePerNight: 60.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=800&q=80', // Reusing ID
+      amenities: ['Sea View', 'Clifton Beach', 'Mall'],
+      isShariahCompliant: true,
+      rooms: [
+        RoomType(
+          id: '7701',
+          name: 'Coast Room',
+          description: 'Notes of the sea',
+          price: 60.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1527011046414-4781f1f94f8c?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['AC'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '78',
+      name: 'Riyadh Kingdom',
+      location: 'Riyadh, Saudi Arabia',
+      rating: 4.8,
+      pricePerNight: 250.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1586723812148-3b56a1c5031b?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Skybridge', 'Luxury Shopping', 'Fine Dining'],
+      isShariahCompliant: true,
+      rooms: [
+        RoomType(
+          id: '7801',
+          name: 'Kingdom Suite',
+          description: 'Luxury in the sky',
+          price: 250.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1560448204-603b3fc33ddc?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['King Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '79',
+      name: 'Jeddah Red Sea',
+      location: 'Jeddah, Saudi Arabia',
+      rating: 4.7,
+      pricePerNight: 200.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=800&q=80', // Reusing ID
+      amenities: ['Corniche', 'Red Sea View', 'Aquarium'],
+      isShariahCompliant: true,
+      rooms: [
+        RoomType(
+          id: '7901',
+          name: 'Sea Suite',
+          description: 'Relaxing sea view',
+          price: 200.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Balcony'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '80',
+      name: 'Kuwait Towers Inn',
+      location: 'Kuwait City, Kuwait',
+      rating: 4.6,
+      pricePerNight: 190.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1578895210405-907a5e4b9e24?auto=format&fit=crop&w=800&q=80',
+      amenities: ['Towers View', 'Shopping', 'Gulf View'],
+      isShariahCompliant: true,
+      rooms: [
+        RoomType(
+          id: '8001',
+          name: 'Tower Room',
+          description: 'Modern comfort',
+          price: 190.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1550973886-a6e55c7a4ec3?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Queen Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '81',
+      name: 'Muscat Oman Resort',
+      location: 'Muscat, Oman',
+      rating: 4.8,
+      pricePerNight: 280.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1590490360636-c7b8f9361399?auto=format&fit=crop&w=800&q=80', // Reusing ID
+      amenities: ['Beach', 'Souq', 'Opera'],
+      isShariahCompliant: true,
+      rooms: [
+        RoomType(
+          id: '8101',
+          name: 'Oman Suite',
+          description: 'Traditional luxury',
+          price: 280.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1560448204-603b3fc33ddc?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['King Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '82',
+      name: 'Manama Bay',
+      location: 'Manama, Bahrain',
+      rating: 4.5,
+      pricePerNight: 160.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80', // Reusing ID
+      amenities: ['Bay View', 'Souq', 'Nightlife'],
+      isShariahCompliant: true,
+      rooms: [
+        RoomType(
+          id: '8201',
+          name: 'Bay Room',
+          description: 'View of the bay',
+          price: 160.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1550973886-a6e55c7a4ec3?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Queen Bed'],
+        ),
+      ],
+    ),
+    Hotel(
+      id: '83',
+      name: 'Tel Aviv Beach',
+      location: 'Tel Aviv, Israel',
+      rating: 4.7,
+      pricePerNight: 220.0,
+      imageUrl:
+          'https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=800&q=80', // Reusing ID
+      amenities: ['Beach', 'Bauhaus', 'Nightlife'],
+      isShariahCompliant: false,
+      rooms: [
+        RoomType(
+          id: '8301',
+          name: 'White City Room',
+          description: 'Modern decor',
+          price: 220.0,
+          imageUrls: [
+            'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80',
+          ],
+          amenities: ['Balcony'],
         ),
       ],
     ),
