@@ -7,6 +7,7 @@ import 'widgets/hotel_card.dart';
 import '../bookings/my_bookings_screen.dart';
 import '../profile/profile_screen.dart';
 import 'widgets/filter_bottom_sheet.dart';
+import '../chat/chat_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _pages = [
       HomeContent(onProfileTap: _onItemTapped),
       const MyBookingsScreen(),
+      const ChatScreen(),
       const ProfileScreen(),
     ];
   }
@@ -51,6 +53,10 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_month),
             label: 'Bookings',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat_bubble_outline),
+            label: 'Chat',
           ),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],

@@ -15,6 +15,7 @@ import 'screens/profile/payment_methods_screen.dart';
 import 'screens/profile/settings_screen.dart';
 import 'screens/profile/help_support_screen.dart';
 import 'screens/destination/destination_screen.dart';
+import 'screens/chat/chat_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,6 +43,7 @@ class SwiftRetreatApp extends StatelessWidget {
         '/payment-methods': (context) => const PaymentMethodsScreen(),
         '/settings': (context) => const SettingsScreen(),
         '/help': (context) => const HelpSupportScreen(),
+        '/chat': (context) => const ChatScreen(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == '/detail') {
