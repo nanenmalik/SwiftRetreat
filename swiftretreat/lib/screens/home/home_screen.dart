@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_theme.dart';
+import '../../services/firebase_auth_service.dart';
 import '../../data/mock_data.dart';
 import '../../models/hotel_model.dart';
 import 'widgets/hotel_card.dart';
 
 import '../bookings/my_bookings_screen.dart';
 import '../profile/profile_screen.dart';
-import 'widgets/filter_bottom_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -81,9 +81,13 @@ class _HomeContentState extends State<HomeContent> {
   late List<Hotel> _popularHotels;
   late List<Hotel> _recommendedHotels;
 
+  final _authService = FirebaseAuthService();
+  String _userName = 'Traveler';
+
   @override
   void initState() {
     super.initState();
+    _loadUserData();
     _searchController = TextEditingController();
 
     // Sort hotels by rating descending
@@ -93,14 +97,26 @@ class _HomeContentState extends State<HomeContent> {
     // Take top 10 for popular
     if (sortedHotels.length > 10) {
       _popularHotels = sortedHotels.sublist(0, 10);
-      // For recommended, we can either use the rest, or a mix.
-      // User request implies splitting logic. Let's use the rest for recommended so no duplicates.
-      // Or typically "Recommended" might just be "All" sorted differently.
-      // Let's assume distinct lists for now as it feels cleaner for the "Split" request.
       _recommendedHotels = sortedHotels.sublist(10);
     } else {
       _popularHotels = sortedHotels;
       _recommendedHotels = [];
+    }
+  }
+
+  Future<void> _loadUserData() async {
+    try {
+      final user = _authService.currentUser;
+      if (user != null) {
+        final userData = await _authService.getUserData();
+        if (mounted) {
+          setState(() {
+            _userName = userData?['name'] ?? user.displayName ?? 'Traveler';
+          });
+        }
+      }
+    } catch (e) {
+      debugPrint('Error loading user data: $e');
     }
   }
 
@@ -128,7 +144,7 @@ class _HomeContentState extends State<HomeContent> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Hello, Alpay',
+                        'Hello, ${_userName}',
                         style: Theme.of(context).textTheme.headlineSmall
                             ?.copyWith(
                               fontWeight: FontWeight.bold,
@@ -273,10 +289,11 @@ class _HomeContentState extends State<HomeContent> {
                               const SizedBox(width: 8),
                               Text(
                                 'Price Range',
-                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: Colors.grey[600],
-                                  fontWeight: FontWeight.w500,
-                                ),
+                                style: Theme.of(context).textTheme.bodySmall
+                                    ?.copyWith(
+                                      color: Colors.grey[600],
+                                      fontWeight: FontWeight.w500,
+                                    ),
                               ),
                             ],
                           ),
