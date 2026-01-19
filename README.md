@@ -137,8 +137,8 @@ Screenshot of website mockup
 
 **User's side**
 **login and register page**
-![Screenshot 2025-05-22 224640](https://github.com/user-attachments/assets/a0c816ca-b904-46a1-bd07-d32e55d4d938)
 
+![Screenshot 2025-05-22 224640](https://github.com/user-attachments/assets/a0c816ca-b904-46a1-bd07-d32e55d4d938)
 ![Screenshot 2025-05-22 224647](https://github.com/user-attachments/assets/0d396a42-e319-4f15-8f39-2e39445f3f17)
 
 **landing page**
