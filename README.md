@@ -138,28 +138,9 @@ Screenshot of website mockup
 **User's side**
 **login and register page**
 
-![Screenshot 2025-05-22 224640](https://github.com/user-attachments/assets/a0c816ca-b904-46a1-bd07-d32e55d4d938)
-- Scaffold: The base container with ("Welcome Back").
-
-- TextFormField: containing ("Email") and ("Password")
-
-- BottomAppBar: A fixed container at the bottom holding the "Login" ElevatedButton.
-  
-- Row: with MainAxisAlignment containing TextButton ("Register").
-
-![Screenshot 2025-05-22 224647](https://github.com/user-attachments/assets/0d396a42-e319-4f15-8f39-2e39445f3f17)
-
-- Scaffold: The base container with ("Create Account").
-
-- TextFormField: containing ("Full Name"), ("Email") and ("Password").
-
-- BottomAppBar: A fixed container at the bottom holding the "Sign Up" ElevatedButton.
-  
-- Row: with MainAxisAlignment containing TextButton ("Login").
-
 
 **landing page**
-![Landing page](https://github.com/user-attachments/assets/30bbf602-842d-4729-916a-e7ddcf6310fe)
+
 
 
 **payment page**
@@ -405,7 +386,70 @@ This form appears when the “+ Add New Guest” button is clicked on the Guest 
 2. "Cancel" Button:
    - Closes the form without saving any information.
    - Useful when admins need to abort the operation or correct data before submission.
-  
+
+---
+### ✅ Final UI Screenshots
+The screenshots provided above showcase the complete user interface of the Swift Retreat application, including:
+- Login and Registration pages for secure user authentication
+- Landing page with search and filtering capabilities
+- Payment processing interface
+- Booking management interface
+- Admin Dashboard for hotel staff
+- Facilities management page
+- Room management and guest management pages
+
+### 📊 Summary of Achieved Features
+**Core Features Implemented:**
+1. **User Authentication** – Secure login and registration system
+2. **Room Browsing & Filtering** – Dynamic search with Shariah-compliant filters (Prayer Room, Halal Dining, Family-Friendly options)
+3. **Online Booking System** – Customers can book rooms with real-time availability
+4. **Secure Payment Processing** – Multiple payment options with card details capture
+5. **Booking Management** – Users can view, track, and manage their bookings
+6. **Admin Dashboard** – Real-time monitoring of hotel operations, room occupancy, revenue, and guest feedback
+7. **Facilities Management** – Staff can manage and assign room facilities
+8. **Guest Management** – Complete CRUD operations for guest records
+9. **Room Management** – Add, edit, delete, and filter room inventory
+10. **Invoice & Confirmation Emails** – Automated confirmation and invoice generation
+
+### 🔧 Technical Explanation
+**Technology Stack:**
+- **Frontend Framework:** Flutter – Ensures consistent UI/UX across iOS and Android platforms
+- **Backend:** Firebase (Authentication, Cloud Firestore, Storage)
+- **Database:** MySQL with phpMyAdmin (for admin backend data storage)
+- **Payment Integration:** Stripe or similar payment gateway
+- **Architecture:** Clean Architecture with separation of concerns (Models, Services, Screens, Data)
+- **State Management:** Provider or Riverpod for efficient state handling
+- **Localization:** Multi-language support via l10n package
+
+**Key Design Patterns:**
+- Model-View-ViewModel (MVVM) for scalable architecture
+- Repository Pattern for data access abstraction
+- Service Layer for business logic separation
+- Widget composition for reusable UI components
+
+### 🚀 Limitations and Future Enhancements
+
+**Current Limitations:**
+1. **Offline Support** – App requires internet connectivity; offline caching not yet implemented
+2. **Multi-Language Support** – Currently supports limited language options
+3. **Analytics Dashboard** – Basic admin reporting; advanced analytics not available
+4. **Notification System** – Email notifications implemented, but push notifications are in progress
+5. **Payment History** – Limited transaction history and detailed payment reports
+6. **User Support System** – No in-app chat or support ticketing system
+7. **Review & Rating System** – User reviews feature not fully implemented
+
+**Future Enhancements:**
+1. **AI-Powered Recommendations** – Machine learning for personalized room suggestions based on user preferences
+2. **Dynamic Pricing** – Real-time pricing adjustments based on demand and seasonality
+3. **Virtual Room Tours** – 360° room previews using AR/VR technology
+4. **Multi-Currency Support** – Seamless currency conversion for international travelers
+5. **Advanced Loyalty Program** – Point-based rewards and exclusive member benefits
+6. **Integration with Global OTA Platforms** – Connection with major booking platforms (Booking.com, Agoda, etc.)
+7. **Enhanced Admin Analytics** – Detailed business intelligence and forecasting tools
+8. **Guest Services Integration** – In-app requests for housekeeping, room service, and other hotel amenities
+9. **Blockchain-based Invoices** – Verifiable invoice generation using blockchain technology
+10. **Mobile Wallet Integration** – One-click payment via digital wallets (Apple Pay, Google Pay)
+
 
 
 
