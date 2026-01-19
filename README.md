@@ -137,10 +137,11 @@ Screenshot of website mockup
 
 **User's side**
 **login and register page**
-
+<img width="939" height="663" alt="Screenshot 2026-01-19 104711" src="https://github.com/user-attachments/assets/b62c3494-2754-49f9-8e5a-0637eee990d9" />
+<img width="939" height="660" alt="Screenshot 2026-01-19 104723" src="https://github.com/user-attachments/assets/921c8d19-71e3-464c-8135-bbb4f82953e3" />
 
 **landing page**
-
+![Landing page](https://github.com/user-attachments/assets/30bbf602-842d-4729-916a-e7ddcf6310fe)
 
 
 **payment page**
