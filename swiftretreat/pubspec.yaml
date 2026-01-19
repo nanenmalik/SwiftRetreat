@@ -46,6 +46,7 @@ dependencies:
   http: ^1.2.2
   dash_chat_2: ^0.0.21
   google_generative_ai: ^0.4.6
+  aichatbot: ^0.0.2
 
 dev_dependencies:
   flutter_test:
