@@ -58,7 +58,7 @@ class _ChatScreenState extends State<ChatScreen> {
         messageOptions: const MessageOptions(
           currentUserContainerColor: AppTheme.mocha,
           currentUserTextColor: Colors.white,
-          containerColor: AppTheme.cream,
+          containerColor: Colors.grey,
           textColor: Colors.black,
         ),
       ),
