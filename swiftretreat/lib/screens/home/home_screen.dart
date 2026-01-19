@@ -160,7 +160,7 @@ class _HomeContentState extends State<HomeContent> {
                       child: const CircleAvatar(
                         radius: 24,
                         backgroundImage: NetworkImage(
-                          'https://randomuser.me/api/portraits/men/32.jpg',
+                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_R4S4j_-Ii4yXXo5eCYiwhO66hb0Ez9a1dQ&s',
                         ),
                       ),
                     ),
