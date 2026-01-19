@@ -381,7 +381,7 @@ This form appears when the “+ Add New Guest” button is clicked on the Guest 
      - Check-In Date
      - Check-Out Date
      - Payment Status (dropdown with options: Paid, Pending, Cancelled)
-   - All submitted data is seamlessly stored in the connected MySQL database via phpMyAdmin, ensuring real-time data integration.
+   - All submitted data is seamlessly stored in Firebase Cloud Firestore, ensuring real-time data synchronization across the application.
 
 2. "Cancel" Button:
    - Closes the form without saving any information.
@@ -413,9 +413,8 @@ The screenshots provided above showcase the complete user interface of the Swift
 
 ### 🔧 Technical Explanation
 **Technology Stack:**
-- **Frontend Framework:** Flutter – Ensures consistent UI/UX across iOS and Android platforms
-- **Backend:** Firebase (Authentication, Cloud Firestore, Storage)
-- **Database:** MySQL with phpMyAdmin (for admin backend data storage)
+- **Frontend Framework:** Flutter – Builds native Android mobile applications with beautiful and consistent UI/UX
+- **Backend & Database:** Firebase (Authentication, Cloud Firestore for real-time database, Cloud Storage for images)
 - **Payment Integration:** Stripe or similar payment gateway
 - **Architecture:** Clean Architecture with separation of concerns (Models, Services, Screens, Data)
 - **State Management:** Provider or Riverpod for efficient state handling
@@ -439,16 +438,17 @@ The screenshots provided above showcase the complete user interface of the Swift
 7. **Review & Rating System** – User reviews feature not fully implemented
 
 **Future Enhancements:**
-1. **AI-Powered Recommendations** – Machine learning for personalized room suggestions based on user preferences
-2. **Dynamic Pricing** – Real-time pricing adjustments based on demand and seasonality
-3. **Virtual Room Tours** – 360° room previews using AR/VR technology
-4. **Multi-Currency Support** – Seamless currency conversion for international travelers
-5. **Advanced Loyalty Program** – Point-based rewards and exclusive member benefits
-6. **Integration with Global OTA Platforms** – Connection with major booking platforms (Booking.com, Agoda, etc.)
-7. **Enhanced Admin Analytics** – Detailed business intelligence and forecasting tools
-8. **Guest Services Integration** – In-app requests for housekeeping, room service, and other hotel amenities
-9. **Blockchain-based Invoices** – Verifiable invoice generation using blockchain technology
-10. **Mobile Wallet Integration** – One-click payment via digital wallets (Apple Pay, Google Pay)
+1. **iOS Platform Expansion** – Extend Flutter application to support iOS devices, enabling users on iPhones and iPads to access Swift Retreat
+2. **AI-Powered Recommendations** – Machine learning for personalized room suggestions based on user preferences
+3. **Dynamic Pricing** – Real-time pricing adjustments based on demand and seasonality
+4. **Virtual Room Tours** – 360° room previews using AR/VR technology
+5. **Multi-Currency Support** – Seamless currency conversion for international travelers
+6. **Advanced Loyalty Program** – Point-based rewards and exclusive member benefits
+7. **Integration with Global OTA Platforms** – Connection with major booking platforms (Booking.com, Agoda, etc.)
+8. **Enhanced Admin Analytics** – Detailed business intelligence and forecasting tools
+9. **Guest Services Integration** – In-app requests for housekeeping, room service, and other hotel amenities
+10. **Blockchain-based Invoices** – Verifiable invoice generation using blockchain technology
+11. **Mobile Wallet Integration** – One-click payment via digital wallets (Apple Pay, Google Pay)
 
 
 
