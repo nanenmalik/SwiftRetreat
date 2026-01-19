@@ -266,7 +266,7 @@ class MockData {
       rating: 4.7,
       pricePerNight: 160.0,
       imageUrl:
-          'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=800&q=80', // Placeholder
+          'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&q=80',
       amenities: ['Bosphorus View', 'Turkish Bath', 'Halal Dining'],
       isShariahCompliant: true,
       reviews: _mockReviews,
@@ -343,7 +343,7 @@ class MockData {
       rating: 4.5,
       pricePerNight: 350.0,
       imageUrl:
-          'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80', // Placeholder
+          'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=800&q=80',
       amenities: ['High Tea', 'City Center', 'Concierge'],
       isShariahCompliant: true,
       reviews: _mockReviews,

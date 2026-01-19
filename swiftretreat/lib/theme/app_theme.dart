@@ -12,6 +12,7 @@ class AppTheme {
   // Deprecated colors mapped for compatibility if needed elsewhere
   static const Color mocha = primaryTeal;
   static const Color darkMocha = textDark;
+  static const Color cream = Color(0xFFFFF8E7);
 
   static final ThemeData bohemianTheme = ThemeData(
     useMaterial3: true,

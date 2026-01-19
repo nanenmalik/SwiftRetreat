@@ -138,9 +138,28 @@ Screenshot of website mockup
 **User's side**
 **login and register page**
 
+![Screenshot 2025-05-22 224640](https://github.com/user-attachments/assets/a0c816ca-b904-46a1-bd07-d32e55d4d938)
+- Scaffold: The base container with ("Welcome Back").
+
+- TextFormField: containing ("Email") and ("Password")
+
+- BottomAppBar: A fixed container at the bottom holding the "Login" ElevatedButton.
+  
+- Row: with MainAxisAlignment containing TextButton ("Register").
+
+![Screenshot 2025-05-22 224647](https://github.com/user-attachments/assets/0d396a42-e319-4f15-8f39-2e39445f3f17)
+
+- Scaffold: The base container with ("Create Account").
+
+- TextFormField: containing ("Full Name"), ("Email") and ("Password").
+
+- BottomAppBar: A fixed container at the bottom holding the "Sign Up" ElevatedButton.
+  
+- Row: with MainAxisAlignment containing TextButton ("Login").
+
 
 **landing page**
-
+![Landing page](https://github.com/user-attachments/assets/30bbf602-842d-4729-916a-e7ddcf6310fe)
 
 
 **payment page**

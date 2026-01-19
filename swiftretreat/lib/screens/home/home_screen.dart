@@ -27,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _pages = [
       HomeContent(onProfileTap: _onItemTapped),
       const MyBookingsScreen(),
+      const ChatScreen(),
       const ProfileScreen(),
     ];
   }
@@ -62,6 +63,10 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_month),
             label: 'Bookings',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat_bubble_outline),
+            label: 'Chat',
           ),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],

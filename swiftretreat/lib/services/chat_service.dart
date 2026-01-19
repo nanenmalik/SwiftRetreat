@@ -3,7 +3,11 @@ import 'package:dash_chat_2/dash_chat_2.dart';
 
 class ChatService {
   // TODO: Replace with your actual API key
+<<<<<<< HEAD
   static const String _apiKey = 'AIzaSyC4tBvJfOaJucPVXneRUjLe4Sqp9LDq-mU';
+=======
+  static const String _apiKey = 'AIzaSyDjKOe2uLfR1_9umVch-Uz-4-ndxYNMgaw';
+>>>>>>> 3f964294f5f76d8fd5e1db37e40341bfd8c91766
 
   late final GenerativeModel _model;
   late final ChatSession _chat;
