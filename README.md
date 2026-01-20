@@ -211,9 +211,11 @@ The screenshots provided above showcase the complete user interface of the Swift
 ---
 - **Booking interface**
 <img width="1914" height="844" alt="image" src="https://github.com/user-attachments/assets/f91860e2-c8dc-4d53-845b-b1326d530c1f" />
+   
    - If user already choose their own preferred hotel, they can book the room by clicking on button "Book Now"
 
 <img width="1918" height="846" alt="image" src="https://github.com/user-attachments/assets/b6c33d15-1540-4a53-8e67-aa4c48ecd0df" />
+   
    - User will be redirect to this page which user need to put their own the information on when they want to book the hotel and guest number.
    - After that, they need to click on "Continue to Payment" to complete the payment
   
@@ -222,13 +224,16 @@ The screenshots provided above showcase the complete user interface of the Swift
    - User can choose to pay using a card or online banking
 
 <img width="435" height="223" alt="image" src="https://github.com/user-attachments/assets/c3faad36-19fd-4d13-8a75-21c26cf881f8" />
+   
    - If user done pay using a card, this pop-up will be display
 
 <img width="1906" height="844" alt="image" src="https://github.com/user-attachments/assets/91009b42-74d9-4d27-a122-0173319e41f5" />
+   
    - If user decided to use online baking system, user need to choose their bank preferences.
 
 <img width="1916" height="839" alt="image" src="https://github.com/user-attachments/assets/a58f58fa-45c3-4099-a931-04cf993f38bb" />
 <img width="458" height="235" alt="image" src="https://github.com/user-attachments/assets/5b022b37-b381-4721-a3f7-4648ae8b70d3" />
+   
    - After user done making the payment using online banking, this pop-up will notified the user that the payment is successfull.
 
 
