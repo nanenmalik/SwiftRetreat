@@ -185,7 +185,7 @@ Screenshot of website mockup
 ### Data Model
 ER Diagram
 
-![ER_Diagram_Swift]<img width="1086" height="796" alt="Untitled design" src="https://github.com/user-attachments/assets/92128289-ccb8-487a-9a04-68646d589888" />
+<img width="1086" height="796" alt="Untitled design" src="https://github.com/user-attachments/assets/92128289-ccb8-487a-9a04-68646d589888" />
 
 
 ### Sequence Diagram
@@ -198,6 +198,9 @@ ER Diagram
 ### ✅ Final UI Screenshots
 The screenshots provided above showcase the complete user interface of the Swift Retreat application, including:
 - Login and Registration pages for secure user authentication
+  <img width="1917" height="845" alt="image" src="https://github.com/user-attachments/assets/757d046e-7c28-4622-bce6-68cc1cfe381e" />
+<img width="1912" height="850" alt="image" src="https://github.com/user-attachments/assets/4e69417b-c3aa-4c23-b201-c27f9d6baafd" />
+
 - Landing page with search and filtering capabilities
 - Payment processing interface
 - Booking management interface
