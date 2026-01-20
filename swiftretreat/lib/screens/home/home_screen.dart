@@ -161,7 +161,7 @@ class _HomeContentState extends State<HomeContent> {
                     ],
                   ),
                   GestureDetector(
-                    onTap: () => widget.onProfileTap?.call(2),
+                    onTap: () => widget.onProfileTap?.call(3),
                     child: Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
