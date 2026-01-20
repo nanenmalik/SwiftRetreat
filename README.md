@@ -190,8 +190,6 @@ ER Diagram
 ### Sequence Diagram
 
 ![SD - Guest](https://github.com/user-attachments/assets/cf3e22e8-6ab5-4b92-aa58-7b12acfc4d03)
-![SD - Staff](https://github.com/user-attachments/assets/c642ccf6-e42c-4cd9-8a60-162d25a4637e)
-![SD - Admin](https://github.com/user-attachments/assets/d0c79f61-a8fd-41af-b48e-f3a278e34bf0)
 
 ### References
 
