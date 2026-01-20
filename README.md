@@ -218,16 +218,20 @@ The screenshots provided above showcase the complete user interface of the Swift
 - After that, they need to click on "Continue to Payment" to complete the payment
   
 <img width="1913" height="839" alt="image" src="https://github.com/user-attachments/assets/4ab530bc-e10a-44ce-b790-ed5c821f9ead" />
+
 - User can choose to pay using a card or online banking
 
 <img width="435" height="223" alt="image" src="https://github.com/user-attachments/assets/c3faad36-19fd-4d13-8a75-21c26cf881f8" />
+
 - If user done pay using a card, this pop-up will be display
 
 <img width="1906" height="844" alt="image" src="https://github.com/user-attachments/assets/91009b42-74d9-4d27-a122-0173319e41f5" />
+
 - If user decided to use online baking system, user need to choose their bank preferences.
 
 <img width="1916" height="839" alt="image" src="https://github.com/user-attachments/assets/a58f58fa-45c3-4099-a931-04cf993f38bb" />
 <img width="458" height="235" alt="image" src="https://github.com/user-attachments/assets/5b022b37-b381-4721-a3f7-4648ae8b70d3" />
+
 - After user done making the payment using online banking, this pop-up will notified the user that the payment is successfull.
 
 
