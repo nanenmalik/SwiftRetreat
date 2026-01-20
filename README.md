@@ -196,15 +196,20 @@ ER Diagram
 
 ---
 ### ✅ Final UI Screenshots
+The screenshots provided above showcase the complete user interface of the Swift Retreat application, including:
 
+---
 - **Login and Registration pages for secure user authentication**
 <img width="1917" height="845" alt="image" src="https://github.com/user-attachments/assets/757d046e-7c28-4622-bce6-68cc1cfe381e" />
 - User can choose to register or login on this page
 <img width="1912" height="850" alt="image" src="https://github.com/user-attachments/assets/4e69417b-c3aa-4c23-b201-c27f9d6baafd" />
+---
 
+---
 - Landing page with search and filtering capabilities
 - 
-
+---
+---
 - **Booking interface**
 <img width="1914" height="844" alt="image" src="https://github.com/user-attachments/assets/f91860e2-c8dc-4d53-845b-b1326d530c1f" />
 - If user already choose their own preferred hotel, they can book the room by clicking on button "Book Now"
@@ -221,6 +226,7 @@ ER Diagram
 <img width="458" height="235" alt="image" src="https://github.com/user-attachments/assets/5b022b37-b381-4721-a3f7-4648ae8b70d3" />
 - After user done making the payment using online banking, this pop-up will notified the user that the payment is successfull.
 
+
 - Review Booking
 <img width="1916" height="848" alt="image" src="https://github.com/user-attachments/assets/18e96d19-024e-4fa7-90b9-fda343351858" />
 - If user want to review their booking, simply click "Bookings" and this page will be displayed.
@@ -229,7 +235,9 @@ ER Diagram
 <img width="443" height="236" alt="image" src="https://github.com/user-attachments/assets/2d1b28a4-f8d9-43c7-a1b0-c98da8a4533b" />
 <img width="1910" height="848" alt="image" src="https://github.com/user-attachments/assets/2dc7db24-3741-43c1-8322-b7b46f46989d" />
 - User can simply click "cancel Booking" to cancel their room booking. And user can review their cancelled booking.
+---
 
+---
 - **User Profile**
 <img width="1918" height="839" alt="image" src="https://github.com/user-attachments/assets/e25213f4-6b52-422a-b47a-20ef960d6173" />
 
@@ -250,7 +258,7 @@ ER Diagram
 
 - **Help % Support page**
 <img width="1913" height="845" alt="image" src="https://github.com/user-attachments/assets/ad2d15f8-b19d-4282-bf55-62b0224527a0" />
-
+---
 
 
 
