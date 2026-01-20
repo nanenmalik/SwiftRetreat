@@ -239,7 +239,6 @@ The screenshots provided above showcase the complete user interface of the Swift
 <img width="443" height="236" alt="image" src="https://github.com/user-attachments/assets/2d1b28a4-f8d9-43c7-a1b0-c98da8a4533b" />
 <img width="1910" height="848" alt="image" src="https://github.com/user-attachments/assets/2dc7db24-3741-43c1-8322-b7b46f46989d" />
 - User can simply click "cancel Booking" to cancel their room booking. And user can review their cancelled booking.
----
 
 ---
 - **User Profile**
