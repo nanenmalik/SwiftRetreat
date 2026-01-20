@@ -277,7 +277,7 @@ class _HomeContentState extends State<HomeContent> {
                     context,
                     icon: Icons.tune,
                     label: 'Filter',
-                    value: 'Guests, Price, etc.',
+                    value: 'Price, Ratings',
                     onTap: () async {
                       await showModalBottomSheet(
                         context: context,
@@ -360,20 +360,77 @@ class _HomeContentState extends State<HomeContent> {
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.only(left: 16),
-                          child: _buildSearchField(
-                            context,
-                            icon: Icons.person_outline,
-                            label: 'Guests',
-                            value: '$_numberOfPersons Guests',
-                            onTap: () {
-                              // Simple increment for demo
-                              setState(() {
-                                _numberOfPersons = _numberOfPersons >= 5
-                                    ? 1
-                                    : _numberOfPersons + 1;
-                              });
-                            },
-                            isPlaceholder: false,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Guests',
+                                    style: TextStyle(color: Colors.grey[500], fontSize: 12),
+                                  ),
+                                  const SizedBox(height: 2),
+                                  Text(
+                                    '$_numberOfPersons',
+                                    style: TextStyle(
+                                      color: AppTheme.textDark,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        if (_numberOfPersons > 1) _numberOfPersons--;
+                                      });
+                                    },
+                                    child: Container(
+                                      width: 28,
+                                      height: 28,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: Colors.grey[300]!,
+                                        ),
+                                        borderRadius: BorderRadius.circular(6),
+                                      ),
+                                      child: const Icon(
+                                        Icons.remove,
+                                        size: 16,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        if (_numberOfPersons < 10) _numberOfPersons++;
+                                      });
+                                    },
+                                    child: Container(
+                                      width: 28,
+                                      height: 28,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: Colors.grey[300]!,
+                                        ),
+                                        borderRadius: BorderRadius.circular(6),
+                                      ),
+                                      child: const Icon(
+                                        Icons.add,
+                                        size: 16,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       ),

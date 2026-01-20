@@ -20,6 +20,7 @@ class HotelCard extends StatelessWidget {
         onTap: onTap, // Pass the tap event to the parent
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
             // Image Section
             Stack(
@@ -92,6 +93,7 @@ class HotelCard extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
                     hotel.name,

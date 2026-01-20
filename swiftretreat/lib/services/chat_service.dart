@@ -2,8 +2,8 @@ import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
 
 class ChatService {
-  // TODO: Replace with your actual API key
-  static const String _apiKey = 'AIzaSyC4tBvJfOaJucPVXneRUjLe4Sqp9LDq-mU';
+  
+  static const String _apiKey = 'AIzaSyDsn-_fcH4901sPeAS5d1nohx1SgFVa3O8';
 
   late final GenerativeModel _model;
   late final ChatSession _chat;
