@@ -185,7 +185,8 @@ Screenshot of website mockup
 ### Data Model
 ER Diagram
 
-![ER_Diagram_Swift](https://github.com/user-attachments/assets/9a9e1461-45c9-41bf-b000-12846883e031)
+![ER_Diagram_Swift]<img width="1086" height="796" alt="Untitled design" src="https://github.com/user-attachments/assets/92128289-ccb8-487a-9a04-68646d589888" />
+
 
 ### Sequence Diagram
 
