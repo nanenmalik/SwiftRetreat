@@ -185,26 +185,86 @@ Screenshot of website mockup
 ### Data Model
 ER Diagram
 
-![ER_Diagram_Swift](https://github.com/user-attachments/assets/9a9e1461-45c9-41bf-b000-12846883e031)
+<img width="1086" height="796" alt="Untitled design" src="https://github.com/user-attachments/assets/92128289-ccb8-487a-9a04-68646d589888" />
+
 
 ### Sequence Diagram
 
 ![SD - Guest](https://github.com/user-attachments/assets/cf3e22e8-6ab5-4b92-aa58-7b12acfc4d03)
-![SD - Staff](https://github.com/user-attachments/assets/c642ccf6-e42c-4cd9-8a60-162d25a4637e)
-![SD - Admin](https://github.com/user-attachments/assets/d0c79f61-a8fd-41af-b48e-f3a278e34bf0)
 
 ### References
 
 ---
 ### ✅ Final UI Screenshots
 The screenshots provided above showcase the complete user interface of the Swift Retreat application, including:
-- Login and Registration pages for secure user authentication
+
+---
+- **Login and Registration pages for secure user authentication**
+<img width="1917" height="845" alt="image" src="https://github.com/user-attachments/assets/757d046e-7c28-4622-bce6-68cc1cfe381e" />
+- User can choose to register or login on this page
+<img width="1912" height="850" alt="image" src="https://github.com/user-attachments/assets/4e69417b-c3aa-4c23-b201-c27f9d6baafd" />
+
+---
 - Landing page with search and filtering capabilities
-- Payment processing interface
-- Booking management interface
-- Admin Dashboard for hotel staff
-- Facilities management page
-- Room management and guest management pages
+- 
+---
+---
+- **Booking interface**
+<img width="1914" height="844" alt="image" src="https://github.com/user-attachments/assets/f91860e2-c8dc-4d53-845b-b1326d530c1f" />
+- If user already choose their own preferred hotel, they can book the room by clicking on button "Book Now"
+
+<img width="1918" height="846" alt="image" src="https://github.com/user-attachments/assets/b6c33d15-1540-4a53-8e67-aa4c48ecd0df" />
+- User will be redirect to this page which user need to put their own the information on when they want to book the hotel and guest number.
+- After that, they need to click on "Continue to Payment" to complete the payment
+  
+<img width="1913" height="839" alt="image" src="https://github.com/user-attachments/assets/4ab530bc-e10a-44ce-b790-ed5c821f9ead" />
+- User can choose to pay using a card or online banking
+
+<img width="435" height="223" alt="image" src="https://github.com/user-attachments/assets/c3faad36-19fd-4d13-8a75-21c26cf881f8" />
+- If user done pay using a card, this pop-up will be display
+
+<img width="1906" height="844" alt="image" src="https://github.com/user-attachments/assets/91009b42-74d9-4d27-a122-0173319e41f5" />
+- If user decided to use online baking system, user need to choose their bank preferences.
+
+<img width="1916" height="839" alt="image" src="https://github.com/user-attachments/assets/a58f58fa-45c3-4099-a931-04cf993f38bb" />
+<img width="458" height="235" alt="image" src="https://github.com/user-attachments/assets/5b022b37-b381-4721-a3f7-4648ae8b70d3" />
+- After user done making the payment using online banking, this pop-up will notified the user that the payment is successfull.
+
+
+- Review Booking
+<img width="1916" height="848" alt="image" src="https://github.com/user-attachments/assets/18e96d19-024e-4fa7-90b9-fda343351858" />
+- If user want to review their booking, simply click "Bookings" and this page will be displayed.
+
+- Cancel Booking
+<img width="443" height="236" alt="image" src="https://github.com/user-attachments/assets/2d1b28a4-f8d9-43c7-a1b0-c98da8a4533b" />
+<img width="1910" height="848" alt="image" src="https://github.com/user-attachments/assets/2dc7db24-3741-43c1-8322-b7b46f46989d" />
+- User can simply click "cancel Booking" to cancel their room booking. And user can review their cancelled booking.
+---
+
+---
+- **User Profile**
+<img width="1918" height="839" alt="image" src="https://github.com/user-attachments/assets/e25213f4-6b52-422a-b47a-20ef960d6173" />
+
+- Edit Profile
+<img width="1914" height="725" alt="image" src="https://github.com/user-attachments/assets/d5947e91-aa5d-45d7-ad35-49f9405ab694" />
+
+- Card Information/ Payment Information
+<img width="1919" height="469" alt="image" src="https://github.com/user-attachments/assets/d3256a9c-3838-427d-aebe-d79410f84ab6" />
+
+- Settings
+<img width="1914" height="842" alt="image" src="https://github.com/user-attachments/assets/e88e1633-8510-41bc-991d-7303b8516d8e" />
+
+- Privacy Policy
+<img width="1914" height="848" alt="image" src="https://github.com/user-attachments/assets/1d0b3637-51a0-480c-a0a2-2cf7341b7b1c" />
+
+- Terms of Service
+<img width="1913" height="843" alt="image" src="https://github.com/user-attachments/assets/8b7e3777-96f6-4315-bef1-3d8128fcb002" />
+
+- **Help % Support page**
+<img width="1913" height="845" alt="image" src="https://github.com/user-attachments/assets/ad2d15f8-b19d-4282-bf55-62b0224527a0" />
+---
+
+
 
 ### 📊 Summary of Achieved Features
 **Core Features Implemented:**
