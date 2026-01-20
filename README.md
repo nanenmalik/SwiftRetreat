@@ -215,6 +215,7 @@ The screenshots provided above showcase the complete user interface of the Swift
 
 <img width="1918" height="846" alt="image" src="https://github.com/user-attachments/assets/b6c33d15-1540-4a53-8e67-aa4c48ecd0df" />
 -User will be redirect to this page which user need to put their own the information on when they want to book the hotel and guest number.
+
 -After that, they need to click on "Continue to Payment" to complete the payment
   
 <img width="1913" height="839" alt="image" src="https://github.com/user-attachments/assets/4ab530bc-e10a-44ce-b790-ed5c821f9ead" />
