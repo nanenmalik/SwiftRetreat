@@ -231,6 +231,7 @@ The screenshots provided above showcase the complete user interface of the Swift
 -After that, they need to click on "Continue to Payment" to complete the payment
   
 <img width="1913" height="839" alt="image" src="https://github.com/user-attachments/assets/4ab530bc-e10a-44ce-b790-ed5c821f9ead" />
+
 -User can choose to pay using a card or online banking
 
 <img width="435" height="223" alt="image" src="https://github.com/user-attachments/assets/c3faad36-19fd-4d13-8a75-21c26cf881f8" /> 
