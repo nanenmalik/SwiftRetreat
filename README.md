@@ -138,10 +138,12 @@ Screenshot of website mockup
 **User's side**
 **login and register page**
 
+![Screenshot 2025-05-22 224640](https://github.com/user-attachments/assets/a0c816ca-b904-46a1-bd07-d32e55d4d938)
+![Screenshot 2025-05-22 224647](https://github.com/user-attachments/assets/0d396a42-e319-4f15-8f39-2e39445f3f17)
 
 **landing page**
 
-
+![Landing page](https://github.com/user-attachments/assets/30bbf602-842d-4729-916a-e7ddcf6310fe)
 
 **payment page**
 
@@ -193,7 +195,7 @@ ER Diagram
 ![SD - Guest](https://github.com/user-attachments/assets/cf3e22e8-6ab5-4b92-aa58-7b12acfc4d03)
 
 ### References
-
+1. Booking.com. (n.d.). Booking.com. https://www.booking.com/
 ---
 ### ✅ Final UI Screenshots
 The screenshots provided above showcase the complete user interface of the Swift Retreat application, including:
@@ -206,40 +208,53 @@ The screenshots provided above showcase the complete user interface of the Swift
 
 ---
 - Landing page with search and filtering capabilities
-- 
----
+<img width="1904" height="986" alt="Screenshot 2026-01-21 105221" src="https://github.com/user-attachments/assets/6d322fc2-a701-472c-8234-24d0b3bd0600" />
+- The landing page shows the list of most popular and recommended hotels
+  
+<img width="1900" height="972" alt="Screenshot 2026-01-21 110025" src="https://github.com/user-attachments/assets/0b57f291-1722-4026-9e5a-8a893dd9b8cd" />
+- The filter bottom can use for filtering any price range and ratings based on user preferences
+  
+<img width="1911" height="865" alt="Screenshot 2026-01-21 105112" src="https://github.com/user-attachments/assets/27fc5238-93d9-440a-9a5d-ddc3ea2acd29" />
+- The result after applying the filter.
+  
+<img width="1915" height="972" alt="Screenshot 2026-01-21 110414" src="https://github.com/user-attachments/assets/807babe2-254e-4727-8d8c-b5e92dcc915d" />
+- The user can click their choice and they can see the available rooms and the reviews
+
 ---
 - **Booking interface**
 <img width="1914" height="844" alt="image" src="https://github.com/user-attachments/assets/f91860e2-c8dc-4d53-845b-b1326d530c1f" />
-- If user already choose their own preferred hotel, they can book the room by clicking on button "Book Now"
+-If user already choose their own preferred hotel, they can book the room by clicking on button "Book Now"
 
 <img width="1918" height="846" alt="image" src="https://github.com/user-attachments/assets/b6c33d15-1540-4a53-8e67-aa4c48ecd0df" />
-- User will be redirect to this page which user need to put their own the information on when they want to book the hotel and guest number.
-- After that, they need to click on "Continue to Payment" to complete the payment
+-User will be redirect to this page which user need to put their own the information on when they want to book the hotel and guest number.
+
+-After that, they need to click on "Continue to Payment" to complete the payment
   
 <img width="1913" height="839" alt="image" src="https://github.com/user-attachments/assets/4ab530bc-e10a-44ce-b790-ed5c821f9ead" />
-- User can choose to pay using a card or online banking
+-User can choose to pay using a card or online banking
 
-<img width="435" height="223" alt="image" src="https://github.com/user-attachments/assets/c3faad36-19fd-4d13-8a75-21c26cf881f8" />
-- If user done pay using a card, this pop-up will be display
+<img width="435" height="223" alt="image" src="https://github.com/user-attachments/assets/c3faad36-19fd-4d13-8a75-21c26cf881f8" /> 
+
+-If user done pay using a card, this pop-up will be display
 
 <img width="1906" height="844" alt="image" src="https://github.com/user-attachments/assets/91009b42-74d9-4d27-a122-0173319e41f5" />
-- If user decided to use online baking system, user need to choose their bank preferences.
+   
+-If user decided to use online baking system, user need to choose their bank preferences.
 
 <img width="1916" height="839" alt="image" src="https://github.com/user-attachments/assets/a58f58fa-45c3-4099-a931-04cf993f38bb" />
 <img width="458" height="235" alt="image" src="https://github.com/user-attachments/assets/5b022b37-b381-4721-a3f7-4648ae8b70d3" />
-- After user done making the payment using online banking, this pop-up will notified the user that the payment is successfull.
+   
+-After user done making the payment using online banking, this pop-up will notified the user that the payment is successfull.
 
 
 - Review Booking
 <img width="1916" height="848" alt="image" src="https://github.com/user-attachments/assets/18e96d19-024e-4fa7-90b9-fda343351858" />
-- If user want to review their booking, simply click "Bookings" and this page will be displayed.
+   - If user want to review their booking, simply click "Bookings" and this page will be displayed.
 
 - Cancel Booking
 <img width="443" height="236" alt="image" src="https://github.com/user-attachments/assets/2d1b28a4-f8d9-43c7-a1b0-c98da8a4533b" />
 <img width="1910" height="848" alt="image" src="https://github.com/user-attachments/assets/2dc7db24-3741-43c1-8322-b7b46f46989d" />
-- User can simply click "cancel Booking" to cancel their room booking. And user can review their cancelled booking.
----
+   - User can simply click "cancel Booking" to cancel their room booking. And user can review their cancelled booking.
 
 ---
 - **User Profile**
