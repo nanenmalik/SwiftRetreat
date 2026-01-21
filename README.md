@@ -1,4 +1,4 @@
-<img width="1919" height="979" alt="Screenshot 2026-01-21 105204" src="https://github.com/user-attachments/assets/e0998ed3-9123-44e8-a897-729ec2f76d02" /># 🏨 Swift Retreat – Hotel Booking Management System
+# 🏨 Swift Retreat – Hotel Booking Management System
 
 ## 📘 Project Proposal 
 
@@ -210,10 +210,13 @@ The screenshots provided above showcase the complete user interface of the Swift
 - Landing page with search and filtering capabilities
 <img width="1904" height="986" alt="Screenshot 2026-01-21 105221" src="https://github.com/user-attachments/assets/6d322fc2-a701-472c-8234-24d0b3bd0600" />
 - The landing page shows the list of most popular and recommended hotels
+  
 <img width="1900" height="972" alt="Screenshot 2026-01-21 110025" src="https://github.com/user-attachments/assets/0b57f291-1722-4026-9e5a-8a893dd9b8cd" />
 - The filter bottom can use for filtering any price range and ratings based on user preferences
+  
 <img width="1911" height="865" alt="Screenshot 2026-01-21 105112" src="https://github.com/user-attachments/assets/27fc5238-93d9-440a-9a5d-ddc3ea2acd29" />
 - The result after applying the filter.
+  
 <img width="1915" height="972" alt="Screenshot 2026-01-21 110414" src="https://github.com/user-attachments/assets/807babe2-254e-4727-8d8c-b5e92dcc915d" />
 - The user can click their choice and they can see the available rooms and the reviews
 
