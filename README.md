@@ -208,7 +208,7 @@ The screenshots provided above showcase the complete user interface of the Swift
 
 ---
 - Landing page with search and filtering capabilities
-<img width="1904" height="986" alt="Screenshot 2026-01-21 105221" src="https://github.com/user-attachments/assets/6d322fc2-a701-472c-8234-24d0b3bd0600" />
+<img width="1920" height="913" alt="Screenshot 2026-01-21 173933" src="https://github.com/user-attachments/assets/63913515-3c99-4cf4-bf84-8e707b8691ea" />
 - The landing page shows the list of most popular and recommended hotels
   
 <img width="1900" height="972" alt="Screenshot 2026-01-21 110025" src="https://github.com/user-attachments/assets/0b57f291-1722-4026-9e5a-8a893dd9b8cd" />
