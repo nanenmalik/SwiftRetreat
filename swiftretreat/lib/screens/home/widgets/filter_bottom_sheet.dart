@@ -17,16 +17,6 @@ class FilterBottomSheet extends StatefulWidget {
 
 class _FilterBottomSheetState extends State<FilterBottomSheet> {
   late RangeValues _priceRange;
-  int _guestCount =
-      2; // Default from image: 3 Guest (2 Adult, 1 Children) - simplified for now
-  bool _instantBook = false;
-  String _selectedLocation = 'San Diego'; // Default selection
-  final List<String> _locations = [
-    'San Diego',
-    'New York',
-    'Amsterdam',
-    'Bali',
-  ];
 
   // Facilities
   final Map<String, bool> _facilities = {
@@ -170,14 +160,11 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                 widget.onApply({
                   'minPrice': _priceRange.start,
                   'maxPrice': _priceRange.end,
-                  'location': _selectedLocation,
                   'rating': _selectedRating,
                   'facilities': _facilities.entries
                       .where((e) => e.value)
                       .map((e) => e.key)
                       .toList(),
-                  // 'guests': _guestCount,
-                  // 'instantBook': _instantBook,
                 });
                 Navigator.pop(context);
               },
