@@ -368,7 +368,10 @@ class _HomeContentState extends State<HomeContent> {
                                 children: [
                                   Text(
                                     'Guests',
-                                    style: TextStyle(color: Colors.grey[500], fontSize: 12),
+                                    style: TextStyle(
+                                      color: Colors.grey[500],
+                                      fontSize: 12,
+                                    ),
                                   ),
                                   const SizedBox(height: 2),
                                   Text(
@@ -386,7 +389,8 @@ class _HomeContentState extends State<HomeContent> {
                                   GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        if (_numberOfPersons > 1) _numberOfPersons--;
+                                        if (_numberOfPersons > 1)
+                                          _numberOfPersons--;
                                       });
                                     },
                                     child: Container(
@@ -409,7 +413,8 @@ class _HomeContentState extends State<HomeContent> {
                                   GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        if (_numberOfPersons < 10) _numberOfPersons++;
+                                        if (_numberOfPersons < 10)
+                                          _numberOfPersons++;
                                       });
                                     },
                                     child: Container(
@@ -496,7 +501,7 @@ class _HomeContentState extends State<HomeContent> {
 
           SliverToBoxAdapter(
             child: Container(
-              height: 500,
+              height: 420,
               padding: const EdgeInsets.only(top: 16, bottom: 24),
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
@@ -541,10 +546,10 @@ class _HomeContentState extends State<HomeContent> {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             sliver: SliverGrid(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
+                crossAxisCount: 5,
                 mainAxisSpacing: 16,
                 crossAxisSpacing: 16,
-                mainAxisExtent: 500,
+                mainAxisExtent: 380,
               ),
               delegate: SliverChildBuilderDelegate((context, index) {
                 final hotel = _recommendedHotels[index];

@@ -1766,7 +1766,7 @@ class MockData {
       rating: 4.9,
       pricePerNight: 400.0,
       imageUrl:
-          'https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=800&q=80',
       amenities: ['Infinity Pool', 'Gardens by the Bay', 'Casino'],
       isShariahCompliant: false,
       reviews: _mockReviews,
@@ -1814,7 +1814,7 @@ class MockData {
       rating: 4.8,
       pricePerNight: 150.0,
       imageUrl:
-          'https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?auto=format&fit=crop&w=800&q=80', // Reusing ID
+          'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
       amenities: ['White Sand', 'Party', 'Water Sports'],
       isShariahCompliant: false,
       reviews: _mockReviews,
@@ -1982,7 +1982,7 @@ class MockData {
       rating: 4.4,
       pricePerNight: 100.0,
       imageUrl:
-          'https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?auto=format&fit=crop&w=800&q=80', // Reusing ID
+          'https://images.unsplash.com/photo-1566375638427-09875556788c?auto=format&fit=crop&w=800&q=80',
       amenities: ['Galle Face', 'Pool', 'Seafood'],
       isShariahCompliant: false,
       reviews: _mockReviews,
@@ -2054,7 +2054,7 @@ class MockData {
       rating: 4.2,
       pricePerNight: 60.0,
       imageUrl:
-          'https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=800&q=80', // Reusing ID
+          'https://images.unsplash.com/photo-1627833626343-44754546a36c?auto=format&fit=crop&w=800&q=80',
       amenities: ['Sea View', 'Clifton Beach', 'Mall'],
       isShariahCompliant: true,
       reviews: _mockReviews,
@@ -2102,7 +2102,7 @@ class MockData {
       rating: 4.7,
       pricePerNight: 200.0,
       imageUrl:
-          'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=800&q=80', // Reusing ID
+          'https://images.unsplash.com/photo-1589531826046-24e0b04c86a3?auto=format&fit=crop&w=800&q=80',
       amenities: ['Corniche', 'Red Sea View', 'Aquarium'],
       isShariahCompliant: true,
       reviews: _mockReviews,
@@ -2173,7 +2173,7 @@ class MockData {
       rating: 4.5,
       pricePerNight: 160.0,
       imageUrl:
-          'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80', // Reusing ID
+          'https://images.unsplash.com/photo-1579782536766-0d193d052601?auto=format&fit=crop&w=800&q=80',
       amenities: ['Bay View', 'Souq', 'Nightlife'],
       isShariahCompliant: true,
       rooms: [
