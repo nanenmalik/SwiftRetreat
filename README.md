@@ -18,12 +18,6 @@
 
 ---
 
-## 📌 Project Video Proposal
-
-
-
----
-
 ## 🧠 Introduction
 
 **Swift Retreat** is a customer-focused mobile application designed to simplify and automate the hotel reservation process while adhering to Shariah-compliant principles. The application directly addresses common customer issues like difficulty finding suitable accommodations and lack of real-time availability. Swift Retreat integrates Islamic values, enabling users to easily filter and book accommodations based on criteria such as modesty, family-friendly rooms, and optional amenities like prayer room access and halal-certified food services.
